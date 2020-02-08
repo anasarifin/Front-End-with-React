@@ -1,0 +1,21 @@
+#cart {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 25%;
+	min-width: 275px;
+	height: 100%;
+	background-color: salmon;
+	overflow-y: scroll;
+}
+#card .cart_card {
+	color: white;
+	display: grid;
+	grid-template-columns: 3;
+}
+#cart .cart_card * {
+	color: white;
+}
+#cart .cart_card button {
+	color: black;
+}
