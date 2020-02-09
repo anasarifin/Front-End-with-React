@@ -1,4 +1,5 @@
 import React from "react";
+import "../style/Header.css";
 
 export default class Header extends React.Component {
 	constructor() {
@@ -14,7 +15,6 @@ export default class Header extends React.Component {
 		return (
 			<div id="header">
 				<input type="text" id="header-search" onChange={this.props.eventSearch} />
-				<br />
 				<span>Filter by : </span>
 				<select onChange={this.props.eventType}>
 					<option value="all">All</option>

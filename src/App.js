@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
+import Edit from "./components/Edit";
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
@@ -17,6 +18,9 @@ class Example extends Component {
 			currentPage: <Main />,
 		};
 		this.changePage = this.changePage.bind(this);
+		this.changeMain = this.changeMain.bind(this);
+		this.changeEdit = this.changeEdit.bind(this);
+		this.changeHistory = this.changeHistory.bind(this);
 	}
 	static defaultProps = {
 		batch: 1,
@@ -42,23 +46,31 @@ class Example extends Component {
 	}
 
 	changePage(event) {
+		console.log(event.currentTarget.dataset.page);
 		this.setState({
-			currentPage: event.target.value,
+			currentPage: event.currentTarget.dataset.page,
 		});
-		console.log(event.target.value);
+	}
+	changeMain() {
+		this.setState({
+			currentPage: <Main />,
+		});
+	}
+	changeEdit() {
+		this.setState({
+			currentPage: <Edit />,
+		});
+	}
+	changeHistory() {
+		this.setState({
+			currentPage: <Edit />,
+		});
 	}
 
 	render() {
 		return (
-			<div className="main">
-				<Navbar event={this.changePage} />
-				<br />
-				<br />
-				<br />
-				<button onClick={this.goToHome}>Profile</button>
-				<br />
-				<br />
-				<br />
+			<div id="main-con">
+				<Navbar event={[this.changeMain, this.changeEdit, this.changeHistory]} />
 				{this.state.currentPage}
 			</div>
 		);
@@ -90,5 +102,8 @@ class Example extends Component {
 // 	batch: 1,
 // 	city: "Jakarta",
 // };
+{
+	/* <button onClick={this.goToHome}>Profile</button> */
+}
 
 export default Example;

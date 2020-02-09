@@ -1,8 +1,8 @@
 import React from "react";
 import MainCard from "./MainCard";
-import Cart from "./Cart";
 import Header from "./Header";
 import Axios from "axios";
+import Modal from "./Modal";
 import "../style/Main.css";
 
 const productUrl = "http://localhost:9999/api/v1/products";
@@ -12,7 +12,7 @@ export default class Main extends React.Component {
 		super();
 		this.state = {
 			productList: [],
-			cart: [],
+			id: 1,
 			name: "?",
 			type: "",
 			sort: "",
@@ -23,18 +23,17 @@ export default class Main extends React.Component {
 		this.filterSort = this.filterSort.bind(this);
 	}
 
-	moveToCart(event) {
-		console.log(event.currentTarget.dataset.name);
-		this.setState({
-			cart: [...this.state.cart, event.currentTarget.dataset.name],
-		});
-	}
-
 	getProduct() {
 		Axios.get(productUrl).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 			});
+		});
+	}
+
+	moveToCart(event) {
+		this.setState({
+			id: event.currentTarget.dataset.name,
 		});
 	}
 
@@ -76,7 +75,6 @@ export default class Main extends React.Component {
 	render() {
 		const products = [];
 		if (this.state.productList.length > 0) {
-			console.log(this.state.productList);
 			this.state.productList.map((data, x) => {
 				products.push(<MainCard key={x} event={this.moveToCart} product={data} />);
 			});
@@ -85,7 +83,7 @@ export default class Main extends React.Component {
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
-				<Cart list={this.state.cart} />
+				<Modal name={this.state.id} />
 			</div>
 		);
 	}

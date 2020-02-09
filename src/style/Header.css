@@ -1,0 +1,18 @@
+#header {
+	position: fixed;
+	left: 55px;
+	top: 0;
+	height: 50px;
+	width: 70%;
+	background: salmon;
+}
+#header * {
+	line-height: 50px;
+}
+#header input {
+	position: absolute;
+	right: 10px;
+	top: 12.5px;
+	width: 300px;
+	height: 25px;
+}
