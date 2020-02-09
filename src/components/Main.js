@@ -12,12 +12,14 @@ export default class Main extends React.Component {
 		this.state = {
 			productList: [],
 			cart: [],
-			name: "",
+			name: "?",
 			type: "",
+			sort: "",
 		};
 		this.moveToCart = this.moveToCart.bind(this);
-		this.searchFilter = this.searchFilter.bind(this);
-		this.sortFilter = this.sortFilter.bind(this);
+		this.filterName = this.filterName.bind(this);
+		this.filterType = this.filterType.bind(this);
+		this.filterSort = this.filterSort.bind(this);
 	}
 
 	moveToCart(event) {
@@ -35,10 +37,9 @@ export default class Main extends React.Component {
 		});
 	}
 
-	searchFilter(event) {
-		const name = event.target.value;
-		console.log(name);
-		Axios.get(productUrl + "?name=" + name + "&" + this.state.type).then(resolve => {
+	filterName(event) {
+		const name = "?name=" + event.target.value;
+		Axios.get(productUrl + name + this.state.type + this.state.sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				name: name,
@@ -46,17 +47,25 @@ export default class Main extends React.Component {
 		});
 	}
 
-	sortFilter(event) {
-		const type = event.target.value == "all" ? "" : "type=" + event.target.value;
-		console.log(type);
-		Axios.get(productUrl + "?name=" + this.state.name + "&" + type).then(resolve => {
+	filterType(event) {
+		const type = event.target.value == "all" ? "" : "&type=" + event.target.value;
+		Axios.get(productUrl + this.state.name + type + this.state.sort).then(resolve => {
 			console.log(resolve.data);
 			this.setState({
 				productList: resolve.data,
 				type: type,
 			});
 		});
-		console.log(type);
+	}
+
+	filterSort(event) {
+		const sort = "&sort=" + event.target.value;
+		Axios.get(productUrl + this.state.name + this.state.type + sort).then(resolve => {
+			this.setState({
+				productList: resolve.data,
+				sort: sort,
+			});
+		});
 	}
 
 	componentDidMount() {
@@ -73,7 +82,7 @@ export default class Main extends React.Component {
 		}
 		return (
 			<div id="main">
-				<Header eventSearch={this.searchFilter} eventSort={this.sortFilter} />
+				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				{products}
 				<Cart list={this.state.cart} />
 			</div>
