@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Main from "./components/Main";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
@@ -14,8 +14,9 @@ class Example extends Component {
 	constructor() {
 		super();
 		this.state = {
-			date: "This is state",
+			currentPage: <Main />,
 		};
+		this.changePage = this.changePage.bind(this);
 	}
 	static defaultProps = {
 		batch: 1,
@@ -35,28 +36,30 @@ class Example extends Component {
 		// console.log("state", prevState);
 	};
 
-	goToHome = () => {
+	goToHome() {
 		this.props.history.push("/profile");
 		console.log(this.props.history);
-	};
+	}
+
+	changePage(event) {
+		this.setState({
+			currentPage: event.target.value,
+		});
+		console.log(event.target.value);
+	}
 
 	render() {
 		return (
 			<div className="main">
+				<Navbar event={this.changePage} />
 				<br />
-				<br />
-				<div>Hello world!</div>
-				<div>{this.state.date}</div>
-				<div>
-					{this.props.batch} - {this.props.city}
-				</div>
 				<br />
 				<br />
 				<button onClick={this.goToHome}>Profile</button>
 				<br />
 				<br />
 				<br />
-				<Main />
+				{this.state.currentPage}
 			</div>
 		);
 	}
