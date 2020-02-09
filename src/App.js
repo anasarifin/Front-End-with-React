@@ -1,0 +1,94 @@
+import React, { Component } from "react";
+import Main from "./components/Main";
+import Navbar from "./components/Navbar";
+// import { Link } from "react-router-dom";
+// import logo from "./logo.svg";
+// prop-types
+import "./App.css";
+
+// export const contextApp = React.createContext({
+// 	number: 1,
+// });
+
+class Example extends Component {
+	constructor() {
+		super();
+		this.state = {
+			currentPage: <Main />,
+		};
+		this.changePage = this.changePage.bind(this);
+	}
+	static defaultProps = {
+		batch: 1,
+		city: "Jakarta",
+	};
+
+	componentDidMount = () => {
+		setTimeout(() => {
+			this.setState({
+				date: "This state has been changed",
+			});
+		}, 2000);
+	};
+
+	componentDidUpdate = (prevProps, prevState) => {
+		// console.log("props", prevProps);
+		// console.log("state", prevState);
+	};
+
+	goToHome() {
+		this.props.history.push("/profile");
+		console.log(this.props.history);
+	}
+
+	changePage(event) {
+		this.setState({
+			currentPage: event.target.value,
+		});
+		console.log(event.target.value);
+	}
+
+	render() {
+		return (
+			<div className="main">
+				<Navbar event={this.changePage} />
+				<br />
+				<br />
+				<br />
+				<button onClick={this.goToHome}>Profile</button>
+				<br />
+				<br />
+				<br />
+				{this.state.currentPage}
+			</div>
+		);
+	}
+}
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <p>
+//           Edit <code>src/App.js</code> and save to reload.
+//         </p>
+//         <a
+//           className="App-link"
+//           href="https://reactjs.org"
+//           target="_blank"
+//           rel="noopener noreferrer"
+//         >
+//           Learn React
+//         </a>
+//       </header>
+//     </div>
+//   );
+// }
+
+// Example.defaultProps = {
+// 	batch: 1,
+// 	city: "Jakarta",
+// };
+
+export default Example;
