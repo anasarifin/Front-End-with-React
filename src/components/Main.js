@@ -12,6 +12,8 @@ export default class Main extends React.Component {
 		this.state = {
 			productList: [],
 			cart: [],
+			name: "",
+			type: "",
 		};
 		this.moveToCart = this.moveToCart.bind(this);
 		this.searchFilter = this.searchFilter.bind(this);
@@ -36,7 +38,7 @@ export default class Main extends React.Component {
 	searchFilter(event) {
 		const name = event.target.value;
 		console.log(name);
-		Axios.get(productUrl + "?name=" + name + "?type=" + this.state.type).then(resolve => {
+		Axios.get(productUrl + "?name=" + name + "&" + this.state.type).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				name: name,
@@ -45,15 +47,16 @@ export default class Main extends React.Component {
 	}
 
 	sortFilter(event) {
-		const type = event.target.value;
+		const type = event.target.value == "all" ? "" : "type=" + event.target.value;
 		console.log(type);
-		Axios.get(productUrl + "?type=" + type + "?name=" + this.state.name || "").then(resolve => {
+		Axios.get(productUrl + "?name=" + this.state.name + "&" + type).then(resolve => {
 			console.log(resolve.data);
 			this.setState({
 				productList: resolve.data,
 				type: type,
 			});
 		});
+		console.log(type);
 	}
 
 	componentDidMount() {

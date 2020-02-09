@@ -16,7 +16,7 @@ export default class Header extends React.Component {
 				<input type="text" id="header-search" onChange={this.props.eventSearch} />
 				<br />
 				<select onChange={this.props.eventSort}>
-					<option value="">All</option>
+					<option value="all">All</option>
 					<option value="0">Food</option>
 					<option value="1">Drink</option>
 				</select>
