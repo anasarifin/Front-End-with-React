@@ -17,16 +17,9 @@ export default class Main extends React.Component {
 			type: "",
 			sort: "",
 		};
-		this.moveToCart = this.moveToCart.bind(this);
 		this.filterName = this.filterName.bind(this);
 		this.filterType = this.filterType.bind(this);
 		this.filterSort = this.filterSort.bind(this);
-	}
-
-	moveToCart(event) {
-		this.setState({
-			cart: [...this.state.cart, event.currentTarget.dataset.name],
-		});
 	}
 
 	getProduct() {
@@ -76,8 +69,8 @@ export default class Main extends React.Component {
 		const products = [];
 		if (this.state.productList.length > 0) {
 			this.state.productList.map((data, x) => {
-				console.log(data.id);
-				products.push(<MainCard key={x} event={this.moveToCart} product={data} productId={data.id} />);
+				console.log(data);
+				products.push(<MainCard key={x} product={data} productId={data.id} />);
 			});
 		}
 		return (

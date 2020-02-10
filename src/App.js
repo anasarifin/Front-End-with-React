@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import Edit from "./components/Edit";
+import History from "./components/History";
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
@@ -63,7 +64,7 @@ class Example extends Component {
 	}
 	changeHistory() {
 		this.setState({
-			currentPage: <Edit />,
+			currentPage: <History />,
 		});
 	}
 

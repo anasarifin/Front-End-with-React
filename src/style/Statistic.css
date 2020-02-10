@@ -1,0 +1,14 @@
+#statistic {
+	margin-left: 55px;
+	padding: 20px;
+	width: 90%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+#statistic div {
+	height: 150px;
+	line-height: 150px;
+	background-color: salmon;
+	text-align: center;
+}

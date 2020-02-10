@@ -61,7 +61,6 @@ export default class CartCard extends React.Component {
 	// }
 
 	render() {
-		console.log(this.props.product);
 		return (
 			<div>
 				{this.state.order !== 0 ? (

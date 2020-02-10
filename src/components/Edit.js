@@ -1,5 +1,5 @@
 import React from "react";
-import MainCard from "./MainCard";
+import EditCard from "./EditCard";
 import Header from "./Header";
 import Axios from "axios";
 import Modal from "./Modal";
@@ -12,6 +12,7 @@ export default class Main extends React.Component {
 		super();
 		this.state = {
 			productList: [],
+			modal: { name: "wowowow" },
 			id: 1,
 			name: "?",
 			type: "",
@@ -21,6 +22,7 @@ export default class Main extends React.Component {
 		this.filterName = this.filterName.bind(this);
 		this.filterType = this.filterType.bind(this);
 		this.filterSort = this.filterSort.bind(this);
+		this.getModal = this.getModal.bind(this);
 	}
 
 	getProduct() {
@@ -72,18 +74,25 @@ export default class Main extends React.Component {
 		this.getProduct();
 	}
 
+	getModal(data) {
+		console.log(data);
+		this.setState({
+			modal: data,
+		});
+	}
+
 	render() {
 		const products = [];
 		if (this.state.productList.length > 0) {
 			this.state.productList.map((data, x) => {
-				products.push(<MainCard key={x} event={this.moveToCart} product={data} />);
+				products.push(<EditCard key={x} onClick={console.log(123)} product={data} />);
 			});
 		}
 		return (
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
-				<Modal name={this.state.id} />
+				<Modal product={this.state.modal} />
 			</div>
 		);
 	}
