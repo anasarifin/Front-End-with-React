@@ -1,8 +1,9 @@
 import React from "react";
 import CartCard from "./CartCard";
-import CheckButton from "./CheckButton";
+import Confirm from "./Confirm";
 import Axios from "axios";
 import "../style/Cart.css";
+import { Button } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -12,7 +13,9 @@ export default class Cart extends React.Component {
 		this.state = {
 			cartList: [],
 			totalPrice: 10,
+			modal: "",
 		};
+		this.paymentConfirm = this.paymentConfirm.bind(this);
 		// this.getTotalPrice = this.getTotalPrice.bind(this);
 	}
 
@@ -33,16 +36,19 @@ export default class Cart extends React.Component {
 			});
 		});
 	}
-
-	// componentDidMount() {
-	// 	this.setState({
-	// 		list: this.props.list,
-	// 	});
-	// }
-
-	// componentDidMount() {
-	// 	this.getCart();
-	// }
+	resetCart() {
+		Axios.delete(url, { data: { id: "all" } }).then(resolve => {
+			console.log(resolve);
+		});
+	}
+	paymentConfirm() {
+		this.state.modal ? this.setState({ modal: "" }) : this.setState({ modal: "show" });
+	}
+	checkout() {
+		Axios.post(url).then(resolve => {
+			alert(resolve);
+		});
+	}
 	componentDidUpdate() {
 		this.getCart();
 	}
@@ -57,7 +63,19 @@ export default class Cart extends React.Component {
 		return (
 			<div id="cart">
 				{cart}
-				<CheckButton totalPrice={this.state.totalPrice} />
+				<div id="checkButton">
+					<span>Total Price: {this.state.totalPrice}</span>
+					<br />
+					<Button onClick={this.checkout} className="button" color="primary">
+						Checkout
+					</Button>
+					<br />
+					<Button onClick={this.resetCart} color="danger">
+						Reset cart
+					</Button>
+				</div>
+				<Confirm show={this.state.modal} cartList={this.state.cartList.sold_item_list} />
+				<div className={this.state.modal ? "layer show" : "layer"}></div>
 			</div>
 		);
 	}

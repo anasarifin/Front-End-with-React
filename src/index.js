@@ -5,7 +5,7 @@ import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Modal from "./components/Modal";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class AppWithRouter extends React.Component {

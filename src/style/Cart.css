@@ -24,3 +24,13 @@
 #checkButton .button {
 	margin-top: 10px;
 }
+#modal {
+	position: fixed;
+	width: 50%;
+	top: 150%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+#modal.show {
+	top: 50%;
+}

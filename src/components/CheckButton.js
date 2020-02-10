@@ -1,10 +1,12 @@
 import React from "react";
 import Axios from "axios";
-import { Button } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/cart";
 
 export default class CheckButton extends React.Component {
+	checkout() {
+		Axios.post(url);
+	}
 	resetCart() {
 		Axios.delete(url, { data: { id: "all" } }).then(resolve => {
 			console.log(resolve);

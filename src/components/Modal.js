@@ -49,61 +49,63 @@ export default class Modal extends React.Component {
 
 	render() {
 		return (
-			<Form>
-				<FormGroup row>
-					<Label for="name" sm={2}>
-						Name
-					</Label>
-					<Col sm={10}>
-						<Input type="text" name="name" id="xName" />
-					</Col>
-				</FormGroup>
-				<FormGroup row>
-					<Label for="stock" sm={2}>
-						Stock
-					</Label>
-					<Col sm={10}>
-						<Input type="text" name="stock" id="xStock" />
-					</Col>
-				</FormGroup>
-				<FormGroup row>
-					<Label for="price" sm={2}>
-						Price
-					</Label>
-					<Col sm={10}>
-						<Input type="text" name="price" id="xPrice" />
-					</Col>
-				</FormGroup>
-				<FormGroup row>
-					<Label for="category" sm={2}>
-						Category
-					</Label>
-					<Col sm={10}>
-						<Input type="select" name="category" id="xCategory">
-							<option value="0">Food</option>
-							<option value="1">Drink</option>
-						</Input>
-					</Col>
-				</FormGroup>
-				<FormGroup row>
-					<Label for="desc" sm={2}>
-						Description
-					</Label>
-					<Col sm={10}>
-						<Input type="textarea" name="desc" id="xDesc" />
-					</Col>
-				</FormGroup>
-				<FormGroup row>
-					<Label for="image" sm={2}>
-						Image
-					</Label>
-					<Col sm={10}>
-						<Input type="file" name="image" id="xImage" />
-						<FormText color="muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</FormText>
-					</Col>
-				</FormGroup>
-				<Button onClick={this.postData}>Submit</Button>
-			</Form>
+			<div id="modal" className={this.props.show}>
+				<Form>
+					<FormGroup row>
+						<Label for="name" sm={2}>
+							Name
+						</Label>
+						<Col sm={10}>
+							<Input type="text" name="name" id="xName" />
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="stock" sm={2}>
+							Stock
+						</Label>
+						<Col sm={10}>
+							<Input type="text" name="stock" id="xStock" />
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="price" sm={2}>
+							Price
+						</Label>
+						<Col sm={10}>
+							<Input type="text" name="price" id="xPrice" />
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="category" sm={2}>
+							Category
+						</Label>
+						<Col sm={10}>
+							<Input type="select" name="category" id="xCategory">
+								<option value="0">Food</option>
+								<option value="1">Drink</option>
+							</Input>
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="desc" sm={2}>
+							Description
+						</Label>
+						<Col sm={10}>
+							<Input type="textarea" name="desc" id="xDesc" />
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="image" sm={2}>
+							Image
+						</Label>
+						<Col sm={10}>
+							<Input type="file" name="image" id="xImage" />
+							<FormText color="muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</FormText>
+						</Col>
+					</FormGroup>
+					<Button onClick={this.postData}>Submit</Button>
+				</Form>
+			</div>
 		);
 	}
 }
