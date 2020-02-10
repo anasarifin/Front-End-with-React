@@ -1,22 +1,36 @@
 import React from "react";
 import CartCard from "./CartCard";
 import CheckButton from "./CheckButton";
+import Axios from "axios";
 import "../style/Cart.css";
+
+const url = "http://localhost:9999/api/v1/cart";
 
 export default class Cart extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			cart: [],
-			totalPrice: 10
+			cartList: [],
+			totalPrice: 10,
 		};
-		this.getTotalPrice = this.getTotalPrice.bind(this);
+		// this.getTotalPrice = this.getTotalPrice.bind(this);
 	}
 
-	getTotalPrice(sum) {
-		console.log(sum);
-		this.setState({
-			totalPrice: this.state.totalPrice + sum
+	// getTotalPrice(sum) {
+	// 	console.log(sum);
+	// 	this.setState({
+	// 		totalPrice: this.state.totalPrice + sum,
+	// 	});
+	// }
+
+	getCart() {
+		Axios.get(url).then(resolve => {
+			this.setState({
+				cartList: resolve.data,
+				totalPrice: resolve.data.reduce((sum, product) => {
+					return (sum += product.quantity * product.price);
+				}, 0),
+			});
 		});
 	}
 
@@ -26,14 +40,23 @@ export default class Cart extends React.Component {
 	// 	});
 	// }
 
+	// componentDidMount() {
+	// 	this.getCart();
+	// }
+	componentDidUpdate() {
+		this.getCart();
+	}
+
 	render() {
-		const products = [];
-		this.props.list.map((data, x) => {
-			products.push(<CartCard key={x} id={data} event={this.getTotalPrice} />);
-		});
+		const cart = [];
+		if (this.state.cartList.length > 0) {
+			this.state.cartList.map((data, x) => {
+				cart.push(<CartCard key={x} product={data} />);
+			});
+		}
 		return (
 			<div id="cart">
-				{products}
+				{cart}
 				<CheckButton totalPrice={this.state.totalPrice} />
 			</div>
 		);

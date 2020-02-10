@@ -15,7 +15,7 @@ class Example extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentPage: <Main />
+			currentPage: <Main />,
 		};
 		this.changePage = this.changePage.bind(this);
 		this.changeMain = this.changeMain.bind(this);
@@ -24,13 +24,13 @@ class Example extends Component {
 	}
 	static defaultProps = {
 		batch: 1,
-		city: "Jakarta"
+		city: "Jakarta",
 	};
 
 	componentDidMount = () => {
 		setTimeout(() => {
 			this.setState({
-				date: "This state has been changed"
+				date: "This state has been changed",
 			});
 		}, 2000);
 	};
@@ -46,23 +46,24 @@ class Example extends Component {
 	}
 
 	changePage(event) {
+		console.log(event.currentTarget.dataset.page);
 		this.setState({
-			currentPage: event.currentTarget.dataset.page
+			currentPage: event.currentTarget.dataset.page,
 		});
 	}
 	changeMain() {
 		this.setState({
-			currentPage: <Main />
+			currentPage: <Main />,
 		});
 	}
 	changeEdit() {
 		this.setState({
-			currentPage: <Edit />
+			currentPage: <Edit />,
 		});
 	}
 	changeHistory() {
 		this.setState({
-			currentPage: <Edit />
+			currentPage: <Edit />,
 		});
 	}
 

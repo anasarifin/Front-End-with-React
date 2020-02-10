@@ -1,20 +1,23 @@
 import React from "react";
 import Axios from "axios";
 
-const productUrl = "http://localhost:9999/api/v1/products";
+const url = "http://localhost:9999/api/v1/cart";
 
 export default class CartCard extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			order: 1
+			order: 1,
 		};
 	}
 
 	reduceStock = () => {
 		this.setState({
 			order: this.state.order - 1,
-			stock: this.state.stock + 1
+			stock: this.state.stock + 1,
+		});
+		Axios.delete(url, { data: { id: this.props.product.product_id } }).then(resolve => {
+			console.log(resolve);
 		});
 	};
 
@@ -22,26 +25,43 @@ export default class CartCard extends React.Component {
 		if (this.state.stock > 0) {
 			this.setState({
 				order: this.state.order + 1,
-				stock: this.state.stock - 1
+				stock: this.state.stock - 1,
+			});
+			Axios.patch(url, { id: this.props.product.product_id }).then(resolve => {
+				console.log(resolve);
 			});
 		}
 	};
 
-	getData() {
-		Axios.get(productUrl + "?id=" + this.props.id).then(resolve => {
-			this.setState({
-				name: resolve.data[0].name,
-				stock: resolve.data[0].stock,
-				price: resolve.data[0].price
-			});
+	componentDidMount() {
+		this.setState({
+			order: this.props.product.quantity,
+			stock: this.props.product.stock,
 		});
 	}
+	// componentDidUpdate() {
+	// 	this.setState({
+	// 		order: this.props.product.quantity,
+	// 		stock: this.props.product.stock,
+	// 	});
+	// }
 
-	componentDidMount() {
-		this.getData();
-	}
+	// getData() {
+	// 	Axios.get(url + "?id=" + this.props.id).then(resolve => {
+	// 		this.setState({
+	// 			name: resolve.data[0].name,
+	// 			stock: resolve.data[0].stock,
+	// 			price: resolve.data[0].price,
+	// 		});
+	// 	});
+	// }
+
+	// componentDidMount() {
+	// 	this.getData();
+	// }
 
 	render() {
+		console.log(this.props.product);
 		return (
 			<div>
 				{this.state.order !== 0 ? (
@@ -50,7 +70,7 @@ export default class CartCard extends React.Component {
 							<img></img>
 						</div>
 						<div>
-							<span className="name">{this.state.name}</span>
+							<span className="name">{this.props.product.name}</span>
 							<br />
 							<button className="reduce" onClick={this.reduceStock}>
 								-
@@ -62,8 +82,8 @@ export default class CartCard extends React.Component {
 							<br />
 							<span className="stock">Stock Available: {this.state.stock}</span>
 							<br />
-							<span className="price">Price: {this.state.price * this.state.order}</span>
-							<input type="hidden" className="totalPrice" data-price={this.state.price * this.state.order}></input>
+							<span className="price">Price: {this.props.product.price * this.state.order}</span>
+							<input type="hidden" className="totalPrice" data-price={this.props.product.price * this.state.order}></input>
 						</div>
 					</div>
 				) : (

@@ -15,7 +15,7 @@ export default class Main extends React.Component {
 			cart: [],
 			name: "?",
 			type: "",
-			sort: ""
+			sort: "",
 		};
 		this.moveToCart = this.moveToCart.bind(this);
 		this.filterName = this.filterName.bind(this);
@@ -25,14 +25,14 @@ export default class Main extends React.Component {
 
 	moveToCart(event) {
 		this.setState({
-			cart: [...this.state.cart, event.currentTarget.dataset.name]
+			cart: [...this.state.cart, event.currentTarget.dataset.name],
 		});
 	}
 
 	getProduct() {
 		Axios.get(productUrl).then(resolve => {
 			this.setState({
-				productList: resolve.data
+				productList: resolve.data,
 			});
 		});
 	}
@@ -42,7 +42,7 @@ export default class Main extends React.Component {
 		Axios.get(productUrl + name + this.state.type + this.state.sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
-				name: name
+				name: name,
 			});
 		});
 	}
@@ -53,7 +53,7 @@ export default class Main extends React.Component {
 			console.log(resolve.data);
 			this.setState({
 				productList: resolve.data,
-				type: type
+				type: type,
 			});
 		});
 	}
@@ -63,22 +63,21 @@ export default class Main extends React.Component {
 		Axios.get(productUrl + this.state.name + this.state.type + sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
-				sort: sort
+				sort: sort,
 			});
 		});
 	}
 
-	// componentDidMount() {
-	// 	this.getProduct();
-	// }
+	componentDidMount() {
+		this.getProduct();
+	}
 
 	render() {
-		this.getProduct();
 		const products = [];
 		if (this.state.productList.length > 0) {
-			console.log(this.state.productList);
 			this.state.productList.map((data, x) => {
-				products.push(<MainCard key={x} event={this.moveToCart} product={data} />);
+				console.log(data.id);
+				products.push(<MainCard key={x} event={this.moveToCart} product={data} productId={data.id} />);
 			});
 		}
 		return (

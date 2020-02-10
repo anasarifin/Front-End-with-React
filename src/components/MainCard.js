@@ -1,31 +1,34 @@
 import React from "react";
+import Axios from "axios";
+
+const url = "http://localhost:9999/api/v1/cart";
 
 export default class MainCard extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			data: ""
+			data: "",
 		};
+		this.addToCart = this.addToCart.bind(this);
 	}
 
 	componentDidMount() {
 		this.setState({
-			data: this.props.product
+			data: this.props.product,
+			id: this.props.productId,
 		});
 	}
 
-	// addToCart() {
-	// 	Axios.get(productUrl + "?name=" + this.props.name).then(resolve => {
-	// 		this.setState({
-	// 			stock: resolve.data[0].stock,
-	// 			price: resolve.data[0].price
-	// 		});
-	// 	});
-	// }
+	addToCart() {
+		const id = this.props.productId;
+		Axios.patch(url, { id: id }).then(resolve => {
+			console.log(resolve);
+		});
+	}
 
 	render() {
 		return (
-			<div className="product" onClick={this.props.event} data-name={this.props.product.id}>
+			<div className="product" onClick={this.addToCart} data-name={this.props.product.id}>
 				<img src={this.props.product.image}></img>
 				<span className="name">{this.props.product.name}</span>
 				<span className="desc">{this.props.product.description}</span>
