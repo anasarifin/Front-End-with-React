@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import Edit from "./components/Edit";
-<<<<<<< HEAD
-=======
-
->>>>>>> 15fcef24a2252c0e84a5af3e258c065498ca9e83
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
@@ -19,7 +15,7 @@ class Example extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentPage: <Main />,
+			currentPage: <Main />
 		};
 		this.changePage = this.changePage.bind(this);
 		this.changeMain = this.changeMain.bind(this);
@@ -28,13 +24,13 @@ class Example extends Component {
 	}
 	static defaultProps = {
 		batch: 1,
-		city: "Jakarta",
+		city: "Jakarta"
 	};
 
 	componentDidMount = () => {
 		setTimeout(() => {
 			this.setState({
-				date: "This state has been changed",
+				date: "This state has been changed"
 			});
 		}, 2000);
 	};
@@ -51,22 +47,22 @@ class Example extends Component {
 
 	changePage(event) {
 		this.setState({
-			currentPage: event.currentTarget.dataset.page,
+			currentPage: event.currentTarget.dataset.page
 		});
 	}
 	changeMain() {
 		this.setState({
-			currentPage: <Main />,
+			currentPage: <Main />
 		});
 	}
 	changeEdit() {
 		this.setState({
-			currentPage: <Edit />,
+			currentPage: <Edit />
 		});
 	}
 	changeHistory() {
 		this.setState({
-			currentPage: <Edit />,
+			currentPage: <Edit />
 		});
 	}
 

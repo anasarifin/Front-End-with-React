@@ -7,14 +7,14 @@ export default class CartCard extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			order: 1,
+			order: 1
 		};
 	}
 
 	reduceStock = () => {
 		this.setState({
 			order: this.state.order - 1,
-			stock: this.state.stock + 1,
+			stock: this.state.stock + 1
 		});
 	};
 
@@ -22,7 +22,7 @@ export default class CartCard extends React.Component {
 		if (this.state.stock > 0) {
 			this.setState({
 				order: this.state.order + 1,
-				stock: this.state.stock - 1,
+				stock: this.state.stock - 1
 			});
 		}
 	};
@@ -31,7 +31,7 @@ export default class CartCard extends React.Component {
 		Axios.get(productUrl + "?name=" + this.props.name).then(resolve => {
 			this.setState({
 				stock: resolve.data[0].stock,
-				price: resolve.data[0].price,
+				price: resolve.data[0].price
 			});
 		});
 	}
