@@ -3,8 +3,7 @@ import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 <<<<<<< HEAD
 import Edit from "./components/Edit";
-=======
->>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
+
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
@@ -21,12 +20,11 @@ class Example extends Component {
 			currentPage: <Main />,
 		};
 		this.changePage = this.changePage.bind(this);
-<<<<<<< HEAD
+
 		this.changeMain = this.changeMain.bind(this);
 		this.changeEdit = this.changeEdit.bind(this);
 		this.changeHistory = this.changeHistory.bind(this);
-=======
->>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
+
 	}
 	static defaultProps = {
 		batch: 1,
@@ -52,7 +50,7 @@ class Example extends Component {
 	}
 
 	changePage(event) {
-<<<<<<< HEAD
+
 		console.log(event.currentTarget.dataset.page);
 		this.setState({
 			currentPage: event.currentTarget.dataset.page,
@@ -72,20 +70,20 @@ class Example extends Component {
 		this.setState({
 			currentPage: <Edit />,
 		});
-=======
+
 		this.setState({
 			currentPage: event.target.value,
 		});
 		console.log(event.target.value);
->>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
+
 	}
 
 	render() {
 		return (
-<<<<<<< HEAD
+
 			<div id="main-con">
 				<Navbar event={[this.changeMain, this.changeEdit, this.changeHistory]} />
-=======
+
 			<div className="main">
 				<Navbar event={this.changePage} />
 				<br />
@@ -95,7 +93,7 @@ class Example extends Component {
 				<br />
 				<br />
 				<br />
->>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
+
 				{this.state.currentPage}
 			</div>
 		);
@@ -127,11 +125,10 @@ class Example extends Component {
 // 	batch: 1,
 // 	city: "Jakarta",
 // };
-<<<<<<< HEAD
+
 {
 	/* <button onClick={this.goToHome}>Profile</button> */
 }
-=======
->>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
+
 
 export default Example;
