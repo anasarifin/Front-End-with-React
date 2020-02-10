@@ -28,8 +28,9 @@ export default class CartCard extends React.Component {
 	};
 
 	getData() {
-		Axios.get(productUrl + "?name=" + this.props.name).then(resolve => {
+		Axios.get(productUrl + "?id=" + this.props.id).then(resolve => {
 			this.setState({
+				name: resolve.data[0].name,
 				stock: resolve.data[0].stock,
 				price: resolve.data[0].price
 			});
@@ -49,7 +50,7 @@ export default class CartCard extends React.Component {
 							<img></img>
 						</div>
 						<div>
-							<span className="name">{this.props.name}</span>
+							<span className="name">{this.state.name}</span>
 							<br />
 							<button className="reduce" onClick={this.reduceStock}>
 								-
@@ -62,6 +63,7 @@ export default class CartCard extends React.Component {
 							<span className="stock">Stock Available: {this.state.stock}</span>
 							<br />
 							<span className="price">Price: {this.state.price * this.state.order}</span>
+							<input type="hidden" className="totalPrice" data-price={this.state.price * this.state.order}></input>
 						</div>
 					</div>
 				) : (
