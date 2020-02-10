@@ -3,7 +3,10 @@ import MainCard from "./MainCard";
 import Cart from "./Cart";
 import Header from "./Header";
 import Axios from "axios";
+<<<<<<< HEAD
 import "../style/Main.css";
+=======
+>>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
 
 const productUrl = "http://localhost:9999/api/v1/products";
 
@@ -24,9 +27,15 @@ export default class Main extends React.Component {
 	}
 
 	moveToCart(event) {
+<<<<<<< HEAD
 		console.log(event.currentTarget.dataset.name);
 		this.setState({
 			cart: [...this.state.cart, event.currentTarget.dataset.name],
+=======
+		console.log(event);
+		this.setState({
+			cart: [...this.state.cart, event.target.textContent],
+>>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
 		});
 	}
 
@@ -84,7 +93,11 @@ export default class Main extends React.Component {
 		return (
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
+<<<<<<< HEAD
 				<div id="product-con">{products}</div>
+=======
+				{products}
+>>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
 				<Cart list={this.state.cart} />
 			</div>
 		);

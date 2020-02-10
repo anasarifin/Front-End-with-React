@@ -15,6 +15,7 @@ export default class MainCard extends React.Component {
 	}
 
 	render() {
+<<<<<<< HEAD
 		return (
 			<div className="product" onClick={this.props.event} data-name={this.props.product.name}>
 				<img src={this.props.product.image}></img>
@@ -24,5 +25,8 @@ export default class MainCard extends React.Component {
 				<span className="price">{this.props.product.price}</span>
 			</div>
 		);
+=======
+		return <div onClick={this.props.event}>{this.props.product.name}</div>;
+>>>>>>> 58b2e33f0bf80389da02a53491546ba81500e7d5
 	}
 }
