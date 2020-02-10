@@ -1,0 +1,21 @@
+#login {
+	position: fixed;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+#login * {
+	display: block;
+}
+#login input {
+	margin-bottom: 20px;
+	width: 250px;
+	padding: 0 3px;
+}
+#login button {
+	width: 100px;
+	margin-top: 10px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}

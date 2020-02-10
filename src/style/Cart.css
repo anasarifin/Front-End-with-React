@@ -5,17 +5,22 @@
 	width: 25%;
 	min-width: 275px;
 	height: 100%;
-	background-color: salmon;
 	overflow-y: scroll;
+	text-align: center;
 }
 #card .cart_card {
-	color: white;
 	display: grid;
 	grid-template-columns: 3;
 }
-#cart .cart_card * {
-	color: white;
+#card .cart_card div span {
+	margin: 10px 10px;
 }
-#cart .cart_card button {
-	color: black;
+#checkButton {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+#checkButton .button {
+	margin-top: 10px;
 }

@@ -69,7 +69,6 @@ export default class Main extends React.Component {
 		const products = [];
 		if (this.state.productList.length > 0) {
 			this.state.productList.map((data, x) => {
-				console.log(data);
 				products.push(<MainCard key={x} product={data} productId={data.id} />);
 			});
 		}

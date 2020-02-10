@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import { Button } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -71,13 +72,13 @@ export default class CartCard extends React.Component {
 						<div>
 							<span className="name">{this.props.product.name}</span>
 							<br />
-							<button className="reduce" onClick={this.reduceStock}>
+							<Button color="primary" onClick={this.reduceStock}>
 								-
-							</button>
+							</Button>
 							<span className="order">{this.state.order}</span>
-							<button className={this.state.stock !== 0 ? "add" : "add out"} onClick={this.addStock}>
+							<Button color="primary" onClick={this.addStock}>
 								+
-							</button>
+							</Button>
 							<br />
 							<span className="stock">Stock Available: {this.state.stock}</span>
 							<br />

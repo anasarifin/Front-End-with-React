@@ -1,36 +1,35 @@
 import React from "react";
+import Axios from "axios";
+
+const url = "http://localhost:9999/api/v1/history";
 
 export default class HistoryList extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			data: "",
+		};
+	}
+
+	// getData() {
+	// 	Axios.get(url).then(resolve => {
+	// 		this.setState({
+	// 			data: resolve.data.sold_item_list,
+	// 		});
+	// 	});
+	// }
+
 	render() {
-		const list = [];
-		if (this.props.data.length > 0) {
-			this.props.data.map((data, x) => {
-				list.push(
-					<ul className="table">
-						<div className="invoice">Invoice</div>
-						<div className="cashier">{data.username}</div>
-						<div className="product">{data.name}</div>
-						<div className="quantity">{data.quantity}</div>
-						<div className="price">{data.price}</div>
-						<div className="totalPrice">{data.price * data.quantity}</div>
-						<div className="purchased">{data.purchased_date}</div>
-					</ul>,
-				);
-			});
-		}
 		return (
-			<div id="history-list">
-				<div className="topTable">
-					<div className="invoice">Invoice</div>
-					<div className="cashier">Cashier</div>
-					<div className="product">Product</div>
-					<div className="quantity">Quantity</div>
-					<div className="price">Price</div>
-					<div className="totalPrice">Total Price</div>
-					<div className="purchased">Purchased at</div>
-				</div>
-				{list}
-			</div>
+			<ul className="table">
+				<li className="invoice">Invoice</li>
+				<li className="cashier">{this.props.paymentData.username}</li>
+				<li className="product">{this.props.paymentData.name}</li>
+				<li className="quantity">{this.props.paymentData.quantity}</li>
+				<li className="price">{this.props.paymentData.price}</li>
+				<li className="totalPrice">{this.props.paymentData.price * this.props.paymentData.quantity}</li>
+				<li className="purchased">{this.props.paymentData.purchased_at}</li>
+			</ul>
 		);
 	}
 }

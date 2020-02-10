@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import { Button } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -12,12 +13,16 @@ export default class CheckButton extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div id="checkButton">
 				<span>Total Price: {this.props.totalPrice}</span>
 				<br />
-				<button>Checkout</button>
+				<Button className="button" color="primary">
+					Checkout
+				</Button>
 				<br />
-				<button onClick={this.resetCart}>Reset cart</button>
+				<Button onClick={this.resetCart} color="danger">
+					Reset cart
+				</Button>
 			</div>
 		);
 	}
