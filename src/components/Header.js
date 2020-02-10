@@ -15,13 +15,13 @@ export default class Header extends React.Component {
 		return (
 			<div id="header">
 				<input type="text" id="header-search" onChange={this.props.eventSearch} />
-				<span>Filter by : </span>
+				<label>Filter by : </label>
 				<select onChange={this.props.eventType}>
 					<option value="all">All</option>
 					<option value="0">Food</option>
 					<option value="1">Drink</option>
 				</select>
-				<span>Sort by : </span>
+				<label>Sort by : </label>
 				<select onChange={this.props.eventSort}>
 					<option value="name">Name</option>
 					<option value="stock">Stock</option>

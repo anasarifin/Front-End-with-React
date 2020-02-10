@@ -1,5 +1,8 @@
 #main {
-	margin-left: 55px;
+	position: fixed;
+	left: 50px;
+	background-color: whitesmoke;
+	width: 100%;
 }
 #product-con {
 	display: grid;

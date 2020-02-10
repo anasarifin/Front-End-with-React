@@ -1,16 +1,30 @@
 #history {
-	margin-left: 55px;
-	width: 90%;
+	position: fixed;
+	left: 50px;
+	background-color: whitesmoke;
+	width: 98%;
 	padding: 20px;
 }
 #statistic {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
+	justify-items: center;
+	margin-bottom: 50px;
 }
 #statistic div {
+	width: 70%;
 	height: 150px;
 	line-height: 150px;
-	background-color: salmon;
+	background-color: #29b6f6;
 	text-align: center;
+}
+
+.topTable,
+.table {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	width: 100%;
+	text-align: center;
+	margin-bottom: 15px;
 }

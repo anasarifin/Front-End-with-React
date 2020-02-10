@@ -28,7 +28,7 @@ export default class HistoryList extends React.Component {
 				<li className="quantity">{this.props.paymentData.quantity}</li>
 				<li className="price">{this.props.paymentData.price}</li>
 				<li className="totalPrice">{this.props.paymentData.price * this.props.paymentData.quantity}</li>
-				<li className="purchased">{this.props.paymentData.purchased_at}</li>
+				<li className="purchased">{this.props.paymentData.purchased_date}</li>
 			</ul>
 		);
 	}
