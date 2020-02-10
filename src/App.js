@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import Edit from "./components/Edit";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 15fcef24a2252c0e84a5af3e258c065498ca9e83
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
@@ -46,7 +50,6 @@ class Example extends Component {
 	}
 
 	changePage(event) {
-		console.log(event.currentTarget.dataset.page);
 		this.setState({
 			currentPage: event.currentTarget.dataset.page,
 		});
