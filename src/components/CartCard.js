@@ -10,6 +10,7 @@ export default class CartCard extends React.Component {
 		this.state = {
 			order: 1,
 		};
+		this.reduceStock = this.reduceStock.bind(this);
 	}
 
 	reduceStock = () => {

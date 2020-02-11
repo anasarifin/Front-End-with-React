@@ -25,6 +25,7 @@ export default class Main extends React.Component {
 
 	getProduct() {
 		Axios.get(url + 1).then(resolve => {
+			console.log(resolve);
 			this.setState({
 				productList: resolve.data,
 			});
@@ -44,7 +45,6 @@ export default class Main extends React.Component {
 	filterType(event) {
 		const type = event.target.value == "all" ? "" : "&type=" + event.target.value;
 		Axios.get(url + 1 + this.state.name + type + this.state.sort).then(resolve => {
-			console.log(resolve.data);
 			this.setState({
 				productList: resolve.data,
 				type: type,

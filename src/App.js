@@ -32,9 +32,7 @@ class Example extends Component {
 	};
 
 	resetCart() {
-		Axios.delete(url, { data: { id: "all" } }).then(resolve => {
-			console.log(resolve);
-		});
+		Axios.delete(url, { data: { id: "all" } }).then(resolve => {});
 	}
 
 	componentDidMount = () => {

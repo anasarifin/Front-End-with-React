@@ -28,6 +28,7 @@ export default class Cart extends React.Component {
 
 	getCart() {
 		Axios.get(url).then(resolve => {
+			console.log(resolve.data.length);
 			this.setState({
 				cartList: resolve.data,
 				totalPrice: resolve.data.reduce((sum, product) => {
@@ -55,11 +56,13 @@ export default class Cart extends React.Component {
 	}
 
 	render() {
-		const cart = [];
-		if (this.state.cartList.length > 0) {
+		let cart = [];
+		if (this.state.cartList.length > 1) {
 			this.state.cartList.map((data, x) => {
 				cart.push(<CartCard key={x} product={data} />);
 			});
+		} else if (this.state.cartList.length == 1) {
+			cart = <CartCard product={this.state.cartList[0]} />;
 		}
 		return (
 			<div id="cart">

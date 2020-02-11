@@ -1,10 +1,8 @@
 #history {
-	position: fixed;
 	background-color: whitesmoke;
 	width: 100%;
-	height: auto;
+	height: 200%;
 	padding: 20px;
-	overflow: scroll;
 	padding: 30px 70px;
 }
 #history-list {
