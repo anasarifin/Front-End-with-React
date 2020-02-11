@@ -3,64 +3,36 @@ import Axios from "axios";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/products";
-
+// {this.props.show}
 export default class Modal extends React.Component {
 	constructor() {
 		super();
-		this.state = {
-			data: {
-				name: "",
-				stock: "",
-				description: "",
-				price: "",
-			},
-			image: null,
-		};
-		this.postData = this.postData.bind(this);
+		this.state = {};
 	}
 
-	// getData() {
-	// 	Axios.get(urls + "?name=" + this.props.name).then(resolve => {
-	// 		this.setState({
-	// 			data: resolve.data[0],
-	// 		});
-	// 	});
-	// }
-	handleChange(e) {
-		console.log(e.target.files[0]);
-		this.setState({
-			image: e.target.files[0],
-		});
+	handleFile() {
+		alert(123);
 	}
 	postData() {
-		const image = this.state.image;
-		const formData = new FormData();
-		formData.append("name", document.getElementById("xName").value);
-		formData.append("description", document.getElementById("xDesc").value);
-		formData.append("price", document.getElementById("xPrice").value);
-		formData.append("stock", document.getElementById("xStock").value);
-		formData.append("image", image);
-		formData.append("category_id", document.getElementById("xCategory").value);
-		Axios.post(url, formData, {
-			headers: {
-				usertoken: localStorage.getItem("token"),
-			},
+		Axios.post(url, {
+			name: document.getElementById("xName").value,
+			description: document.getElementById("xDesc").value,
+			price: document.getElementById("xPrice").value,
+			stock: document.getElementById("xStock").value,
+			image: document.getElementById("xImage").value,
+			category_id: document.getElementById("xCategory").value,
 		})
 			.then(resolve => {
-				alert(resolve);
+				console.log(resolve);
 			})
 			.catch(reject => {
 				console.log(reject);
 			});
 	}
 
-	// componentDidUpdate() {
-	// 	this.getData();
-	// }
-
 	render() {
 		return (
-			<div id="modal" className={this.props.show}>
+			<div id="addProduct">
 				<Form>
 					<FormGroup row>
 						<Label for="name" sm={2}>
@@ -110,7 +82,7 @@ export default class Modal extends React.Component {
 							Image
 						</Label>
 						<Col sm={10}>
-							<Input type="file" name="image" id="xImage" onChange={e => this.handleChange(e)} />
+							<Input type="file" name="image" id="xImage" onChange={alert(123)} />
 							<FormText color="muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</FormText>
 						</Col>
 					</FormGroup>
@@ -140,12 +112,3 @@ export default class Modal extends React.Component {
 	</button>
 </div>; */
 }
-
-// {
-// 	name: document.getElementById("xName").value,
-// 	description: document.getElementById("xDesc").value,
-// 	price: document.getElementById("xPrice").value,
-// 	stock: document.getElementById("xStock").value,
-// 	image: formData,
-// 	category_id: document.getElementById("xCategory").value,
-// }

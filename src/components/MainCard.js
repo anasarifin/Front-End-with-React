@@ -22,7 +22,7 @@ export default class MainCard extends React.Component {
 
 	addToCart() {
 		const id = this.props.product.id;
-		Axios.patch(url, { id: id }).then(resolve => {
+		Axios.patch(url, { id: id }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 			console.log(resolve);
 		});
 	}
@@ -33,12 +33,12 @@ export default class MainCard extends React.Component {
 				<Card onClick={this.addToCart}>
 					<CardImg top width="100%" src={this.props.product.image} alt={this.props.product.name} />
 					<CardBody>
-						<CardTitle>{this.props.product.name}</CardTitle>
-						<CardText>{this.props.product.description}</CardText>
+						<CardTitle className="xName">{this.props.product.name}</CardTitle>
+						<CardText className="xDesc">{this.props.product.description}</CardText>
 						<CardText>
-							<small className="text-muted">Stock: {this.props.product.stock}</small>
+							<small className="text-muted xStock">Stock: {this.props.product.stock}</small>
 							<br />
-							<small className="text-muted">Price: {this.props.product.price}</small>
+							<small className="text-muted xPrice">Price: {this.props.product.price}</small>
 						</CardText>
 					</CardBody>
 				</Card>

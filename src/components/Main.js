@@ -5,7 +5,7 @@ import Header from "./Header";
 import Axios from "axios";
 import "../style/Main.css";
 
-const productUrl = "http://localhost:9999/api/v1/products";
+const url = "http://localhost:9999/api/v1/products?page=";
 
 export default class Main extends React.Component {
 	constructor() {
@@ -13,7 +13,7 @@ export default class Main extends React.Component {
 		this.state = {
 			productList: [],
 			cart: [],
-			name: "?",
+			name: "",
 			type: "",
 			sort: "",
 		};
@@ -23,7 +23,7 @@ export default class Main extends React.Component {
 	}
 
 	getProduct() {
-		Axios.get(productUrl).then(resolve => {
+		Axios.get(url + 1).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 			});
@@ -31,8 +31,8 @@ export default class Main extends React.Component {
 	}
 
 	filterName(event) {
-		const name = "?name=" + event.target.value;
-		Axios.get(productUrl + name + this.state.type + this.state.sort).then(resolve => {
+		const name = "&name=" + event.target.value;
+		Axios.get(url + 1 + name + this.state.type + this.state.sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				name: name,
@@ -42,7 +42,7 @@ export default class Main extends React.Component {
 
 	filterType(event) {
 		const type = event.target.value == "all" ? "" : "&type=" + event.target.value;
-		Axios.get(productUrl + this.state.name + type + this.state.sort).then(resolve => {
+		Axios.get(url + 1 + this.state.name + type + this.state.sort).then(resolve => {
 			console.log(resolve.data);
 			this.setState({
 				productList: resolve.data,
@@ -53,7 +53,7 @@ export default class Main extends React.Component {
 
 	filterSort(event) {
 		const sort = "&sort=" + event.target.value;
-		Axios.get(productUrl + this.state.name + this.state.type + sort).then(resolve => {
+		Axios.get(url + 1 + this.state.name + this.state.type + sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				sort: sort,

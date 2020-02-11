@@ -3,6 +3,7 @@ import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import Edit from "./components/Edit";
 import History from "./components/History";
+import Axios from "axios";
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
@@ -11,6 +12,8 @@ import "./App.css";
 // export const contextApp = React.createContext({
 // 	number: 1,
 // });
+
+const url = "http://localhost:9999/api/v1/cart";
 
 class Example extends Component {
 	constructor() {
@@ -28,12 +31,14 @@ class Example extends Component {
 		city: "Jakarta",
 	};
 
+	resetCart() {
+		Axios.delete(url, { data: { id: "all" } }).then(resolve => {
+			console.log(resolve);
+		});
+	}
+
 	componentDidMount = () => {
-		setTimeout(() => {
-			this.setState({
-				date: "This state has been changed",
-			});
-		}, 2000);
+		this.resetCart();
 	};
 
 	componentDidUpdate = (prevProps, prevState) => {

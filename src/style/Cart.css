@@ -5,8 +5,11 @@
 	width: 25%;
 	min-width: 275px;
 	height: 100%;
-	overflow-y: scroll;
 	text-align: center;
+	overflow-y: scroll;
+}
+#cartList {
+	margin-bottom: 150px;
 }
 #card .cart_card {
 	display: grid;
@@ -16,21 +19,14 @@
 	margin: 10px 10px;
 }
 #checkButton {
-	position: absolute;
-	bottom: 10px;
-	left: 50%;
-	transform: translateX(-50%);
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	right: 0;
+	width: 25%;
+	background-color: #29b6f6;
+	padding: 10px;
 }
 #checkButton .button {
 	margin-top: 10px;
-}
-#modal {
-	position: fixed;
-	width: 50%;
-	top: 150%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-#modal.show {
-	top: 50%;
 }

@@ -17,12 +17,13 @@ export default class Main extends React.Component {
 			name: "?",
 			type: "",
 			sort: "",
+			show: "",
 		};
 		this.moveToCart = this.moveToCart.bind(this);
 		this.filterName = this.filterName.bind(this);
 		this.filterType = this.filterType.bind(this);
 		this.filterSort = this.filterSort.bind(this);
-		this.getModal = this.getModal.bind(this);
+		this.showModal = this.showModal.bind(this);
 	}
 
 	getProduct() {
@@ -74,25 +75,26 @@ export default class Main extends React.Component {
 		this.getProduct();
 	}
 
-	getModal(data) {
-		console.log(data);
-		this.setState({
-			modal: data,
-		});
+	showModal() {
+		this.state.show ? this.setState({ show: "" }) : this.setState({ show: "show" });
 	}
 
 	render() {
 		const products = [];
 		if (this.state.productList.length > 0) {
 			this.state.productList.map((data, x) => {
-				products.push(<EditCard key={x} onClick={console.log(123)} product={data} />);
+				products.push(<EditCard key={x} product={data} />);
 			});
 		}
 		return (
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
-				<Modal product={this.state.modal} />
+				<Modal product={this.state.modal} show={this.state.show} />
+				<div className="addButton" onClick={this.showModal}>
+					+
+				</div>
+				<div className={this.state.show ? "layer show" : "layer"}></div>
 			</div>
 		);
 	}

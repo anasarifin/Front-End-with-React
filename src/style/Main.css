@@ -16,7 +16,6 @@
 #product-con .product {
 	position: relative;
 	width: 100%;
-	height: 100%;
 	background-color: salmon;
 }
 .product .name,
@@ -26,4 +25,44 @@
 .product .price {
 	position: absolute;
 	right: 0;
+}
+
+#modal {
+	position: fixed;
+	width: 50%;
+	top: 150%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 30px;
+	border-radius: 5px;
+	z-index: 10;
+}
+#modal.show {
+	top: 50%;
+}
+.layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.layer.show {
+	width: 100%;
+	height: 100%;
+}
+
+.addButton {
+	text-align: center;
+	line-height: 80px;
+	font-size: 100px;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: salmon;
 }

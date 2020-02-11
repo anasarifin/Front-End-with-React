@@ -2,8 +2,10 @@
 	position: fixed;
 	left: 50px;
 	background-color: whitesmoke;
-	width: 98%;
+	width: 90%;
+	height: auto;
 	padding: 20px;
+	overflow: scroll;
 }
 #statistic {
 	display: grid;
