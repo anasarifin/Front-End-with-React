@@ -54,9 +54,10 @@ export default class Modal extends React.Component {
 			});
 	}
 
-	// componentDidUpdate() {
-	// 	this.getData();
-	// }
+	hideCart() {
+		document.getElementById("modal").classList.remove("show");
+		document.getElementById("blackLayer").classList.remove("show");
+	}
 
 	render() {
 		return (
@@ -116,6 +117,7 @@ export default class Modal extends React.Component {
 					</FormGroup>
 					<Button onClick={this.postData}>Submit</Button>
 				</Form>
+				<img src="http://localhost:9999/public/img/close.png" alt="close" onClick={this.hideCart} />
 			</div>
 		);
 	}

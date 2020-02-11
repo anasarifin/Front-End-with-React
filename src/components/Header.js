@@ -27,6 +27,11 @@ export default class Header extends React.Component {
 					<option value="price">Price</option>
 					<option value="updated_at">Update at</option>
 					<option value="created_at">Create at</option>
+					<option value="name&dir=1">Name DESC</option>
+					<option value="stock&dir=1">Stock DESC</option>
+					<option value="price&dir=1">Price DESC</option>
+					<option value="updated_at&dir=1">Update at DESC</option>
+					<option value="created_at&dir=1">Create at DESC</option>
 				</select>
 				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
 			</div>

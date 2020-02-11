@@ -28,7 +28,6 @@ export default class Cart extends React.Component {
 
 	getCart() {
 		Axios.get(url).then(resolve => {
-			console.log(resolve.data.length);
 			this.setState({
 				cartList: resolve.data,
 				totalPrice: resolve.data.reduce((sum, product) => {

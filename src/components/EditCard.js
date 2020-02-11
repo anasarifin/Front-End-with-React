@@ -9,6 +9,7 @@ export default class MainCard extends React.Component {
 		this.state = {
 			data: "",
 		};
+		this.fillModal = this.fillModal.bind(this);
 	}
 
 	componentDidMount() {
@@ -16,6 +17,16 @@ export default class MainCard extends React.Component {
 			data: this.props.product,
 			id: this.props.product_id,
 		});
+	}
+
+	fillModal() {
+		document.getElementById("xName").value = this.props.product.name;
+		document.getElementById("xStock").value = this.props.product.stock;
+		document.getElementById("xPrice").value = this.props.product.price;
+		document.getElementById("xCategory").value = this.props.product.category_id;
+		document.getElementById("xDesc").value = this.props.product.description;
+		document.getElementById("modal").classList.add("show");
+		document.getElementById("blackLayer").classList.add("show");
 	}
 
 	// addToCart() {
@@ -26,13 +37,15 @@ export default class MainCard extends React.Component {
 	// }
 
 	render() {
+		console.log(this.props.product);
 		return (
-			<div className="product" onClick={this.props.event} data-product={this.props.data}>
-				<img src={this.props.product.image}></img>
-				<span className="name">{this.props.product.name}</span>
-				<span className="desc">{this.props.product.description}</span>
-				<span className="stock">Stock: {this.props.product.stock}</span>
-				<span className="price">{this.props.product.price}</span>
+			<div className="product" onClick={this.fillModal}>
+				<div className="product-div">
+					<span className="name">{this.props.product.name}</span>
+					<span className="desc">{this.props.product.description}</span>
+					<span className="stock">Stock: {this.props.product.stock}</span>
+					<span className="price">{this.props.product.price}</span>
+				</div>
 			</div>
 		);
 	}

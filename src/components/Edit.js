@@ -75,8 +75,17 @@ export default class Main extends React.Component {
 		this.getProduct();
 	}
 
+	// fillModal() {
+	// 	document.getElementById("product-con").addEventListener("click", event => {
+	// 		if (event.target.className == "product") {
+	// 			document.getElementById("xName").value = event.target;
+	// 		}
+	// 	});
+	// }
+
 	showModal() {
-		this.state.show ? this.setState({ show: "" }) : this.setState({ show: "show" });
+		document.getElementById("modal").classList.add("show");
+		document.getElementById("blackLayer").classList.add("show");
 	}
 
 	render() {
@@ -94,7 +103,7 @@ export default class Main extends React.Component {
 				<div className="addButton" onClick={this.showModal}>
 					+
 				</div>
-				<div className={this.state.show ? "layer show" : "layer"}></div>
+				<div id="blackLayer"></div>
 			</div>
 		);
 	}
