@@ -38,7 +38,7 @@ export default class CartCard extends React.Component {
 	componentDidMount() {
 		this.setState({
 			order: this.props.product.quantity,
-			stock: this.props.product.stock,
+			stock: this.props.product.stock - 1,
 		});
 	}
 	// componentDidUpdate() {

@@ -22,9 +22,13 @@ export default class MainCard extends React.Component {
 
 	addToCart() {
 		const id = this.props.product.id;
-		Axios.patch(url, { id: id }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
-			console.log(resolve);
-		});
+		if (this.props.product.stock > 0) {
+			Axios.patch(url, { id: id }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
+				console.log(resolve);
+			});
+		} else {
+			alert("Out of stock!");
+		}
 	}
 
 	render() {
