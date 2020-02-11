@@ -37,12 +37,12 @@ export default class MainCard extends React.Component {
 				<Card onClick={this.addToCart}>
 					<CardImg top width="100%" src={this.props.product.image} alt={this.props.product.name} />
 					<CardBody>
-						<CardTitle className="xName">{this.props.product.name}</CardTitle>
+						<CardTitle className="xName">
+							<b>{this.props.product.name}</b>
+						</CardTitle>
 						<CardText className="xDesc">{this.props.product.description}</CardText>
 						<CardText>
-							<small className="text-muted xStock">Stock: {this.props.product.stock}</small>
-							<br />
-							<small className="text-muted xPrice">Price: {this.props.product.price}</small>
+							<small className="text-muted xStock">Stock: {this.props.product.stock}</small> <small> | </small> <small className="text-muted xPrice">Price: {this.props.product.price}</small>
 						</CardText>
 					</CardBody>
 				</Card>

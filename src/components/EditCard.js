@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import { Card, CardBody, Button, CardTitle, CardText, CardImg } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -37,16 +38,23 @@ export default class MainCard extends React.Component {
 	// }
 
 	render() {
-		console.log(this.props.product);
 		return (
-			<div className="product" onClick={this.fillModal}>
-				<div className="product-div">
-					<span className="name">{this.props.product.name}</span>
-					<span className="desc">{this.props.product.description}</span>
-					<span className="stock">Stock: {this.props.product.stock}</span>
-					<span className="price">{this.props.product.price}</span>
-				</div>
-			</div>
+			<Card onClick={this.fillModal}>
+				<CardImg top width="100%" src={this.props.product.image} alt={this.props.product.name} />
+				<CardBody>
+					<CardTitle className="xName">
+						<b>{this.props.product.name}</b>
+					</CardTitle>
+					<CardText className="xDesc">{this.props.product.description}</CardText>
+					<CardText>
+						<small className="text-muted xStock">Stock: {this.props.product.stock}</small> <small> | </small> <small className="text-muted xPrice">Price: {this.props.product.price}</small>
+					</CardText>
+				</CardBody>
+			</Card>
 		);
 	}
+}
+
+{
+	/* <div></div>; */
 }

@@ -16,7 +16,6 @@ class AppWithRouter extends React.Component {
 				<Route path="/" exact component={App} />
 				<Route path="/profile" component={Profile} />
 				<Route path="/login" component={Login} />
-				<Route path="/modal" component={Modal} />
 				<Route path="/add" component={AddProduct} />
 			</Router>
 		);

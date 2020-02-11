@@ -25,7 +25,6 @@ export default class Main extends React.Component {
 
 	getProduct() {
 		Axios.get(url + 1).then(resolve => {
-			console.log(resolve);
 			this.setState({
 				productList: resolve.data,
 			});
