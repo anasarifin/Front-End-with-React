@@ -1,6 +1,7 @@
 import React from "react";
 import "../style/Login.css";
 import Axios from "axios";
+import { Redirect, Link } from "react-router-dom";
 
 const url = "http://localhost:9999/api/v1/login";
 
@@ -21,6 +22,7 @@ export default class Login extends React.Component {
 			console.log(resolve);
 			if (resolve.data.token) {
 				localStorage.setItem("token", resolve.data.token);
+				window.location.href = "/";
 			} else {
 				alert(resolve.data.warning);
 			}
@@ -29,7 +31,7 @@ export default class Login extends React.Component {
 
 	render() {
 		return (
-			<div id="login">
+			<form id="login">
 				<label>Username</label>
 				<input type="text" id="loginUsername"></input>
 				<label>Password</label>
@@ -37,10 +39,7 @@ export default class Login extends React.Component {
 				<button onClick={this.postLogin} type="submit">
 					Login
 				</button>
-				<br />
-				<br />
-				<br />
-			</div>
+			</form>
 		);
 	}
 }

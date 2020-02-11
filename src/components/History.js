@@ -39,13 +39,12 @@ export default class History extends React.Component {
 				<Statistic data={this.state.data} />
 				<div id="history-list">
 					<div className="topTable">
-						<div className="invoice">Invoice</div>
 						<div className="cashier">Cashier</div>
 						<div className="product">Product</div>
 						<div className="quantity">Quantity</div>
 						<div className="price">Price</div>
 						<div className="totalPrice">Total Price</div>
-						<div className="purchased">Purchased at</div>
+						<div className="purchased">Purchased Date</div>
 					</div>
 					{history}
 				</div>

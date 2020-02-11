@@ -38,6 +38,9 @@ class Example extends Component {
 	}
 
 	componentDidMount = () => {
+		if (!localStorage.getItem("token")) {
+			window.location.href = "/login";
+		}
 		this.resetCart();
 	};
 

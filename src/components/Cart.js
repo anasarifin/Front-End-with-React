@@ -33,6 +33,7 @@ export default class Cart extends React.Component {
 				totalPrice: resolve.data.reduce((sum, product) => {
 					return (sum += product.quantity * product.price);
 				}, 0),
+				cartCount: resolve.data.length,
 			});
 		});
 	}
@@ -62,7 +63,10 @@ export default class Cart extends React.Component {
 		}
 		return (
 			<div id="cart">
-				{cart}
+				<div id="cart-list">
+					{cart}
+					<br />
+				</div>
 				<div id="checkButton">
 					<span>Total Price: {this.state.totalPrice}</span>
 					<br />

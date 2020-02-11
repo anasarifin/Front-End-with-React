@@ -14,7 +14,6 @@ export default class Header extends React.Component {
 	render() {
 		return (
 			<div id="header">
-				<input type="text" id="header-search" onChange={this.props.eventSearch} />
 				<label>Filter by : </label>
 				<select onChange={this.props.eventType}>
 					<option value="all">All</option>
@@ -29,8 +28,7 @@ export default class Header extends React.Component {
 					<option value="updated_at">Update at</option>
 					<option value="created_at">Create at</option>
 				</select>
-				<br />
-				<br />
+				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
 			</div>
 		);
 	}

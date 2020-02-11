@@ -16,6 +16,7 @@ export default class Main extends React.Component {
 			name: "",
 			type: "",
 			sort: "",
+			show: true,
 		};
 		this.filterName = this.filterName.bind(this);
 		this.filterType = this.filterType.bind(this);
@@ -61,8 +62,20 @@ export default class Main extends React.Component {
 		});
 	}
 
+	showCart() {
+		document.getElementById("cart").classList.toggle("show");
+	}
+	hideCart() {
+		document.getElementById("cart").classList.remove("show");
+	}
+
 	componentDidMount() {
 		this.getProduct();
+		// document.addEventListener("click", event => {
+		// 	if (event.target.className != "product-con" || event.target.id != "cart" || event.target.className != "cart-icon") {
+		// 		this.hideCart();
+		// 	}
+		// });
 	}
 
 	render() {
@@ -76,7 +89,8 @@ export default class Main extends React.Component {
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
-				<Cart list={this.state.cart} />
+				<img alt="show" className="cart-icon" onClick={this.showCart}></img>
+				<Cart list={this.state.cart} show={this.state.show} />
 			</div>
 		);
 	}

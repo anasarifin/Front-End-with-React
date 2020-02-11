@@ -22,7 +22,6 @@ export default class HistoryList extends React.Component {
 	render() {
 		return (
 			<ul className="table">
-				<li className="invoice">Invoice</li>
 				<li className="cashier">{this.props.paymentData.username}</li>
 				<li className="product">{this.props.paymentData.name}</li>
 				<li className="quantity">{this.props.paymentData.quantity}</li>
