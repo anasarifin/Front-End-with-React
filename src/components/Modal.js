@@ -3,6 +3,7 @@ import Axios from "axios";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/products";
+const urlCat = "http://localhost:9999/api/v1/category";
 
 export default class Modal extends React.Component {
 	constructor() {
@@ -15,6 +16,7 @@ export default class Modal extends React.Component {
 				price: "",
 			},
 			image: null,
+			category: [],
 		};
 		this.postData = this.postData.bind(this);
 	}
@@ -27,7 +29,6 @@ export default class Modal extends React.Component {
 	// 	});
 	// }
 	handleChange(e) {
-		console.log(e.target.files[0]);
 		this.setState({
 			image: e.target.files[0],
 		});
@@ -41,25 +42,73 @@ export default class Modal extends React.Component {
 		formData.append("stock", document.getElementById("xStock").value);
 		formData.append("image", image);
 		formData.append("category_id", document.getElementById("xCategory").value);
-		Axios.post(url, formData, {
-			headers: {
-				usertoken: localStorage.getItem("token"),
-			},
-		})
-			.then(resolve => {
-				alert(resolve);
+		const id = document.getElementById("xHidden").value;
+		if (!id) {
+			Axios.post(url, formData, {
+				headers: {
+					usertoken: localStorage.getItem("token"),
+				},
 			})
-			.catch(reject => {
-				console.log(reject);
+				.then(resolve => {
+					this.hideCart();
+					this.props.refresh();
+				})
+				.catch(reject => {
+					console.log(reject);
+					alert("Adding failed!");
+				});
+		} else {
+			Axios.patch(url + "/" + id, formData, {
+				headers: {
+					usertoken: localStorage.getItem("token"),
+				},
+			})
+				.then(resolve => {
+					this.hideCart();
+					this.props.refresh();
+				})
+				.catch(reject => {
+					console.log(reject);
+					alert("Edit failed!");
+				});
+		}
+	}
+
+	getCategory() {
+		Axios.get(urlCat).then(resolve => {
+			this.setState({
+				category: resolve.data,
 			});
+		});
 	}
 
 	hideCart() {
+		document.getElementById("xName").value = null;
+		document.getElementById("xStock").value = null;
+		document.getElementById("xPrice").value = null;
+		document.getElementById("xCategory").value = null;
+		document.getElementById("xDesc").value = null;
+		document.getElementById("xHidden").value = null;
 		document.getElementById("modal").classList.remove("show");
 		document.getElementById("blackLayer").classList.remove("show");
 	}
 
+	componentDidMount() {
+		this.getCategory();
+	}
+
 	render() {
+		const categoryList = [];
+		this.state.category.map((data, x) => {
+			categoryList.push(
+				<option key={x} value={data.id}>
+					{data.name}
+				</option>,
+			);
+		});
+
+		console.log(this.state.category);
+
 		return (
 			<div id="modal" className={this.props.show}>
 				<Form>
@@ -93,8 +142,7 @@ export default class Modal extends React.Component {
 						</Label>
 						<Col sm={10}>
 							<Input type="select" name="category" id="xCategory">
-								<option value="0">Food</option>
-								<option value="1">Drink</option>
+								{categoryList}
 							</Input>
 						</Col>
 					</FormGroup>
@@ -117,6 +165,7 @@ export default class Modal extends React.Component {
 					</FormGroup>
 					<Button onClick={this.postData}>Submit</Button>
 				</Form>
+				<input type="hidden" id="xHidden"></input>
 				<img src="http://localhost:9999/public/img/close.png" alt="close" onClick={this.hideCart} />
 			</div>
 		);

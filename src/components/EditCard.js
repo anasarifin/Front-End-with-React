@@ -26,6 +26,7 @@ export default class MainCard extends React.Component {
 		document.getElementById("xPrice").value = this.props.product.price;
 		document.getElementById("xCategory").value = this.props.product.category_id;
 		document.getElementById("xDesc").value = this.props.product.description;
+		document.getElementById("xHidden").value = this.props.product.id;
 		document.getElementById("modal").classList.add("show");
 		document.getElementById("blackLayer").classList.add("show");
 	}

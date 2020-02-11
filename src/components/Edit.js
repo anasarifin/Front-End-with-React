@@ -23,8 +23,8 @@ export default class Main extends React.Component {
 		this.filterType = this.filterType.bind(this);
 		this.filterSort = this.filterSort.bind(this);
 		this.showModal = this.showModal.bind(this);
+		this.getProduct = this.getProduct.bind(this);
 	}
-
 	getProduct() {
 		Axios.get(url + 1).then(resolve => {
 			this.setState({
@@ -98,7 +98,7 @@ export default class Main extends React.Component {
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
-				<Modal product={this.state.modal} show={this.state.show} />
+				<Modal refresh={this.getProduct} product={this.state.modal} show={this.state.show} />
 				<div className="addButton" onClick={this.showModal}>
 					+
 				</div>
