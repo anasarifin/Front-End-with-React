@@ -13,7 +13,7 @@ export default class Main extends React.Component {
 		this.state = {
 			productList: [],
 			id: 1,
-			name: "?",
+			name: "&",
 			type: "",
 			sort: "",
 			show: "",

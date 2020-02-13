@@ -4,6 +4,7 @@ import "../style/Navbar.css";
 export default class Navbar extends React.Component {
 	logout() {
 		localStorage.removeItem("token");
+		localStorage.removeItem("username");
 		window.location.href = "/login";
 	}
 

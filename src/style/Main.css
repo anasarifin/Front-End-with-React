@@ -19,6 +19,7 @@
 	justify-items: center;
 	margin-top: 50px;
 	padding: 50px;
+	overflow-x: hidden;
 }
 #product-con .product {
 	position: relative;
@@ -97,6 +98,6 @@
 	color: white;
 	background-color: #007bff;
 }
-.modal-button.btn.btn-secondary {
+.modal-button.btn.btn-primary {
 	margin-right: 20px;
 }

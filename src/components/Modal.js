@@ -182,10 +182,12 @@ export default class Modal extends React.Component {
 							<FormText color="muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</FormText>
 						</Col>
 					</FormGroup>
-					<Button onClick={this.postData} className="modal-button">
+					<Button onClick={this.postData} className="modal-button" color="primary">
 						Submit
 					</Button>
-					<Button onClick={this.deleteData}>Delete</Button>
+					<Button onClick={this.deleteData} color="danger">
+						Delete
+					</Button>
 				</Form>
 				<input type="hidden" id="xHidden"></input>
 				<img src="http://localhost:9999/public/img/close.png" alt="close" onClick={this.hideCart} />

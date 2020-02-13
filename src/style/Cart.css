@@ -1,7 +1,7 @@
 #cart {
 	position: fixed;
 	top: 0;
-	right: -25%;
+	right: -35%;
 	width: 25%;
 	min-width: 275px;
 	height: 100%;
@@ -34,4 +34,10 @@
 }
 #checkButton .button {
 	margin-top: 10px;
+}
+#checkButton span {
+	color: black;
+}
+.order {
+	margin: 0 20px;
 }

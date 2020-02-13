@@ -1,6 +1,5 @@
 import React from "react";
 import CartCard from "./CartCard";
-import Confirm from "./Confirm";
 import Axios from "axios";
 import "../style/Cart.css";
 import { Button } from "reactstrap";
@@ -88,7 +87,7 @@ export default class Cart extends React.Component {
 						Reset cart
 					</Button>
 				</div>
-				<Confirm show={this.state.modal} cartList={this.state.cartList.sold_item_list} />
+				{/* <Confirm show={this.state.modal} cartList={this.state.cartList.sold_item_list} /> */}
 				<div className={this.state.modal ? "layer show" : "layer"}></div>
 			</div>
 		);
