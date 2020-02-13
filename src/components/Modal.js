@@ -19,6 +19,7 @@ export default class Modal extends React.Component {
 			category: [],
 		};
 		this.postData = this.postData.bind(this);
+		this.deleteData = this.deleteData.bind(this);
 	}
 
 	// getData() {
@@ -52,6 +53,7 @@ export default class Modal extends React.Component {
 				.then(resolve => {
 					this.hideCart();
 					this.props.refresh();
+					alert("Adding success!");
 				})
 				.catch(reject => {
 					console.log(reject);
@@ -66,12 +68,31 @@ export default class Modal extends React.Component {
 				.then(resolve => {
 					this.hideCart();
 					this.props.refresh();
+					alert("Edit success!");
 				})
 				.catch(reject => {
 					console.log(reject);
 					alert("Edit failed!");
 				});
 		}
+	}
+
+	deleteData() {
+		const id = document.getElementById("xHidden").value;
+		Axios.delete(url + "/" + id, {
+			headers: {
+				usertoken: localStorage.getItem("token"),
+			},
+		})
+			.then(resolve => {
+				this.hideCart();
+				this.props.refresh();
+				alert("Delete success!");
+			})
+			.catch(reject => {
+				console.log(reject);
+				alert("Delete failed!");
+			});
 	}
 
 	getCategory() {
@@ -106,8 +127,6 @@ export default class Modal extends React.Component {
 				</option>,
 			);
 		});
-
-		console.log(this.state.category);
 
 		return (
 			<div id="modal" className={this.props.show}>
@@ -163,7 +182,10 @@ export default class Modal extends React.Component {
 							<FormText color="muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</FormText>
 						</Col>
 					</FormGroup>
-					<Button onClick={this.postData}>Submit</Button>
+					<Button onClick={this.postData} className="modal-button">
+						Submit
+					</Button>
+					<Button onClick={this.deleteData}>Delete</Button>
 				</Form>
 				<input type="hidden" id="xHidden"></input>
 				<img src="http://localhost:9999/public/img/close.png" alt="close" onClick={this.hideCart} />

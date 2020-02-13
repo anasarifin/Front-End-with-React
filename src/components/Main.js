@@ -6,6 +6,7 @@ import Axios from "axios";
 import "../style/Main.css";
 
 const url = "http://localhost:9999/api/v1/products?page=";
+const urlFull = "http://localhost:9999/api/v1/products";
 
 export default class Main extends React.Component {
 	constructor() {
@@ -17,6 +18,8 @@ export default class Main extends React.Component {
 			type: "",
 			sort: "",
 			show: true,
+			totalPage: 1,
+			currentPage: 1,
 		};
 		this.filterName = this.filterName.bind(this);
 		this.filterType = this.filterType.bind(this);
@@ -27,6 +30,22 @@ export default class Main extends React.Component {
 		Axios.get(url + 1).then(resolve => {
 			this.setState({
 				productList: resolve.data,
+			});
+		});
+	}
+
+	// getCategory() {
+	// 	Axios.get(urlCat).then(resolve => {
+	// 		this.setState({
+	// 			category: resolve.data,
+	// 		});
+	// 	});
+	// }
+
+	getPagination() {
+		Axios.get(urlFull).then(resolve => {
+			this.setState({
+				totalPage: Math.ceil(resolve.data.length / 8),
 			});
 		});
 	}
@@ -70,6 +89,7 @@ export default class Main extends React.Component {
 
 	componentDidMount() {
 		this.getProduct();
+		this.getPagination();
 		// document.addEventListener("click", event => {
 		// 	if (event.target.className != "product-con" || event.target.id != "cart" || event.target.className != "cart-icon") {
 		// 		this.hideCart();
@@ -84,11 +104,13 @@ export default class Main extends React.Component {
 				products.push(<MainCard key={x} product={data} productId={data.id} />);
 			});
 		}
+
 		return (
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
 				<img alt="show" className="cart-icon" onClick={this.showCart}></img>
+				<div className="pagination"></div>
 				<Cart list={this.state.cart} show={this.state.show} />
 			</div>
 		);
