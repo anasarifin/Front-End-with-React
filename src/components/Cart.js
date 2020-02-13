@@ -46,8 +46,16 @@ export default class Cart extends React.Component {
 		this.state.modal ? this.setState({ modal: "" }) : this.setState({ modal: "show" });
 	}
 	checkout() {
-		Axios.post(url).then(resolve => {
-			alert(resolve);
+		Axios.post(
+			url,
+			{ username: localStorage.getItem("username") },
+			{
+				headers: {
+					usertoken: localStorage.getItem("token"),
+				},
+			},
+		).then(resolve => {
+			alert("Transaction success!");
 		});
 	}
 	componentDidUpdate() {

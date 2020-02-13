@@ -43,7 +43,10 @@ export default class Header extends React.Component {
 		return (
 			<div id="header">
 				<label>Filter by : </label>
-				<select onChange={this.props.eventType}>{categoryList}</select>
+				<select onChange={this.props.eventType}>
+					<option value="all">All</option>
+					{categoryList}
+				</select>
 				<label>Sort by : </label>
 				<select onChange={this.props.eventSort}>
 					<option value="name">Name</option>

@@ -24,23 +24,18 @@ export default class Main extends React.Component {
 		this.filterName = this.filterName.bind(this);
 		this.filterType = this.filterType.bind(this);
 		this.filterSort = this.filterSort.bind(this);
+		this.prevPage = this.prevPage.bind(this);
+		this.nextPage = this.nextPage.bind(this);
 	}
 
 	getProduct() {
-		Axios.get(url + 1).then(resolve => {
+		Axios.get(url + this.state.currentPage).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 			});
 		});
 	}
-
-	// getCategory() {
-	// 	Axios.get(urlCat).then(resolve => {
-	// 		this.setState({
-	// 			category: resolve.data,
-	// 		});
-	// 	});
-	// }
+	s;
 
 	getPagination() {
 		Axios.get(urlFull).then(resolve => {
@@ -50,9 +45,22 @@ export default class Main extends React.Component {
 		});
 	}
 
+	nextPage() {
+		this.setState({
+			currentPage: this.state.currentPage + 1,
+		});
+		this.getProduct();
+	}
+
+	prevPage() {
+		this.setState({
+			currentPage: this.state.currentPage - 1,
+		});
+	}
+
 	filterName(event) {
 		const name = "&name=" + event.target.value;
-		Axios.get(url + 1 + name + this.state.type + this.state.sort).then(resolve => {
+		Axios.get(url + this.state.currentPage + name + this.state.type + this.state.sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				name: name,
@@ -62,7 +70,7 @@ export default class Main extends React.Component {
 
 	filterType(event) {
 		const type = event.target.value == "all" ? "" : "&type=" + event.target.value;
-		Axios.get(url + 1 + this.state.name + type + this.state.sort).then(resolve => {
+		Axios.get(url + this.state.currentPage + this.state.name + type + this.state.sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				type: type,
@@ -72,7 +80,7 @@ export default class Main extends React.Component {
 
 	filterSort(event) {
 		const sort = "&sort=" + event.target.value;
-		Axios.get(url + 1 + this.state.name + this.state.type + sort).then(resolve => {
+		Axios.get(url + this.state.currentPage + this.state.name + this.state.type + sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				sort: sort,
@@ -104,14 +112,18 @@ export default class Main extends React.Component {
 				products.push(<MainCard key={x} product={data} productId={data.id} />);
 			});
 		}
-
 		return (
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
-				<img alt="show" className="cart-icon" onClick={this.showCart}></img>
+				<img src="http://localhost:9999/public/img/cart.png" alt="show" className="cart-icon" onClick={this.showCart}></img>
 				<div className="pagination"></div>
 				<Cart list={this.state.cart} show={this.state.show} />
+				{/* <div id="pagination">
+					<span onClick={this.prevPage}> Prev Page </span>
+					<span>{this.state.currentPage}</span>
+					<span onClick={this.nextPage}> Next Page </span>
+				</div> */}
 			</div>
 		);
 	}

@@ -5,7 +5,8 @@ const url = "http://localhost:9999/api/v1/cart";
 
 export default class CheckButton extends React.Component {
 	checkout() {
-		Axios.post(url);
+		console.log(localStorage.getItem("username"));
+		Axios.post(url, { username: localStorage.getItem("username") });
 	}
 	resetCart() {
 		Axios.delete(url, { data: { id: "all" } }).then(resolve => {

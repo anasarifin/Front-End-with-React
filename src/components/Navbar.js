@@ -11,10 +11,10 @@ export default class Navbar extends React.Component {
 		return (
 			<div id="navbar-con">
 				<div id="navbar">
-					<img alt="Home" onClick={this.props.event[0]} />
-					<img alt="Edit" onClick={this.props.event[1]} />
-					<img alt="History" onClick={this.props.event[2]} />
-					<img alt="Logout" onClick={this.logout} />
+					<img alt="Home" src="http://localhost:9999/public/img/home.png" onClick={this.props.event[0]} />
+					<img alt="Edit" src="http://localhost:9999/public/img/edit.png" onClick={this.props.event[1]} />
+					<img alt="History" src="http://localhost:9999/public/img/history.png" onClick={this.props.event[2]} />
+					<img alt="Logout" src="http://localhost:9999/public/img/logout.png" onClick={this.logout} />
 				</div>
 			</div>
 		);

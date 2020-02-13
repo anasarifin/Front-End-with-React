@@ -30,6 +30,7 @@ export default class History extends React.Component {
 		const history = [];
 		if (this.state.data) {
 			this.state.data.sold_item_list.map((data, x) => {
+				console.log(data);
 				history.push(<HistoryList key={x} paymentData={data} />);
 			});
 		}

@@ -1,8 +1,5 @@
 import React from "react";
-import Axios from "axios";
-import { Card, CardBody, Button, CardTitle, CardText, CardImg } from "reactstrap";
-
-const url = "http://localhost:9999/api/v1/cart";
+import { Card, CardBody, CardTitle, CardText, CardImg } from "reactstrap";
 
 export default class MainCard extends React.Component {
 	constructor() {

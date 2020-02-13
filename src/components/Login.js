@@ -22,6 +22,7 @@ export default class Login extends React.Component {
 			console.log(resolve);
 			if (resolve.data.token) {
 				localStorage.setItem("token", resolve.data.token);
+				localStorage.setItem("username", document.getElementById("loginUsername").value);
 				window.location.href = "/";
 			} else {
 				alert(resolve.data.warning);
