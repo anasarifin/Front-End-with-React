@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardBody, CardTitle, CardText, CardImg } from "reactstrap";
+import PropTypes from "prop-types";
 
 export default class MainCard extends React.Component {
 	constructor() {
@@ -13,7 +14,7 @@ export default class MainCard extends React.Component {
 	componentDidMount() {
 		this.setState({
 			data: this.props.product,
-			id: this.props.product_id,
+			id: this.props.product.id,
 		});
 	}
 
@@ -43,7 +44,7 @@ export default class MainCard extends React.Component {
 					<CardTitle className="xName">
 						<b>{this.props.product.name}</b>
 					</CardTitle>
-					<CardText className="xDesc">{this.props.product.description}</CardText>
+					<CardText className="xDesc"></CardText>
 					<CardText>
 						<small className="text-muted xStock">Stock: {this.props.product.stock}</small> <small> | </small> <small className="text-muted xPrice">Price: {this.props.product.price}</small>
 					</CardText>
@@ -53,6 +54,6 @@ export default class MainCard extends React.Component {
 	}
 }
 
-{
-	/* <div></div>; */
-}
+MainCard.propTypes = {
+	product: PropTypes,
+};

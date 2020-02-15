@@ -26,7 +26,7 @@ export default class Cart extends React.Component {
 	// }
 
 	getCart() {
-		Axios.get(url).then(resolve => {
+		Axios.get(url, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 			this.setState({
 				cartList: resolve.data,
 				totalPrice: resolve.data.reduce((sum, product) => {
@@ -37,7 +37,7 @@ export default class Cart extends React.Component {
 		});
 	}
 	resetCart() {
-		Axios.delete(url, { data: { id: "all" } }).then(resolve => {
+		Axios.delete(url, { data: { id: "all" }, headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 			console.log(resolve);
 		});
 	}
@@ -67,7 +67,7 @@ export default class Cart extends React.Component {
 			this.state.cartList.map((data, x) => {
 				cart.push(<CartCard key={x} product={data} />);
 			});
-		} else if (this.state.cartList.length == 1) {
+		} else if (this.state.cartList.length === 1) {
 			cart = <CartCard product={this.state.cartList[0]} />;
 		}
 		return (

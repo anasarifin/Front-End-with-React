@@ -1,45 +1,39 @@
 import React from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { add, reduce } from "../redux/actions/count";
 
 const urlGet = "http://localhost:9999/api/v1/products";
 const login = "http://localhost:9999/api/v1/login";
 
-export default class Header extends React.Component {
-	getUser = () => {
-		Axios.get(urlGet)
-			.then(response => {
-				console.log(response);
-			})
-			.catch(reject => {
-				console.log(reject);
-			});
-	};
-	postUser = () => {
-		Axios.post(
-			login,
-			{
-				username: "john",
-				password: "john123",
-			},
-			{
-				"Content-Type": "application/x-www-form-urlencoded",
-			},
-		)
-			.then(response => {
-				console.log(response);
-			})
-			.catch(reject => {
-				console.log(reject);
-			});
-	};
+class Profile extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			number: 0,
+		};
+		this.changeNumber = this.changeNumber.bind(this);
+		this.addNumber = this.addNumber.bind(this);
+	}
+	changeNumber(e) {
+		let number = parseFloat(e.target.value) || 0;
+		this.setState({
+			number: number,
+		});
+	}
+	addNumber() {
+		this.props.dispatch(add(this.state.number));
+	}
 
 	render() {
+		const { count } = this.props;
 		return (
 			<div>
-				<h1>This is profile component</h1>
-				<button onClick={this.getUser}>Get User</button>
-				<button onClick={this.postUser}>Post User</button>
+				<h1>{count.number}</h1>
+				<input type="number" onChange={this.changeNumber}></input>
+				<button onClick={this.reduceNumber}>Reduce</button>
+				<button onClick={this.addNumber}>Add</button>
 				<Link to="/">
 					<h4>Home</h4>
 				</Link>
@@ -47,6 +41,17 @@ export default class Header extends React.Component {
 		);
 	}
 }
+
+// mapstate to props
+// mapdispatch to props
+
+const mapStateToProps = state => {
+	return {
+		count: state.count,
+	};
+};
+
+export default connect(mapStateToProps)(Profile);
 
 // export default Header;
 

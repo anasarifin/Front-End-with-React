@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import PropTypes from "prop-types";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/products";
@@ -50,7 +51,7 @@ export default class Modal extends React.Component {
 					usertoken: localStorage.getItem("token"),
 				},
 			})
-				.then(resolve => {
+				.then(() => {
 					this.hideCart();
 					this.props.refresh();
 					alert("Adding success!");
@@ -65,7 +66,7 @@ export default class Modal extends React.Component {
 					usertoken: localStorage.getItem("token"),
 				},
 			})
-				.then(resolve => {
+				.then(() => {
 					this.hideCart();
 					this.props.refresh();
 					alert("Edit success!");
@@ -84,7 +85,7 @@ export default class Modal extends React.Component {
 				usertoken: localStorage.getItem("token"),
 			},
 		})
-			.then(resolve => {
+			.then(() => {
 				this.hideCart();
 				this.props.refresh();
 				alert("Delete success!");
@@ -179,7 +180,7 @@ export default class Modal extends React.Component {
 						</Label>
 						<Col sm={10}>
 							<Input type="file" name="image" id="xImage" onChange={e => this.handleChange(e)} />
-							<FormText color="muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</FormText>
+							<FormText color="muted"></FormText>
 						</Col>
 					</FormGroup>
 					<Button onClick={this.postData} className="modal-button" color="primary">
@@ -195,6 +196,12 @@ export default class Modal extends React.Component {
 		);
 	}
 }
+
+Modal.propTypes = {
+	refresh: PropTypes,
+	show: PropTypes,
+};
+
 {
 	/* <div id="modal">
 	<label>Name</label>

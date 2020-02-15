@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { Button } from "reactstrap";
+import PropTypes from "prop-types";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -9,31 +10,33 @@ export default class CartCard extends React.Component {
 		super();
 		this.state = {
 			order: 1,
+			stock: 1,
 		};
 		this.reduceStock = this.reduceStock.bind(this);
+		this.addStock = this.addStock.bind(this);
 	}
 
-	reduceStock = () => {
+	reduceStock() {
 		this.setState({
 			order: this.state.order - 1,
 			stock: this.state.stock + 1,
 		});
-		Axios.delete(url, { data: { id: this.props.product.product_id } }).then(resolve => {
+		Axios.delete(url, { data: { id: this.props.product.product_id, qty: 1 }, headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 			console.log(resolve);
 		});
-	};
+	}
 
-	addStock = () => {
+	addStock() {
 		if (this.state.stock > 0) {
 			this.setState({
 				order: this.state.order + 1,
 				stock: this.state.stock - 1,
 			});
-			Axios.patch(url, { id: this.props.product.product_id }).then(resolve => {
+			Axios.patch(url, { id: this.props.product.product_id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 				console.log(resolve);
 			});
 		}
-	};
+	}
 
 	componentDidMount() {
 		this.setState({
@@ -94,3 +97,7 @@ export default class CartCard extends React.Component {
 		);
 	}
 }
+
+CartCard.propTypes = {
+	product: PropTypes,
+};

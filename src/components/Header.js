@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import PropTypes from "prop-types";
 import "../style/Header.css";
 
 const urlCat = "http://localhost:9999/api/v1/category";
@@ -23,6 +24,15 @@ export default class Header extends React.Component {
 	showValue(event) {
 		document.getElementById("bb1").innerHTML = event.target.value;
 	}
+
+	showMenu() {
+		document.getElementById("navbar").classList.toggle("show");
+	}
+
+	showCart() {
+		document.getElementById("cart").classList.toggle("show");
+	}
+
 	componentDidMount() {
 		this.getCategory();
 	}
@@ -42,6 +52,7 @@ export default class Header extends React.Component {
 
 		return (
 			<div id="header">
+				<img src="http://localhost:9999/public/img/menu.png" alt="menu" onClick={this.showMenu} />
 				<label>Filter by : </label>
 				<select onChange={this.props.eventType}>
 					<option value="all">All</option>
@@ -61,7 +72,16 @@ export default class Header extends React.Component {
 					<option value="created_at&dir=1">Create at DESC</option>
 				</select>
 				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
+				<div id="cart-logo">
+					<span onClick={this.showCart}>Cart </span>
+				</div>
 			</div>
 		);
 	}
 }
+
+Header.propTypes = {
+	eventSearch: PropTypes,
+	eventType: PropTypes,
+	eventSort: PropTypes,
+};

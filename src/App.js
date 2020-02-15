@@ -7,7 +7,7 @@ import Axios from "axios";
 // import { Link } from "react-router-dom";
 // import logo from "./logo.svg";
 // prop-types
-import "./App.css";
+// import "./App.css";
 
 // export const contextApp = React.createContext({
 // 	number: 1,

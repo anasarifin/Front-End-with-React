@@ -35,7 +35,6 @@ export default class Main extends React.Component {
 			});
 		});
 	}
-	s;
 
 	getPagination() {
 		Axios.get(urlFull).then(resolve => {
@@ -88,9 +87,9 @@ export default class Main extends React.Component {
 		});
 	}
 
-	showCart() {
-		document.getElementById("cart").classList.toggle("show");
-	}
+	// showCart() {
+	// 	document.getElementById("cart").classList.toggle("show");
+	// }
 	hideCart() {
 		document.getElementById("cart").classList.remove("show");
 	}
@@ -115,9 +114,7 @@ export default class Main extends React.Component {
 		return (
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
-				<div id="product-con">{products}</div>
-				<img src="http://localhost:9999/public/img/cart.png" alt="show" className="cart-icon" onClick={this.showCart}></img>
-				<div className="pagination"></div>
+				<div className="flex-con">{products}</div>
 				<Cart list={this.state.cart} show={this.state.show} />
 				{/* <div id="pagination">
 					<span onClick={this.prevPage}> Prev Page </span>

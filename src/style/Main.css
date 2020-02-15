@@ -1,33 +1,33 @@
 #main {
 	background-color: whitesmoke;
 	width: 100%;
-	overflow-x: hidden;
 }
-#main .cart-icon {
+/* #main .cart-icon {
 	position: fixed;
 	top: 10px;
 	right: 10px;
 	z-index: 5;
 	width: 40px;
 	height: 40px;
-}
-#product-con {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 30px;
+} */
+.flex-con {
+	display: flex;
+	flex-flow: row wrap;
 	width: 100%;
-	justify-items: center;
+	justify-content: center;
 	margin-top: 50px;
 	padding: 50px;
-	overflow-x: hidden;
 }
-#product-con .product {
-	position: relative;
-	width: 100%;
-	max-width: 200px;
+.flex-con .flex {
+	width: 300px;
 	height: 200px;
+	margin: 20px;
 	background-color: white;
 	border-radius: 5px;
+}
+.flex-con .flex img {
+	width: 300px;
+	height: auto;
 }
 .product-div {
 	width: 100%;

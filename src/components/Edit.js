@@ -50,7 +50,7 @@ export default class Main extends React.Component {
 	}
 
 	filterType(event) {
-		const type = event.target.value == "all" ? "" : "&type=" + event.target.value;
+		const type = event.target.value === "all" ? "" : "&type=" + event.target.value;
 		Axios.get(url + 1 + this.state.name + type + this.state.sort).then(resolve => {
 			console.log(resolve.data);
 			this.setState({

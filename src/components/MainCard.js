@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
-import { Card, CardBody, Button, CardTitle, CardText, CardImg } from "reactstrap";
+import PropTypes from "prop-types";
+import { Card, CardBody, CardTitle, CardText, CardImg } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -13,6 +14,18 @@ export default class MainCard extends React.Component {
 		this.addToCart = this.addToCart.bind(this);
 	}
 
+	toRupiah(number) {
+		let number_string = number.toString();
+		let leftover = number_string.length % 3;
+		let rupiah = number_string.substr(0, leftover);
+		let thousand = number_string.substr(leftover).match(/\d{3}/g);
+		if (thousand) {
+			let separator = leftover ? "." : "";
+			rupiah += separator + thousand.join(".");
+		}
+		return rupiah;
+	}
+
 	componentDidMount() {
 		this.setState({
 			data: this.props.product,
@@ -23,7 +36,7 @@ export default class MainCard extends React.Component {
 	addToCart() {
 		const id = this.props.product.id;
 		if (this.props.product.stock > 0) {
-			Axios.patch(url, { id: id }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
+			Axios.patch(url, { id: id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 				console.log(resolve);
 			});
 		} else {
@@ -33,23 +46,23 @@ export default class MainCard extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<Card onClick={this.addToCart}>
-					<CardImg top width="100%" src={this.props.product.image} alt={this.props.product.name} />
-					<CardBody>
-						<CardTitle className="xName">
-							<b>{this.props.product.name}</b>
-						</CardTitle>
-						<CardText className="xDesc">{this.props.product.description}</CardText>
-						<CardText>
-							<small className="text-muted xStock">Stock: {this.props.product.stock}</small> <small> | </small> <small className="text-muted xPrice">Price: {this.props.product.price}</small>
-						</CardText>
-					</CardBody>
-				</Card>
+			<div className="flex" onClick={this.addToCart}>
+				<img src={this.props.product.image} alt={this.props.product.name} />
+				<span>
+					<b>{this.props.product.name}</b>
+				</span>
+				<br />
+				<span>
+					Rp. {this.toRupiah(this.props.product.price)} | Stock: {this.props.product.stock}
+				</span>
 			</div>
 		);
 	}
 }
+
+MainCard.propTypes = {
+	product: PropTypes,
+};
 
 {
 	/* <div className="product" onClick={this.addToCart}>
