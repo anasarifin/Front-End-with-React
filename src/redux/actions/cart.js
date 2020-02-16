@@ -4,3 +4,9 @@ export const add = object => {
 		payload: object, // variable yg dibawa ke reducer
 	};
 };
+export const reset = () => {
+	return {
+		type: "CART_RESET", //string yg mendeskripsikan perintah
+		payload: [], // variable yg dibawa ke reducer
+	};
+};

@@ -34,26 +34,36 @@ class MainCard extends React.Component {
 		});
 	}
 
+	checkClicked() {
+		this.props.cart.cartList.some(x => x.id === this.props.product.id);
+	}
+
 	addToCart(e) {
-		console.log(e.target.parentElement.querySelector("div").classList.add("show"));
 		const id = this.props.product.id;
 		if (this.props.product.stock > 0) {
-			this.props.dispatch(add(this.props.product));
-			// Axios.patch(url, { id: id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
-			// 	console.log(resolve);
-			// });
+			if (e.target.parentElement.querySelector("div").className != "show") {
+				e.target.parentElement.querySelector("div").classList.add("show");
+				this.props.dispatch(add(this.props.product));
+				// Axios.patch(url, { id: id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
+				// 	console.log(resolve);
+				// });
+			}
 		} else {
 			alert("Out of stock!");
 		}
 	}
 
 	render() {
+		let clicked = <div>clicked</div>;
+		if (this.props.cart.cartList.some(x => x.id === this.props.product.id)) {
+			clicked = <div className="show">clicked</div>;
+		}
 		return (
 			<div className="flex" onClick={this.addToCart}>
 				<span>
 					<img src={this.props.product.image} alt={this.props.product.name} />
 				</span>
-				<div>clicked</div>
+				{clicked}
 				<span>{this.props.product.name}</span>
 				<span>
 					Rp. {this.toRupiah(this.props.product.price)} | Stock: {this.props.product.stock}

@@ -34,6 +34,8 @@ export default class CartCard extends React.Component {
 			// Axios.patch(url, { id: this.props.product.product_id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 			// 	console.log(resolve);
 			// });
+		} else {
+			alert("Out of stock!");
 		}
 	}
 
@@ -65,32 +67,26 @@ export default class CartCard extends React.Component {
 
 	render() {
 		return (
-			<div>
-				{this.state.order !== 0 ? (
-					<div className="cart_card">
-						<div>
-							<img src={this.props.product.image}></img>
-						</div>
-						<div>
-							<span className="name">
-								<b>{this.props.product.name}</b>
-							</span>
-							<br />
-							<button color="primary" onClick={this.reduceStock}>
-								-
-							</button>
-							<span className="order">{this.state.order}</span>
-							<button color="primary" onClick={this.addStock}>
-								+
-							</button>
-							<br />
-							<span className="price">Price: {this.props.product.price}</span>
-							<input type="hidden" className="totalPrice" data-price={this.props.product.price * this.state.order}></input>
-						</div>
-					</div>
-				) : (
-					""
-				)}
+			<div className="cart_card">
+				<div>
+					<img src={this.props.product.image}></img>
+				</div>
+				<div>
+					<span className="name">
+						<b>{this.props.product.name}</b>
+					</span>
+					<br />
+					<button color="primary" onClick={this.reduceStock}>
+						-
+					</button>
+					<span className="order">{this.state.order}</span>
+					<button color="primary" onClick={this.addStock}>
+						+
+					</button>
+					<br />
+					<span className="price">Price: {this.props.product.price}</span>
+					<input type="hidden" className="totalPrice" data-price={this.props.product.price * this.state.order}></input>
+				</div>
 			</div>
 		);
 	}

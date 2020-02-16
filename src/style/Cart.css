@@ -18,6 +18,11 @@
 	height: 80%;
 	overflow-y: scroll;
 }
+#cart-list img {
+	margin-top: 50px;
+	width: 80%;
+	height: auto;
+}
 #cart-list::-webkit-scrollbar {
 	width: 0 !important;
 }
