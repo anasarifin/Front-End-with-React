@@ -13,6 +13,16 @@ const countReducer = (state = initialValue, action) => {
 	//     }
 	// }
 	switch (action.type) {
+		case "COUNT_ADD_PENDING":
+			return {
+				...state,
+				isPending: true,
+			};
+		case "COUNT_ADD_REJECTED":
+			return {
+				...state,
+				isRejected: true,
+			};
 		case "COUNT_ADD":
 			return {
 				...state,
@@ -21,6 +31,7 @@ const countReducer = (state = initialValue, action) => {
 		case "COUNT_REDUCE":
 			return {
 				...state,
+				isFulfilled: true,
 				number: state.number - action.payload,
 			};
 		default:

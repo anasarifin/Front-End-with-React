@@ -1,6 +1,5 @@
 import React from "react";
 import Axios from "axios";
-import { Button } from "reactstrap";
 import PropTypes from "prop-types";
 
 const url = "http://localhost:9999/api/v1/cart";
@@ -21,9 +20,9 @@ export default class CartCard extends React.Component {
 			order: this.state.order - 1,
 			stock: this.state.stock + 1,
 		});
-		Axios.delete(url, { data: { id: this.props.product.product_id, qty: 1 }, headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
-			console.log(resolve);
-		});
+		// Axios.delete(url, { data: { id: this.props.product.product_id, qty: 1 }, headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
+		// 	console.log(resolve);
+		// });
 	}
 
 	addStock() {
@@ -32,15 +31,14 @@ export default class CartCard extends React.Component {
 				order: this.state.order + 1,
 				stock: this.state.stock - 1,
 			});
-			Axios.patch(url, { id: this.props.product.product_id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
-				console.log(resolve);
-			});
+			// Axios.patch(url, { id: this.props.product.product_id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
+			// 	console.log(resolve);
+			// });
 		}
 	}
 
 	componentDidMount() {
 		this.setState({
-			order: this.props.product.quantity,
 			stock: this.props.product.stock - 1,
 		});
 	}
@@ -71,22 +69,22 @@ export default class CartCard extends React.Component {
 				{this.state.order !== 0 ? (
 					<div className="cart_card">
 						<div>
-							<img></img>
+							<img src={this.props.product.image}></img>
 						</div>
 						<div>
-							<span className="name">{this.props.product.name}</span>
+							<span className="name">
+								<b>{this.props.product.name}</b>
+							</span>
 							<br />
-							<Button color="primary" onClick={this.reduceStock}>
+							<button color="primary" onClick={this.reduceStock}>
 								-
-							</Button>
+							</button>
 							<span className="order">{this.state.order}</span>
-							<Button color="primary" onClick={this.addStock}>
+							<button color="primary" onClick={this.addStock}>
 								+
-							</Button>
+							</button>
 							<br />
-							<span className="stock">Stock Available: {this.state.stock}</span>
-							<br />
-							<span className="price">Price: {this.props.product.price * this.state.order}</span>
+							<span className="price">Price: {this.props.product.price}</span>
 							<input type="hidden" className="totalPrice" data-price={this.props.product.price * this.state.order}></input>
 						</div>
 					</div>

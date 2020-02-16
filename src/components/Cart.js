@@ -2,11 +2,11 @@ import React from "react";
 import CartCard from "./CartCard";
 import Axios from "axios";
 import "../style/Cart.css";
-import { Button } from "reactstrap";
+import { connect } from "react-redux";
 
 const url = "http://localhost:9999/api/v1/cart";
 
-export default class Cart extends React.Component {
+class Cart extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -57,18 +57,21 @@ export default class Cart extends React.Component {
 			alert("Transaction success!");
 		});
 	}
+	// componentDidMount() {
+	// 	console.log(this.props);
+	// }
 	componentDidUpdate() {
 		this.getCart();
 	}
 
 	render() {
 		let cart = [];
-		if (this.state.cartList.length > 1) {
-			this.state.cartList.map((data, x) => {
+		if (this.props.cart.cartList.length > 1) {
+			this.props.cart.cartList.map((data, x) => {
 				cart.push(<CartCard key={x} product={data} />);
 			});
-		} else if (this.state.cartList.length === 1) {
-			cart = <CartCard product={this.state.cartList[0]} />;
+		} else if (this.props.cart.cartList.length === 1) {
+			cart = <CartCard product={this.props.cart.cartList[0]} />;
 		}
 		return (
 			<div id="cart">
@@ -77,15 +80,9 @@ export default class Cart extends React.Component {
 					<br />
 				</div>
 				<div id="checkButton">
-					<span>Total Price: {this.state.totalPrice}</span>
+					<button onClick={this.checkout}>Checkout</button>
 					<br />
-					<Button onClick={this.checkout} className="button" color="primary">
-						Checkout
-					</Button>
-					<br />
-					<Button onClick={this.resetCart} color="danger">
-						Reset cart
-					</Button>
+					<button onClick={this.resetCart}>Reset cart</button>
 				</div>
 				{/* <Confirm show={this.state.modal} cartList={this.state.cartList.sold_item_list} /> */}
 				<div className={this.state.modal ? "layer show" : "layer"}></div>
@@ -93,3 +90,11 @@ export default class Cart extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = state => {
+	return {
+		cart: state.cart,
+	};
+};
+
+export default connect(mapStateToProps)(Cart);

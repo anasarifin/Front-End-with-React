@@ -26,6 +26,10 @@ class Profile extends React.Component {
 		this.props.dispatch(add(this.state.number));
 	}
 
+	componentDidMount() {
+		console.log(this.props);
+	}
+
 	render() {
 		const { count } = this.props;
 		return (

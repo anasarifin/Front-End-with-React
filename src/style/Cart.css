@@ -1,8 +1,9 @@
 #cart {
 	position: fixed;
 	top: 50px;
-	right: -305px;
-	width: 300px;
+	right: -405px;
+	width: 100%;
+	max-width: 400px;
 	min-width: 275px;
 	height: 100%;
 	text-align: center;
@@ -20,17 +21,30 @@
 #cart-list::-webkit-scrollbar {
 	width: 0 !important;
 }
+.cart_card {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	margin: 20px 0;
+}
+.cart_card div:nth-child(1) {
+	grid-column: span 1;
+	padding: 5px;
+}
+.cart_card div:nth-child(2) {
+	grid-column: span 2;
+}
+.cart_card div img {
+	width: 100%;
+	height: auto;
+}
 #card .cart_card div span {
 	margin: 10px 10px;
 }
 #checkButton {
 	position: absolute;
-	bottom: 0;
+	bottom: 55px;
 	width: 100%;
-	height: 20%;
 	right: 0;
-	background-color: #29b6f6;
-	padding: 10px;
 }
 #checkButton .button {
 	margin-top: 10px;

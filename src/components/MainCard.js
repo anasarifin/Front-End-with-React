@@ -1,11 +1,12 @@
 import React from "react";
 import Axios from "axios";
 import PropTypes from "prop-types";
-import { Card, CardBody, CardTitle, CardText, CardImg } from "reactstrap";
+import { connect } from "react-redux";
+import { add } from "../redux/actions/cart";
 
 const url = "http://localhost:9999/api/v1/cart";
 
-export default class MainCard extends React.Component {
+class MainCard extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -33,12 +34,14 @@ export default class MainCard extends React.Component {
 		});
 	}
 
-	addToCart() {
+	addToCart(e) {
+		console.log(e.target.parentElement.querySelector("div").classList.add("show"));
 		const id = this.props.product.id;
 		if (this.props.product.stock > 0) {
-			Axios.patch(url, { id: id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
-				console.log(resolve);
-			});
+			this.props.dispatch(add(this.props.product));
+			// Axios.patch(url, { id: id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
+			// 	console.log(resolve);
+			// });
 		} else {
 			alert("Out of stock!");
 		}
@@ -47,11 +50,11 @@ export default class MainCard extends React.Component {
 	render() {
 		return (
 			<div className="flex" onClick={this.addToCart}>
-				<img src={this.props.product.image} alt={this.props.product.name} />
 				<span>
-					<b>{this.props.product.name}</b>
+					<img src={this.props.product.image} alt={this.props.product.name} />
 				</span>
-				<br />
+				<div>clicked</div>
+				<span>{this.props.product.name}</span>
 				<span>
 					Rp. {this.toRupiah(this.props.product.price)} | Stock: {this.props.product.stock}
 				</span>
@@ -63,6 +66,14 @@ export default class MainCard extends React.Component {
 MainCard.propTypes = {
 	product: PropTypes,
 };
+
+const mapStateToProps = state => {
+	return {
+		cart: state.cart,
+	};
+};
+
+export default connect(mapStateToProps)(MainCard);
 
 {
 	/* <div className="product" onClick={this.addToCart}>

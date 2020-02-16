@@ -2,10 +2,11 @@ import React from "react";
 import Axios from "axios";
 import PropTypes from "prop-types";
 import "../style/Header.css";
+import { connect } from "react-redux";
 
 const urlCat = "http://localhost:9999/api/v1/category";
 
-export default class Header extends React.Component {
+class Header extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -73,7 +74,7 @@ export default class Header extends React.Component {
 				</select>
 				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
 				<div id="cart-logo">
-					<span onClick={this.showCart}>Cart </span>
+					<span onClick={this.showCart}>Cart {this.props.cart.cartList.length}</span>
 				</div>
 			</div>
 		);
@@ -85,3 +86,11 @@ Header.propTypes = {
 	eventType: PropTypes,
 	eventSort: PropTypes,
 };
+
+const mapStateToProps = state => {
+	return {
+		cart: state.cart,
+	};
+};
+
+export default connect(mapStateToProps)(Header);

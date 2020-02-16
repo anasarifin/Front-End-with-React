@@ -29,6 +29,12 @@ const moveToCart = (state = initialValue, action) => {
 				isFulfilled: true,
 				cartList: [...state.cartList, action.payload],
 			};
+		case "CART_ADD":
+			return {
+				...state,
+				isFulfilled: true,
+				cartList: [...state.cartList, action.payload],
+			};
 		default:
 			return state;
 	}

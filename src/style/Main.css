@@ -19,15 +19,39 @@
 	padding: 50px;
 }
 .flex-con .flex {
+	position: relative;
 	width: 300px;
-	height: 200px;
 	margin: 20px;
 	background-color: white;
 	border-radius: 5px;
 }
+.flex-con .flex span {
+	display: block;
+	width: 100%;
+}
+.flex-con .flex span:nth-child(1) {
+	position: relative;
+	height: 100px;
+	overflow: hidden;
+}
 .flex-con .flex img {
-	width: 300px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
 	height: auto;
+}
+.flex-con .flex div {
+	position: absolute;
+	top: 0;
+	color: white;
+	width: 100%;
+	height: 100px;
+	background-color: black;
+	opacity: 0;
+}
+.flex-con .flex div.show {
+	opacity: 0.5;
 }
 .product-div {
 	width: 100%;

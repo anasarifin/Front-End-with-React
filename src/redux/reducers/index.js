@@ -4,7 +4,7 @@ import moveToCart from "./cart";
 
 const reducers = combineReducers({
 	count: countReducer,
-	cartList: moveToCart,
+	cart: moveToCart,
 });
 
 export default reducers;
