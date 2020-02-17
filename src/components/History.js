@@ -1,5 +1,6 @@
 import React from "react";
 import Statistic from "./Statistic";
+import Header from "./Header";
 import HistoryList from "./HistoryList";
 import Axios from "axios";
 import "../style/History.css";
@@ -37,6 +38,12 @@ export default class History extends React.Component {
 
 		return (
 			<div id="history">
+				<div id="header-history">
+					<div>
+						<img src="http://localhost:9999/public/img/menu.png" alt="menu" onClick={this.showMenu} />
+					</div>
+					<span>History</span>
+				</div>
 				<Statistic data={this.state.data} />
 				<div id="history-list">
 					<div className="topTable">

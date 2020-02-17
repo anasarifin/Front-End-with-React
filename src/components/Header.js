@@ -39,7 +39,6 @@ class Header extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.category);
 		const categoryList = [];
 		if (this.state.category.length > 0) {
 			this.state.category.map((data, x) => {

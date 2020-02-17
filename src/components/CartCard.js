@@ -1,10 +1,12 @@
 import React from "react";
 import Axios from "axios";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { reducePrice, addPrice } from "../redux/actions/cart";
 
 const url = "http://localhost:9999/api/v1/cart";
 
-export default class CartCard extends React.Component {
+class CartCard extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -16,10 +18,14 @@ export default class CartCard extends React.Component {
 	}
 
 	reduceStock() {
-		this.setState({
-			order: this.state.order - 1,
-			stock: this.state.stock + 1,
-		});
+		if (this.state.order > 1) {
+			this.setState({
+				order: this.state.order - 1,
+				stock: this.state.stock + 1,
+			});
+			this.props.dispatch(reducePrice(this.props.product.price));
+		}
+
 		// Axios.delete(url, { data: { id: this.props.product.product_id, qty: 1 }, headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 		// 	console.log(resolve);
 		// });
@@ -31,6 +37,7 @@ export default class CartCard extends React.Component {
 				order: this.state.order + 1,
 				stock: this.state.stock - 1,
 			});
+			this.props.dispatch(addPrice(this.props.product.price));
 			// Axios.patch(url, { id: this.props.product.product_id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 			// 	console.log(resolve);
 			// });
@@ -92,7 +99,7 @@ export default class CartCard extends React.Component {
 					<span className="order">{this.state.order}</span>
 					<button onClick={this.addStock}>+</button>
 					<br />
-					<span className="price">Rp. {this.toRupiah(this.props.product.price)}</span>
+					<span className="price">Rp. {this.toRupiah(this.props.product.price * this.state.order)}</span>
 					<input type="hidden" className="totalPrice" data-price={this.props.product.price * this.state.order}></input>
 				</div>
 			</div>
@@ -103,3 +110,11 @@ export default class CartCard extends React.Component {
 CartCard.propTypes = {
 	product: PropTypes,
 };
+
+const mapStateToProps = state => {
+	return {
+		cart: state.cart,
+	};
+};
+
+export default connect(mapStateToProps)(CartCard);

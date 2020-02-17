@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { add } from "../redux/actions/cart";
+import { add, addPrice } from "../redux/actions/cart";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -44,6 +44,7 @@ class MainCard extends React.Component {
 			if (e.target.parentElement.querySelector("div").className != "show") {
 				e.target.parentElement.querySelector("div").classList.add("show");
 				this.props.dispatch(add(this.props.product));
+				this.props.dispatch(addPrice(this.props.product.price));
 				// Axios.patch(url, { id: id, qty: 1 }, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 				// 	console.log(resolve);
 				// });

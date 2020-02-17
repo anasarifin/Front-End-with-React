@@ -33,6 +33,7 @@
 	width: 0 !important;
 }
 .cart_card {
+	position: relative;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	margin: 20px 0;
@@ -44,6 +45,29 @@
 .cart_card div:nth-child(2) {
 	grid-column: span 2;
 }
+.cart_card div:nth-child(2) span.order {
+	color: #82de3a;
+	height: 25px;
+	border-top: solid 1px #82de3a;
+	border-bottom: solid 1px #82de3a;
+	margin: 0;
+	padding: 2px 8px;
+}
+.cart_card div:nth-child(2) span.price {
+	position: absolute;
+	bottom: 0;
+	right: 15px;
+	font-weight: bold;
+}
+.cart_card div:nth-child(2) button {
+	margin-top: 15px;
+	font-weight: bold;
+	color: #82de3a;
+	height: 27px;
+	background-color: #e6f8d8;
+	border: solid 1px #82de3a;
+	outline: none;
+}
 .cart_card div img {
 	width: 100%;
 	height: auto;
@@ -53,16 +77,37 @@
 }
 #checkButton {
 	position: absolute;
-	bottom: 55px;
+	bottom: 65px;
 	width: 100%;
 	right: 0;
+	text-align: center;
 }
-#checkButton .button {
+#checkButton button {
 	margin-top: 10px;
+	width: 90%;
+	height: 35px;
+	color: white;
+	font-weight: 700;
+}
+#checkButton button:nth-child(2) {
+	background-color: #57cad5;
+	border: solid 2px #57cad5;
+}
+#checkButton button:nth-child(4) {
+	background-color: #f24f8a;
+	border: solid 2px #f24f8a;
+}
+#checkButton button:nth-child(2):hover {
+	background-color: white;
+	color: #57cad5;
+}
+#checkButton button:nth-child(4):hover {
+	background-color: white;
+	color: #f24f8a;
 }
 #checkButton span {
 	color: black;
 }
 .order {
-	margin: 0 20px;
+	margin: 0 10px;
 }

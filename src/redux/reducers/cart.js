@@ -1,5 +1,6 @@
 const initialValue = {
 	cartList: [],
+	totalPrice: 0,
 	isPending: false,
 	isRejected: false,
 	isFulfilled: false,
@@ -38,6 +39,21 @@ const moveToCart = (state = initialValue, action) => {
 			return {
 				...state,
 				cartList: [],
+			};
+		case "CART_ADD_PRICE":
+			return {
+				...state,
+				totalPrice: state.totalPrice + action.payload,
+			};
+		case "CART_REDUCE_PRICE":
+			return {
+				...state,
+				totalPrice: state.totalPrice - action.payload,
+			};
+		case "CART_RESET_PRICE":
+			return {
+				...state,
+				totalPrice: 0,
 			};
 		default:
 			return state;

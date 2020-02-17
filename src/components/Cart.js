@@ -3,7 +3,7 @@ import CartCard from "./CartCard";
 import Axios from "axios";
 import "../style/Cart.css";
 import { connect } from "react-redux";
-import { reset } from "../redux/actions/cart";
+import { reset, resetPrice } from "../redux/actions/cart";
 import empty from "../img/empty.jpg";
 
 const url = "http://localhost:9999/api/v1/cart";
@@ -17,6 +17,7 @@ class Cart extends React.Component {
 			modal: "",
 		};
 		this.resetCart = this.resetCart.bind(this);
+		this.checkout = this.checkout.bind(this);
 		// this.getTotalPrice = this.getTotalPrice.bind(this);
 	}
 
@@ -38,19 +39,39 @@ class Cart extends React.Component {
 			});
 		});
 	}
+	toRupiah(number) {
+		let number_string = number.toString();
+		let leftover = number_string.length % 3;
+		let rupiah = number_string.substr(0, leftover);
+		let thousand = number_string.substr(leftover).match(/\d{3}/g);
+		if (thousand) {
+			let separator = leftover ? "." : "";
+			rupiah += separator + thousand.join(".");
+		}
+		return rupiah;
+	}
 	resetCart() {
 		// Axios.delete(url, { data: { id: "all" }, headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 		// 	console.log(resolve);
 		// });
 		this.props.dispatch(reset());
+		this.props.dispatch(resetPrice());
 	}
 	paymentConfirm() {
 		this.state.modal ? this.setState({ modal: "" }) : this.setState({ modal: "show" });
 	}
 	checkout() {
+		console.log(this.props.cart.cartList);
+		const data = this.props.cart.cartList;
+		const final = [];
+		const order = document.getElementsByClassName("order");
+		for (let x = 0; x < order.length; x++) {
+			final.push(parseFloat(order[x].textContent));
+		}
+
 		Axios.post(
 			url,
-			{ username: localStorage.getItem("username") },
+			{ data: data, order: final },
 			{
 				headers: {
 					usertoken: localStorage.getItem("token"),
@@ -58,6 +79,7 @@ class Cart extends React.Component {
 			},
 		).then(resolve => {
 			alert("Transaction success!");
+			this.resetCart();
 		});
 	}
 	// componentDidMount() {
@@ -78,6 +100,7 @@ class Cart extends React.Component {
 		} else if (this.props.cart.cartList.length === 0) {
 			cart = <img src={empty} alt="empty" className="empty" />;
 		}
+
 		return (
 			<div id="cart">
 				<div id="cart-list">
@@ -89,9 +112,10 @@ class Cart extends React.Component {
 					""
 				) : (
 					<div id="checkButton">
+						<span>Rp. {this.toRupiah(this.props.cart.totalPrice)}</span>
 						<button onClick={this.checkout}>Checkout</button>
 						<br />
-						<button onClick={this.resetCart}>Reset cart</button>
+						<button onClick={this.resetCart}>Cancel</button>
 					</div>
 				)}
 
