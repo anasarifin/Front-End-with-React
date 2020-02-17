@@ -53,7 +53,9 @@ class Header extends React.Component {
 
 		return (
 			<div id="header">
-				<img src="http://localhost:9999/public/img/menu.png" alt="menu" onClick={this.showMenu} />
+				<div>
+					<img src="http://localhost:9999/public/img/menu.png" alt="menu" onClick={this.showMenu} />
+				</div>
 				<label>Filter by : </label>
 				<select onChange={this.props.eventType}>
 					<option value="all">All</option>
@@ -74,7 +76,9 @@ class Header extends React.Component {
 				</select>
 				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
 				<div id="cart-logo">
-					<span onClick={this.showCart}>Cart {this.props.cart.cartList.length}</span>
+					<span onClick={this.showCart}>
+						Cart <span>{this.props.cart.cartList.length}</span>
+					</span>
 				</div>
 			</div>
 		);

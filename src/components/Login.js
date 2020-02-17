@@ -1,6 +1,7 @@
 import React from "react";
 import "../style/Login.css";
 import Axios from "axios";
+import barLogo from "../img/bar-logo.png";
 
 const url = "http://localhost:9999/api/v1/login";
 
@@ -30,15 +31,18 @@ export default class Login extends React.Component {
 
 	render() {
 		return (
-			<form id="login">
-				<label>Username</label>
-				<input type="text" id="loginUsername"></input>
-				<label>Password</label>
-				<input type="password" id="loginPassword"></input>
-				<button onClick={this.postLogin} type="submit">
-					Login
-				</button>
-			</form>
+			<div id="login-con">
+				<div>
+					<img alt="logo" src={barLogo} />
+				</div>
+				<form id="login">
+					<input type="text" id="loginUsername" autoComplete="off" placeholder="Username"></input>
+					<input type="password" id="loginPassword" placeholder="Password"></input>
+					<button onClick={this.postLogin} type="submit">
+						Login
+					</button>
+				</form>
+			</div>
 		);
 	}
 }

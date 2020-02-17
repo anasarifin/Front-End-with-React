@@ -1,21 +1,59 @@
-#login {
+#login-con {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 	position: fixed;
-	top: 40%;
+	width: 600px;
+	height: 300px;
+	top: 45%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 1.5px 5px 2px rgba(0, 0, 0, 0.1);
+}
+#login-con div {
+	position: relative;
+	background-color: #57cad5;
+	border-radius: 10px 0 0 10px;
+}
+#login-con div img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	height: auto;
+}
+#login {
+	margin: auto;
 }
 #login * {
 	display: block;
 }
 #login input {
+	background-color: #e7e7e7;
+	border: none;
+	outline: none;
+	height: 35px;
+	border-radius: 10px;
 	margin-bottom: 20px;
 	width: 250px;
-	padding: 0 3px;
+	padding: 0 15px;
+	text-align: center;
 }
 #login button {
+	background-color: #57cad5;
+	border: solid 2px #57cad5;
+	height: 30px;
+	border-radius: 5px;
+	color: white;
 	width: 100px;
-	margin-top: 10px;
-	position: absolute;
+	margin-top: 30px;
+	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+}
+#login button:hover {
+	background-color: white;
+	color: #57cad5;
 }

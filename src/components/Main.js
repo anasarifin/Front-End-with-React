@@ -3,6 +3,7 @@ import MainCard from "./MainCard";
 import Cart from "./Cart";
 import Header from "./Header";
 import Axios from "axios";
+import Modal from "./Modal";
 import "../style/Main.css";
 
 const url = "http://localhost:9999/api/v1/products?page=";
@@ -57,6 +58,14 @@ export default class Main extends React.Component {
 		});
 	}
 
+	containerSize() {
+		let size = 400;
+		if (document.getElementById("main-card-con").offsetHeight + 50 > window.innerHeight) {
+			size = 416;
+		}
+		document.getElementById("main-card-con").style.width = window.innerWidth - size + "px";
+	}
+
 	filterName(event) {
 		const name = "&name=" + event.target.value;
 		Axios.get(url + this.state.currentPage + name + this.state.type + this.state.sort).then(resolve => {
@@ -97,11 +106,15 @@ export default class Main extends React.Component {
 	componentDidMount() {
 		this.getProduct();
 		this.getPagination();
+		window.addEventListener("resize", this.containerSize);
 		// document.addEventListener("click", event => {
 		// 	if (event.target.className != "product-con" || event.target.id != "cart" || event.target.className != "cart-icon") {
 		// 		this.hideCart();
 		// 	}
 		// });
+	}
+	componentDidUpdate() {
+		this.containerSize();
 	}
 
 	render() {
@@ -114,8 +127,12 @@ export default class Main extends React.Component {
 		return (
 			<div id="main">
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
-				<div className="flex-con">{products}</div>
+				<div className="flex-con" id="main-card-con">
+					{products}
+				</div>
 				<Cart list={this.state.cart} show={this.state.show} />
+				<Modal refresh={this.getProduct} product={this.state.modal} show={this.state.show} />
+				<div id="blackLayer"></div>
 				{/* <div id="pagination">
 					<span onClick={this.prevPage}> Prev Page </span>
 					<span>{this.state.currentPage}</span>

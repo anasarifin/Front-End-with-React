@@ -65,9 +65,8 @@ class MainCard extends React.Component {
 				</span>
 				{clicked}
 				<span>{this.props.product.name}</span>
-				<span>
-					Rp. {this.toRupiah(this.props.product.price)} | Stock: {this.props.product.stock}
-				</span>
+				<span>Rp. {this.toRupiah(this.props.product.price)}</span>
+				<span>Stock: {this.props.product.stock}</span>
 			</div>
 		);
 	}

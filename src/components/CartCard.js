@@ -39,6 +39,18 @@ export default class CartCard extends React.Component {
 		}
 	}
 
+	toRupiah(number) {
+		let number_string = number.toString();
+		let leftover = number_string.length % 3;
+		let rupiah = number_string.substr(0, leftover);
+		let thousand = number_string.substr(leftover).match(/\d{3}/g);
+		if (thousand) {
+			let separator = leftover ? "." : "";
+			rupiah += separator + thousand.join(".");
+		}
+		return rupiah;
+	}
+
 	componentDidMount() {
 		this.setState({
 			stock: this.props.product.stock - 1,
@@ -76,15 +88,11 @@ export default class CartCard extends React.Component {
 						<b>{this.props.product.name}</b>
 					</span>
 					<br />
-					<button color="primary" onClick={this.reduceStock}>
-						-
-					</button>
+					<button onClick={this.reduceStock}>-</button>
 					<span className="order">{this.state.order}</span>
-					<button color="primary" onClick={this.addStock}>
-						+
-					</button>
+					<button onClick={this.addStock}>+</button>
 					<br />
-					<span className="price">Price: {this.props.product.price}</span>
+					<span className="price">Rp. {this.toRupiah(this.props.product.price)}</span>
 					<input type="hidden" className="totalPrice" data-price={this.props.product.price * this.state.order}></input>
 				</div>
 			</div>

@@ -13,15 +13,16 @@
 .flex-con {
 	display: flex;
 	flex-flow: row wrap;
-	width: 100%;
 	justify-content: center;
-	margin-top: 50px;
-	padding: 50px;
+	margin-top: 60px;
+}
+#main-card-con {
+	margin-left: 50px;
 }
 .flex-con .flex {
 	position: relative;
-	width: 300px;
-	margin: 20px;
+	width: 250px;
+	margin: 15px 10px;
 	background-color: white;
 	border-radius: 5px;
 }
@@ -30,9 +31,22 @@
 	width: 100%;
 }
 .flex-con .flex span:nth-child(1) {
+	border-radius: 5px 5px 0 0;
 	position: relative;
 	height: 100px;
 	overflow: hidden;
+}
+.flex-con .flex span:nth-child(3) {
+	margin: 5px 0 0 10px;
+}
+.flex-con .flex span:nth-child(4) {
+	margin: 5px 0 5px 10px;
+}
+.flex-con .flex span:nth-child(5) {
+	text-align: right;
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
 }
 .flex-con .flex img {
 	position: absolute;

@@ -4,6 +4,7 @@ import Axios from "axios";
 import "../style/Cart.css";
 import { connect } from "react-redux";
 import { reset } from "../redux/actions/cart";
+import empty from "../img/empty.jpg";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -75,7 +76,7 @@ class Cart extends React.Component {
 		} else if (this.props.cart.cartList.length === 1) {
 			cart = <CartCard product={this.props.cart.cartList[0]} />;
 		} else if (this.props.cart.cartList.length === 0) {
-			cart = <img src="http://localhost:9999/public/img/empty.jpg" alt="empty" />;
+			cart = <img src={empty} alt="empty" className="empty" />;
 		}
 		return (
 			<div id="cart">
