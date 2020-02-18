@@ -4,6 +4,7 @@ import Header from "./Header";
 import HistoryList from "./HistoryList";
 import Axios from "axios";
 import "../style/History.css";
+import revenue from "../img/revenue.jpg";
 
 const url = "http://localhost:9999/api/v1/history";
 
@@ -45,6 +46,7 @@ export default class History extends React.Component {
 					<span>History</span>
 				</div>
 				<Statistic data={this.state.data} />
+				<img alt="revenue" src={revenue} className="dummy" />
 				<div id="history-list">
 					<div className="topTable">
 						<div className="cashier">Cashier</div>
@@ -56,6 +58,7 @@ export default class History extends React.Component {
 					</div>
 					{history}
 				</div>
+				<div id="main-card-con" />
 			</div>
 		);
 	}

@@ -31,6 +31,7 @@ export default class Modal extends React.Component {
 	// 	});
 	// }
 	handleChange(e) {
+		console.log(e.target.files[0]);
 		this.setState({
 			image: e.target.files[0],
 		});
@@ -45,36 +46,45 @@ export default class Modal extends React.Component {
 		formData.append("image", image);
 		formData.append("category_id", document.getElementById("xCategory").value);
 		const id = document.getElementById("xHidden").value;
-		if (!id) {
-			Axios.post(url, formData, {
-				headers: {
-					usertoken: localStorage.getItem("token"),
-				},
-			})
-				.then(() => {
-					this.hideCart();
-					this.props.refresh();
-					alert("Adding success!");
-				})
-				.catch(reject => {
-					console.log(reject);
-					alert("Adding failed!");
-				});
+
+		if (image.type == "image/jpeg" || image.type == "image/png" || image.type == "image/jpg" || image.type == "image/gif") {
+			if (image.size <= 200000) {
+				if (!id) {
+					Axios.post(url, formData, {
+						headers: {
+							usertoken: localStorage.getItem("token"),
+						},
+					})
+						.then(() => {
+							this.hideCart();
+							this.props.refresh();
+							alert("Adding success!");
+						})
+						.catch(reject => {
+							console.log(reject);
+							alert("Adding failed!");
+						});
+				} else {
+					Axios.patch(url + "/" + id, formData, {
+						headers: {
+							usertoken: localStorage.getItem("token"),
+						},
+					})
+						.then(() => {
+							this.hideCart();
+							this.props.refresh();
+							alert("Edit success!");
+						})
+						.catch(reject => {
+							console.log(reject);
+							alert("Edit failed!");
+						});
+				}
+			} else {
+				return alert("Maximum file size is 200kb!");
+			}
 		} else {
-			Axios.patch(url + "/" + id, formData, {
-				headers: {
-					usertoken: localStorage.getItem("token"),
-				},
-			})
-				.then(() => {
-					this.hideCart();
-					this.props.refresh();
-					alert("Edit success!");
-				})
-				.catch(reject => {
-					console.log(reject);
-					alert("Edit failed!");
-				});
+			return alert("File is not image type!");
 		}
 	}
 

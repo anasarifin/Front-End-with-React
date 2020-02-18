@@ -22,6 +22,16 @@
 	outline: none;
 	border-radius: 12px;
 }
+#header select {
+	background-color: #e7e7e7;
+	border: none;
+	border-radius: 7px;
+	padding: 0 5px;
+	width: 150px;
+	height: 30px;
+	color: #434343;
+	outline: none;
+}
 #header label {
 	margin-left: 30px;
 	margin-right: 10px;

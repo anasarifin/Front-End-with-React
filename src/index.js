@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import Profile from "./components/Profile";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -9,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "./index.css";
+import "./fonts/OpenSans-Regular.ttf";
 
 class AppWithRouter extends React.Component {
 	render() {
@@ -16,6 +18,7 @@ class AppWithRouter extends React.Component {
 			<Router>
 				<Route path="/" exact component={App} />
 				<Route path="/login" component={Login} />
+				<Route path="/register" component={Register} />
 				<Route path="/profile" component={Profile} />
 			</Router>
 		);

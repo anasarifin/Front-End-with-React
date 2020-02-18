@@ -62,13 +62,13 @@ class Header extends React.Component {
 				</select>
 				<label>Sort by : </label>
 				<select onChange={this.props.eventSort}>
-					<option value="name">Name</option>
+					<option value="name">Name A-Z</option>
+					<option value="name&dir=1">Name Z-A</option>
+					<option value="stock&dir=1">Stock </option>
 					<option value="stock">Stock</option>
 					<option value="price">Price</option>
 					<option value="updated_at">Update at</option>
 					<option value="created_at">Create at</option>
-					<option value="name&dir=1">Name DESC</option>
-					<option value="stock&dir=1">Stock DESC</option>
 					<option value="price&dir=1">Price DESC</option>
 					<option value="updated_at&dir=1">Update at DESC</option>
 					<option value="created_at&dir=1">Create at DESC</option>

@@ -13,8 +13,13 @@ code {
 
 * {
 	box-sizing: border-box;
+	font-family: "Open Sans";
 }
 ul {
 	padding-inline-start: 0;
 	list-style-type: none;
+}
+@font-face {
+	font-family: "Open Sans";
+	src: local("Open Sans"), url(./fonts/OpenSans-Regular.ttf) format("truetype");
 }

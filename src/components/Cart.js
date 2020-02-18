@@ -61,7 +61,6 @@ class Cart extends React.Component {
 		this.state.modal ? this.setState({ modal: "" }) : this.setState({ modal: "show" });
 	}
 	checkout() {
-		console.log(this.props.cart.cartList);
 		const data = this.props.cart.cartList;
 		const final = [];
 		const order = document.getElementsByClassName("order");

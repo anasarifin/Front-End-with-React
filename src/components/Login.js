@@ -1,5 +1,6 @@
 import React from "react";
 import "../style/Login.css";
+import Register from "./Register";
 import Axios from "axios";
 import barLogo from "../img/bar-logo.png";
 
@@ -10,8 +11,10 @@ export default class Login extends React.Component {
 		super();
 		this.state = {
 			token: "Login first",
+			register: false,
 		};
 		this.postLogin = this.postLogin.bind(this);
+		this.switchPage = this.switchPage.bind(this);
 	}
 
 	postLogin() {
@@ -29,19 +32,29 @@ export default class Login extends React.Component {
 		});
 	}
 
+	switchPage() {
+		this.setState({
+			register: this.state.register ? false : true,
+		});
+	}
+
 	render() {
 		return (
 			<div id="login-con">
 				<div>
-					<img alt="logo" src={barLogo} />
+					<img alt="logo" src={barLogo} onClick={this.switchPage} />
 				</div>
-				<form id="login">
-					<input type="text" id="loginUsername" autoComplete="off" placeholder="Username"></input>
-					<input type="password" id="loginPassword" placeholder="Password"></input>
-					<button onClick={this.postLogin} type="submit">
-						Login
-					</button>
-				</form>
+				{!this.state.register ? (
+					<form id="login">
+						<input type="text" id="loginUsername" autoComplete="off" placeholder="Username"></input>
+						<input type="password" id="loginPassword" placeholder="Password"></input>
+						<button onClick={this.postLogin} type="submit">
+							Login
+						</button>
+					</form>
+				) : (
+					<Register />
+				)}
 			</div>
 		);
 	}

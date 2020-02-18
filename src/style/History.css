@@ -58,6 +58,10 @@
 	width: 25px;
 	height: 25px;
 }
+#history img.dummy {
+	border-radius: 10px;
+	box-shadow: 6px 6px 3px 0px rgba(0, 0, 0, 0.1);
+}
 
 .topTable,
 .table {

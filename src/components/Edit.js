@@ -96,6 +96,7 @@ export default class Main extends React.Component {
 		}
 		return (
 			<div id="main">
+				<div id="main-card-con"></div>
 				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
 				<div id="product-con">{products}</div>
 				<Modal refresh={this.getProduct} product={this.state.modal} show={this.state.show} />

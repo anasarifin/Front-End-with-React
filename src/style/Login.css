@@ -27,10 +27,12 @@
 #login {
 	margin: auto;
 }
-#login * {
+#login *,
+#register * {
 	display: block;
 }
-#login input {
+#login input,
+#register input {
 	background-color: #e7e7e7;
 	border: none;
 	outline: none;
@@ -41,7 +43,8 @@
 	padding: 0 15px;
 	text-align: center;
 }
-#login button {
+#login button,
+#register button {
 	background-color: #57cad5;
 	border: solid 2px #57cad5;
 	height: 30px;
@@ -53,7 +56,8 @@
 	left: 50%;
 	transform: translateX(-50%);
 }
-#login button:hover {
+#login button:hover,
+#register button:hover {
 	background-color: white;
 	color: #57cad5;
 }
