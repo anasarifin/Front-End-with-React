@@ -39,6 +39,10 @@ export default class Main extends React.Component {
 		});
 	}
 
+	containerSize() {
+		document.getElementById("main-card-con").style.width = window.innerWidth - 50 + "px";
+	}
+
 	filterName(event) {
 		const name = "&name=" + event.target.value;
 		Axios.get(url + 1 + name + this.state.type + this.state.sort).then(resolve => {
@@ -72,6 +76,8 @@ export default class Main extends React.Component {
 
 	componentDidMount() {
 		this.getProduct();
+		this.containerSize();
+		window.addEventListener("resize", this.containerSize);
 	}
 
 	// fillModal() {
@@ -96,9 +102,10 @@ export default class Main extends React.Component {
 		}
 		return (
 			<div id="main">
-				<div id="main-card-con"></div>
-				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
-				<div id="product-con">{products}</div>
+				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} cartIcon={false} />
+				<div className="flex-con" id="main-card-con">
+					{products}
+				</div>
 				<Modal refresh={this.getProduct} product={this.state.modal} show={this.state.show} />
 				<div className="addButton" onClick={this.showModal}>
 					+

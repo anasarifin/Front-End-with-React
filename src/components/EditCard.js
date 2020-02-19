@@ -18,6 +18,18 @@ export default class MainCard extends React.Component {
 		});
 	}
 
+	toRupiah(number) {
+		let number_string = number.toString();
+		let leftover = number_string.length % 3;
+		let rupiah = number_string.substr(0, leftover);
+		let thousand = number_string.substr(leftover).match(/\d{3}/g);
+		if (thousand) {
+			let separator = leftover ? "." : "";
+			rupiah += separator + thousand.join(".");
+		}
+		return rupiah;
+	}
+
 	fillModal() {
 		document.getElementById("xName").value = this.props.product.name;
 		document.getElementById("xStock").value = this.props.product.stock;
@@ -38,18 +50,14 @@ export default class MainCard extends React.Component {
 
 	render() {
 		return (
-			<Card onClick={this.fillModal}>
-				<CardImg top width="100%" src={this.props.product.image} alt={this.props.product.name} />
-				<CardBody>
-					<CardTitle className="xName">
-						<b>{this.props.product.name}</b>
-					</CardTitle>
-					<CardText className="xDesc"></CardText>
-					<CardText>
-						<small className="text-muted xStock">Stock: {this.props.product.stock}</small> <small> | </small> <small className="text-muted xPrice">Price: {this.props.product.price}</small>
-					</CardText>
-				</CardBody>
-			</Card>
+			<div className="flex" onClick={this.fillModal}>
+				<span>
+					<img src={this.props.product.image} alt={this.props.product.name} />
+				</span>
+				<span>{this.props.product.name}</span>
+				<span>Rp. {this.toRupiah(this.props.product.price)}</span>
+				<span>Stock: {this.props.product.stock}</span>
+			</div>
 		);
 	}
 }

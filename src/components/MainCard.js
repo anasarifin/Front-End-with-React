@@ -3,6 +3,7 @@ import Axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { add, addPrice } from "../redux/actions/cart";
+import edit from "../img/edit.png";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -13,6 +14,7 @@ class MainCard extends React.Component {
 			data: "",
 		};
 		this.addToCart = this.addToCart.bind(this);
+		this.fillModal = this.fillModal.bind(this);
 	}
 
 	toRupiah(number) {
@@ -41,7 +43,7 @@ class MainCard extends React.Component {
 	addToCart(e) {
 		const id = this.props.product.id;
 		if (this.props.product.stock > 0) {
-			if (e.target.parentElement.querySelector("div").className != "show") {
+			if (e.target.parentElement.querySelector("div").className != "show" && e.target.className != "edit") {
 				e.target.parentElement.querySelector("div").classList.add("show");
 				this.props.dispatch(add(this.props.product));
 				this.props.dispatch(addPrice(this.props.product.price));
@@ -52,6 +54,17 @@ class MainCard extends React.Component {
 		} else {
 			alert("Out of stock!");
 		}
+	}
+
+	fillModal() {
+		document.getElementById("xName").value = this.props.product.name;
+		document.getElementById("xStock").value = this.props.product.stock;
+		document.getElementById("xPrice").value = this.props.product.price;
+		document.getElementById("xCategory").value = this.props.product.category_id;
+		document.getElementById("xDesc").value = this.props.product.description;
+		document.getElementById("xHidden").value = this.props.product.id;
+		document.getElementById("modal").classList.add("show");
+		document.getElementById("blackLayer").classList.add("show");
 	}
 
 	render() {
@@ -67,7 +80,8 @@ class MainCard extends React.Component {
 				{clicked}
 				<span>{this.props.product.name}</span>
 				<span>Rp. {this.toRupiah(this.props.product.price)}</span>
-				<span>Stock: {this.props.product.stock}</span>
+				{/* <span>Stock: {this.props.product.stock}</span> */}
+				<img alt="edit" src={edit} className="edit" onClick={this.fillModal} />
 			</div>
 		);
 	}

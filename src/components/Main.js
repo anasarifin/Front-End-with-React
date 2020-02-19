@@ -1,4 +1,5 @@
 import React from "react";
+import query from "query-string";
 import MainCard from "./MainCard";
 import Cart from "./Cart";
 import Header from "./Header";
@@ -7,7 +8,7 @@ import Modal from "./Modal";
 import "../style/Main.css";
 
 const url = "http://localhost:9999/api/v1/products?page=";
-const urlFull = "http://localhost:9999/api/v1/products";
+const urlNoPage = "http://localhost:9999/api/v1/products?";
 
 export default class Main extends React.Component {
 	constructor() {
@@ -27,6 +28,7 @@ export default class Main extends React.Component {
 		this.filterSort = this.filterSort.bind(this);
 		this.prevPage = this.prevPage.bind(this);
 		this.nextPage = this.nextPage.bind(this);
+		this.changePage = this.changePage.bind(this);
 	}
 
 	getProduct() {
@@ -38,7 +40,7 @@ export default class Main extends React.Component {
 	}
 
 	getPagination() {
-		Axios.get(urlFull).then(resolve => {
+		Axios.get(urlNoPage + this.state.name + this.state.type + this.state.sort).then(resolve => {
 			this.setState({
 				totalPage: Math.ceil(resolve.data.length / 8),
 			});
@@ -49,12 +51,32 @@ export default class Main extends React.Component {
 		this.setState({
 			currentPage: this.state.currentPage + 1,
 		});
-		this.getProduct();
+		Axios.get(url + (this.state.currentPage + 1) + this.state.name + this.state.type + this.state.sort).then(resolve => {
+			this.setState({
+				productList: resolve.data,
+			});
+		});
 	}
 
 	prevPage() {
 		this.setState({
 			currentPage: this.state.currentPage - 1,
+		});
+		Axios.get(url + (this.state.currentPage - 1) + this.state.name + this.state.type + this.state.sort).then(resolve => {
+			this.setState({
+				productList: resolve.data,
+			});
+		});
+	}
+
+	changePage(x) {
+		this.setState({
+			currentPage: parseFloat(x.target.textContent),
+		});
+		Axios.get(url + parseFloat(x.target.textContent) + this.state.name + this.state.type + this.state.sort).then(resolve => {
+			this.setState({
+				productList: resolve.data,
+			});
 		});
 	}
 
@@ -68,30 +90,33 @@ export default class Main extends React.Component {
 
 	filterName(event) {
 		const name = "&name=" + event.target.value;
-		Axios.get(url + this.state.currentPage + name + this.state.type + this.state.sort).then(resolve => {
+		Axios.get(url + 1 + name + this.state.type + this.state.sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				name: name,
+				currentPage: 1,
 			});
 		});
 	}
 
 	filterType(event) {
 		const type = event.target.value == "all" ? "" : "&type=" + event.target.value;
-		Axios.get(url + this.state.currentPage + this.state.name + type + this.state.sort).then(resolve => {
+		Axios.get(url + 1 + this.state.name + type + this.state.sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				type: type,
+				currentPage: 1,
 			});
 		});
 	}
 
 	filterSort(event) {
 		const sort = "&sort=" + event.target.value;
-		Axios.get(url + this.state.currentPage + this.state.name + this.state.type + sort).then(resolve => {
+		Axios.get(url + 1 + this.state.name + this.state.type + sort).then(resolve => {
 			this.setState({
 				productList: resolve.data,
 				sort: sort,
+				currentPage: 1,
 			});
 		});
 	}
@@ -104,9 +129,20 @@ export default class Main extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getProduct();
 		this.getPagination();
 		window.addEventListener("resize", this.containerSize);
+		if (query.parse(window.location.search).page) {
+			this.setState({
+				currentPage: parseFloat(query.parse(window.location.search).page),
+			});
+		}
+		if (query.parse(window.location.search).search) {
+			this.setState({
+				name: query.parse(window.location.search).name,
+			});
+		}
+
+		this.getProduct();
 		// document.addEventListener("click", event => {
 		// 	if (event.target.className != "product-con" || event.target.id != "cart" || event.target.className != "cart-icon") {
 		// 		this.hideCart();
@@ -114,7 +150,9 @@ export default class Main extends React.Component {
 		// });
 	}
 	componentDidUpdate() {
+		// this.getProduct();
 		this.containerSize();
+		this.getPagination();
 	}
 
 	render() {
@@ -124,20 +162,24 @@ export default class Main extends React.Component {
 				products.push(<MainCard key={x} product={data} productId={data.id} />);
 			});
 		}
+		const page = [];
+		for (let x = 1; x <= this.state.totalPage; x++) {
+			page.push(<span onClick={this.changePage}>{x}</span>);
+		}
 		return (
 			<div id="main">
-				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} />
+				<Header eventSearch={this.filterName} eventType={this.filterType} eventSort={this.filterSort} cartIcon={true} />
 				<div className="flex-con" id="main-card-con">
 					{products}
+					<div className="pagination">
+						<span onClick={this.state.currentPage > 1 ? this.prevPage : ""}> &lt; </span>
+						{page}
+						<span onClick={this.state.currentPage < this.state.totalPage ? this.nextPage : ""}> &gt; </span>
+					</div>
 				</div>
 				<Cart list={this.state.cart} show={this.state.show} />
 				<Modal refresh={this.getProduct} product={this.state.modal} show={this.state.show} />
 				<div id="blackLayer"></div>
-				{/* <div id="pagination">
-					<span onClick={this.prevPage}> Prev Page </span>
-					<span>{this.state.currentPage}</span>
-					<span onClick={this.nextPage}> Next Page </span>
-				</div> */}
 			</div>
 		);
 	}

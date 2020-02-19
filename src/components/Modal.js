@@ -1,12 +1,13 @@
 import React from "react";
 import Axios from "axios";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 const url = "http://localhost:9999/api/v1/products";
 const urlCat = "http://localhost:9999/api/v1/category";
 
-export default class Modal extends React.Component {
+class Modal extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -106,13 +107,13 @@ export default class Modal extends React.Component {
 			});
 	}
 
-	getCategory() {
-		Axios.get(urlCat).then(resolve => {
-			this.setState({
-				category: resolve.data,
-			});
-		});
-	}
+	// getCategory() {
+	// 	Axios.get(urlCat).then(resolve => {
+	// 		this.setState({
+	// 			category: resolve.data,
+	// 		});
+	// 	});
+	// }
 
 	hideCart() {
 		document.getElementById("xName").value = null;
@@ -125,13 +126,13 @@ export default class Modal extends React.Component {
 		document.getElementById("blackLayer").classList.remove("show");
 	}
 
-	componentDidMount() {
-		this.getCategory();
-	}
+	// componentDidMount() {
+	// 	this.getCategory();
+	// }
 
 	render() {
 		const categoryList = [];
-		this.state.category.map((data, x) => {
+		this.props.category.categoryList.map((data, x) => {
 			categoryList.push(
 				<option key={x} value={data.id}>
 					{data.name}
@@ -211,6 +212,14 @@ Modal.propTypes = {
 	refresh: PropTypes,
 	show: PropTypes,
 };
+
+const mapStateToProps = state => {
+	return {
+		category: state.category,
+	};
+};
+
+export default connect(mapStateToProps)(Modal);
 
 {
 	/* <div id="modal">

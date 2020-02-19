@@ -3,6 +3,7 @@ import Axios from "axios";
 import PropTypes from "prop-types";
 import "../style/Header.css";
 import { connect } from "react-redux";
+import { category } from "../redux/actions/category";
 
 const urlCat = "http://localhost:9999/api/v1/category";
 
@@ -14,13 +15,17 @@ class Header extends React.Component {
 		};
 	}
 
-	getCategory() {
-		Axios.get(urlCat).then(resolve => {
-			this.setState({
-				category: resolve.data,
-			});
+	getCategory = async () => {
+		// Axios.get(urlCat).then(resolve => {
+		// 	this.setState({
+		// 		category: resolve.data,
+		// 	});
+		// });
+		await this.props.dispatch(category());
+		this.setState({
+			category: this.props.category.categoryList,
 		});
-	}
+	};
 
 	showValue(event) {
 		document.getElementById("bb1").innerHTML = event.target.value;
@@ -74,11 +79,15 @@ class Header extends React.Component {
 					<option value="created_at&dir=1">Create at DESC</option>
 				</select>
 				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
-				<div id="cart-logo">
-					<span onClick={this.showCart}>
-						Cart <span>{this.props.cart.cartList.length}</span>
-					</span>
-				</div>
+				{this.props.cartIcon ? (
+					<div id="cart-logo">
+						<span onClick={this.showCart}>
+							Cart <span>{this.props.cart.cartList.length}</span>
+						</span>
+					</div>
+				) : (
+					""
+				)}
 			</div>
 		);
 	}
@@ -93,6 +102,7 @@ Header.propTypes = {
 const mapStateToProps = state => {
 	return {
 		cart: state.cart,
+		category: state.category,
 	};
 };
 

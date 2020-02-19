@@ -11,10 +11,12 @@
 	height: 40px;
 } */
 .flex-con {
+	position: relative;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
 	margin-top: 60px;
+	padding-bottom: 40px;
 }
 #main-card-con {
 	margin-left: 50px;
@@ -25,6 +27,7 @@
 	margin: 15px 10px;
 	background-color: white;
 	border-radius: 5px;
+	cursor: pointer;
 }
 .flex-con .flex span {
 	display: block;
@@ -48,12 +51,24 @@
 	bottom: 5px;
 	right: 10px;
 }
-.flex-con .flex img {
+.flex-con .flex img:nth-child(1) {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 	width: 100%;
 	height: auto;
+}
+.flex-con .flex img.edit {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 3px;
+	left: 3px;
+	z-index: 20;
+	display: none;
+}
+.flex-con .flex:hover img.edit {
+	display: block;
 }
 .flex-con .flex div {
 	position: absolute;
@@ -96,8 +111,9 @@
 	background-color: #fff;
 	padding: 30px;
 	border-radius: 5px;
-	z-index: 10;
-	transition: 0.5s;
+	z-index: 99;
+	transition: 0.5s top;
+	opacity: 0;
 }
 #modal img {
 	position: absolute;
@@ -108,6 +124,7 @@
 }
 #modal.show {
 	top: 50%;
+	opacity: 1;
 }
 #blackLayer {
 	position: fixed;
@@ -118,25 +135,24 @@
 	background-color: black;
 	opacity: 0;
 	transition: 0.5s opacity;
+	z-index: 80;
 }
 #blackLayer.show {
 	opacity: 0.8;
 	width: 100%;
 	height: 100%;
 }
-
-.addButton {
-	text-align: center;
-	line-height: 64px;
-	font-size: 100px;
-	position: fixed;
+.pagination {
+	position: absolute;
+	left: 50%;
 	bottom: 10px;
-	right: 15px;
-	width: 90px;
-	height: 90px;
-	border-radius: 50%;
-	color: white;
-	background-color: #007bff;
+	transform: translate(-50%);
+}
+.pagination span {
+	margin: 0 5px;
+	border: solid 1px black;
+	padding: 0 7px;
+	cursor: pointer;
 }
 .modal-button.btn.btn-primary {
 	margin-right: 20px;

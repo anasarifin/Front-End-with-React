@@ -23,7 +23,7 @@ class Example extends Component {
 		};
 		this.changePage = this.changePage.bind(this);
 		this.changeMain = this.changeMain.bind(this);
-		this.changeEdit = this.changeEdit.bind(this);
+		// this.changeEdit = this.changeEdit.bind(this);
 		this.changeHistory = this.changeHistory.bind(this);
 	}
 	static defaultProps = {
@@ -63,11 +63,11 @@ class Example extends Component {
 			currentPage: <Main />,
 		});
 	}
-	changeEdit() {
-		this.setState({
-			currentPage: <Edit />,
-		});
-	}
+	// changeEdit() {
+	// 	this.setState({
+	// 		currentPage: <Edit />,
+	// 	});
+	// }
 	changeHistory() {
 		this.setState({
 			currentPage: <History />,
@@ -77,7 +77,7 @@ class Example extends Component {
 	render() {
 		return (
 			<div id="main-con">
-				<Navbar event={[this.changeMain, this.changeEdit, this.changeHistory]} />
+				<Navbar event={[this.changeMain, this.changeHistory]} />
 				{this.state.currentPage}
 			</div>
 		);
