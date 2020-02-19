@@ -29,6 +29,7 @@ export default class Main extends React.Component {
 		this.prevPage = this.prevPage.bind(this);
 		this.nextPage = this.nextPage.bind(this);
 		this.changePage = this.changePage.bind(this);
+		this.getProduct = this.getProduct.bind(this);
 	}
 
 	getProduct() {
@@ -172,9 +173,9 @@ export default class Main extends React.Component {
 				<div className="flex-con" id="main-card-con">
 					{products}
 					<div className="pagination">
-						<span onClick={this.state.currentPage > 1 ? this.prevPage : ""}> &lt; </span>
+						<span onClick={this.state.currentPage > 1 ? this.prevPage : null}> &lt; </span>
 						{page}
-						<span onClick={this.state.currentPage < this.state.totalPage ? this.nextPage : ""}> &gt; </span>
+						<span onClick={this.state.currentPage < this.state.totalPage ? this.nextPage : null}> &gt; </span>
 					</div>
 				</div>
 				<Cart list={this.state.cart} show={this.state.show} />

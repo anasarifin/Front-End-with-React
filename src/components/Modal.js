@@ -3,9 +3,9 @@ import Axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import close from "../img/close.png";
 
 const url = "http://localhost:9999/api/v1/products";
-const urlCat = "http://localhost:9999/api/v1/category";
 
 class Modal extends React.Component {
 	constructor() {
@@ -59,11 +59,11 @@ class Modal extends React.Component {
 						.then(() => {
 							this.hideCart();
 							this.props.refresh();
-							alert("Adding success!");
 						})
 						.catch(reject => {
 							console.log(reject);
-							alert("Adding failed!");
+							this.hideCart();
+							this.props.refresh();
 						});
 				} else {
 					Axios.patch(url + "/" + id, formData, {
@@ -74,11 +74,11 @@ class Modal extends React.Component {
 						.then(() => {
 							this.hideCart();
 							this.props.refresh();
-							alert("Edit success!");
 						})
 						.catch(reject => {
 							console.log(reject);
-							alert("Edit failed!");
+							this.hideCart();
+							this.props.refresh();
 						});
 				}
 			} else {
@@ -99,11 +99,11 @@ class Modal extends React.Component {
 			.then(() => {
 				this.hideCart();
 				this.props.refresh();
-				alert("Delete success!");
 			})
 			.catch(reject => {
 				console.log(reject);
-				alert("Delete failed!");
+				this.hideCart();
+				this.props.refresh();
 			});
 	}
 
@@ -148,7 +148,7 @@ class Modal extends React.Component {
 							Name
 						</Label>
 						<Col sm={10}>
-							<Input type="text" name="name" id="xName" />
+							<Input type="text" name="name" id="xName" pattern="[A-Za-z0-9]{4,}" required />
 						</Col>
 					</FormGroup>
 					<FormGroup row>
@@ -190,7 +190,7 @@ class Modal extends React.Component {
 							Image
 						</Label>
 						<Col sm={10}>
-							<Input type="file" name="image" id="xImage" onChange={e => this.handleChange(e)} />
+							<Input type="file" name="image" id="xImage" onChange={e => this.handleChange(e)} required />
 							<FormText color="muted"></FormText>
 						</Col>
 					</FormGroup>
@@ -202,7 +202,7 @@ class Modal extends React.Component {
 					</Button>
 				</Form>
 				<input type="hidden" id="xHidden"></input>
-				<img src="http://localhost:9999/public/img/close.png" alt="close" onClick={this.hideCart} />
+				<img src={close} alt="close" onClick={this.hideCart} />
 			</div>
 		);
 	}
@@ -211,6 +211,7 @@ class Modal extends React.Component {
 Modal.propTypes = {
 	refresh: PropTypes,
 	show: PropTypes,
+	category: PropTypes,
 };
 
 const mapStateToProps = state => {

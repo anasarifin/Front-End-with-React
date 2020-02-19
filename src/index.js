@@ -4,6 +4,7 @@ import App from "./App";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import Checkout from "./components/Checkout";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,6 +21,7 @@ class AppWithRouter extends React.Component {
 				<Route path="/login" component={Login} />
 				<Route path="/register" component={Register} />
 				<Route path="/profile" component={Profile} />
+				<Route path="/checkout" component={Checkout} />
 			</Router>
 		);
 	}

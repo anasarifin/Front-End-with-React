@@ -42,7 +42,8 @@ export default class Login extends React.Component {
 		return (
 			<div id="login-con">
 				<div>
-					<img alt="logo" src={barLogo} onClick={this.switchPage} />
+					<img alt="logo" src={barLogo} />
+					<span onClick={this.switchPage}>{!this.state.register ? "Register?" : "Back to login..."}</span>
 				</div>
 				{!this.state.register ? (
 					<form id="login">

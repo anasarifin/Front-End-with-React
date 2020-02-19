@@ -17,20 +17,32 @@
 	margin-bottom: 20px;
 }
 #statistic div {
+	position: relative;
 	width: 100%;
 	height: 150px;
-	line-height: 150px;
 	text-align: center;
 	border-radius: 10px;
 	box-shadow: 6px 6px 3px 0px rgba(0, 0, 0, 0.1);
 }
-#statistic div:nth-child(1) {
+#statistic div span {
+	display: block;
+}
+#statistic div div.stat-con {
+	width: fit-content;
+	height: fit-content;
+	box-shadow: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+#statistic div.income {
 	background: linear-gradient(to right, #fdd6df, #fbb2b4);
 }
-#statistic div:nth-child(2) {
+#statistic div.orders {
 	background: linear-gradient(to right, #d4f7fd, #29dfff);
 }
-#statistic div:nth-child(3) {
+#statistic div.income-year {
 	background: linear-gradient(to right, #eddcef, #ab84c8);
 }
 #header-history {
@@ -58,19 +70,15 @@
 	width: 25px;
 	height: 25px;
 }
-#history img.dummy {
-	border-radius: 10px;
-	box-shadow: 6px 6px 3px 0px rgba(0, 0, 0, 0.1);
-}
 
 .topTable,
 .table {
 	display: grid;
-	grid-template-columns: repeat(7, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	width: 100%;
 	text-align: center;
 	margin-bottom: 15px;
 }
-.purchased {
+/* .purchased {
 	grid-column: span 2;
-}
+} */

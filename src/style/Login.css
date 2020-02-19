@@ -26,13 +26,13 @@
 }
 #login {
 	margin: auto;
+	position: relative;
 }
 #login *,
 #register * {
 	display: block;
 }
-#login input,
-#register input {
+#login input {
 	background-color: #e7e7e7;
 	border: none;
 	outline: none;
@@ -43,8 +43,7 @@
 	padding: 0 15px;
 	text-align: center;
 }
-#login button,
-#register button {
+#login button {
 	background-color: #57cad5;
 	border: solid 2px #57cad5;
 	height: 30px;
@@ -56,8 +55,17 @@
 	left: 50%;
 	transform: translateX(-50%);
 }
-#login button:hover,
-#register button:hover {
+#login button:hover {
 	background-color: white;
 	color: #57cad5;
+}
+#login-con div span {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translate(-50%);
+	color: #777777;
+	letter-spacing: 2px;
+	font-weight: 600;
+	cursor: pointer;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
-import Edit from "./components/Edit";
+import Modal from "./components/Modal";
 import History from "./components/History";
 import Axios from "axios";
 // import { Link } from "react-router-dom";
@@ -79,6 +79,8 @@ class Example extends Component {
 			<div id="main-con">
 				<Navbar event={[this.changeMain, this.changeHistory]} />
 				{this.state.currentPage}
+				<Modal />
+				<div id="blackLayer"></div>
 			</div>
 		);
 	}

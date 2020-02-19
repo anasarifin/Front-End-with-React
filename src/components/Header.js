@@ -1,11 +1,11 @@
 import React from "react";
-import Axios from "axios";
 import PropTypes from "prop-types";
 import "../style/Header.css";
 import { connect } from "react-redux";
 import { category } from "../redux/actions/category";
+import menu from "../img/menu.png";
 
-const urlCat = "http://localhost:9999/api/v1/category";
+// const urlCat = "http://localhost:9999/api/v1/category";
 
 class Header extends React.Component {
 	constructor() {
@@ -15,7 +15,7 @@ class Header extends React.Component {
 		};
 	}
 
-	getCategory = async () => {
+	async getCategory() {
 		// Axios.get(urlCat).then(resolve => {
 		// 	this.setState({
 		// 		category: resolve.data,
@@ -25,7 +25,7 @@ class Header extends React.Component {
 		this.setState({
 			category: this.props.category.categoryList,
 		});
-	};
+	}
 
 	showValue(event) {
 		document.getElementById("bb1").innerHTML = event.target.value;
@@ -58,7 +58,7 @@ class Header extends React.Component {
 		return (
 			<div id="header">
 				<div>
-					<img src="http://localhost:9999/public/img/menu.png" alt="menu" onClick={this.showMenu} />
+					<img src={menu} alt="menu" onClick={this.showMenu} />
 				</div>
 				<label>Filter by : </label>
 				<select onChange={this.props.eventType}>
@@ -97,6 +97,10 @@ Header.propTypes = {
 	eventSearch: PropTypes,
 	eventType: PropTypes,
 	eventSort: PropTypes,
+	category: PropTypes,
+	dispatch: PropTypes,
+	cart: PropTypes,
+	cartIcon: PropTypes,
 };
 
 const mapStateToProps = state => {

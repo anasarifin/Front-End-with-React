@@ -1,10 +1,12 @@
 import React from "react";
 import CartCard from "./CartCard";
+import Checkout from "./Checkout";
 import Axios from "axios";
 import "../style/Cart.css";
 import { connect } from "react-redux";
 import { reset, resetPrice } from "../redux/actions/cart";
 import empty from "../img/empty.jpg";
+import PropTypes from "prop-types";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -50,6 +52,7 @@ class Cart extends React.Component {
 		}
 		return rupiah;
 	}
+
 	resetCart() {
 		// Axios.delete(url, { data: { id: "all" }, headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
 		// 	console.log(resolve);
@@ -57,9 +60,17 @@ class Cart extends React.Component {
 		this.props.dispatch(reset());
 		this.props.dispatch(resetPrice());
 	}
+
 	paymentConfirm() {
 		this.state.modal ? this.setState({ modal: "" }) : this.setState({ modal: "show" });
 	}
+
+	showCheckout() {
+		document.getElementById("checkout-con").classList.add("show");
+		document.getElementById("blackLayer2").classList.add("show");
+		document.getElementById("blackLayer").classList.remove("show");
+	}
+
 	checkout() {
 		const data = this.props.cart.cartList;
 		const final = [];
@@ -77,7 +88,7 @@ class Cart extends React.Component {
 				},
 			},
 		).then(resolve => {
-			alert("Transaction success!");
+			console.log(resolve);
 			this.resetCart();
 		});
 	}
@@ -111,19 +122,29 @@ class Cart extends React.Component {
 					""
 				) : (
 					<div id="checkButton">
-						<span>Rp. {this.toRupiah(this.props.cart.totalPrice)}</span>
-						<button onClick={this.checkout}>Checkout</button>
+						<span>Total:</span>
+						<span>Rp. {this.toRupiah(this.props.cart.totalPrice)}*</span>
+						<span>*PPN is not included</span>
+						<button onClick={this.showCheckout}>Checkout</button>
 						<br />
 						<button onClick={this.resetCart}>Cancel</button>
 					</div>
 				)}
-
+				<div id="checkout-con">
+					<Checkout />
+				</div>
+				<div id="blackLayer2"></div>
 				{/* <Confirm show={this.state.modal} cartList={this.state.cartList.sold_item_list} /> */}
-				<div className={this.state.modal ? "layer show" : "layer"}></div>
+				{/* <div className={this.state.modal ? "layer show" : "layer"}></div> */}
 			</div>
 		);
 	}
 }
+
+Cart.propTypes = {
+	cart: PropTypes,
+	dispatch: PropTypes,
+};
 
 const mapStateToProps = state => {
 	return {

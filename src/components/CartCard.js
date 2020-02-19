@@ -1,10 +1,9 @@
 import React from "react";
-import Axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { reducePrice, addPrice } from "../redux/actions/cart";
 
-const url = "http://localhost:9999/api/v1/cart";
+// const url = "http://localhost:9999/api/v1/cart";
 
 class CartCard extends React.Component {
 	constructor() {
@@ -109,6 +108,7 @@ class CartCard extends React.Component {
 
 CartCard.propTypes = {
 	product: PropTypes,
+	dispatch: PropTypes,
 };
 
 const mapStateToProps = state => {

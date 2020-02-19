@@ -1,11 +1,11 @@
 import React from "react";
-import Axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { add, addPrice } from "../redux/actions/cart";
 import edit from "../img/edit.png";
+import checklist from "../img/checklist.png";
 
-const url = "http://localhost:9999/api/v1/cart";
+// const url = "http://localhost:9999/api/v1/cart";
 
 class MainCard extends React.Component {
 	constructor() {
@@ -41,7 +41,6 @@ class MainCard extends React.Component {
 	}
 
 	addToCart(e) {
-		const id = this.props.product.id;
 		if (this.props.product.stock > 0) {
 			if (e.target.parentElement.querySelector("div").className != "show" && e.target.className != "edit") {
 				e.target.parentElement.querySelector("div").classList.add("show");
@@ -70,7 +69,11 @@ class MainCard extends React.Component {
 	render() {
 		let clicked = <div>clicked</div>;
 		if (this.props.cart.cartList.some(x => x.id === this.props.product.id)) {
-			clicked = <div className="show">clicked</div>;
+			clicked = (
+				<div className="show">
+					<img alt="clicked" src={checklist} className="clicked" />
+				</div>
+			);
 		}
 		return (
 			<div className="flex" onClick={this.addToCart}>
@@ -89,6 +92,8 @@ class MainCard extends React.Component {
 
 MainCard.propTypes = {
 	product: PropTypes,
+	cart: PropTypes,
+	dispatch: PropTypes,
 };
 
 const mapStateToProps = state => {

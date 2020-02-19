@@ -23,9 +23,24 @@ export default class Statistic extends React.Component {
 		const totalIncome = parseFloat(this.props.data.total_income);
 		return (
 			<div id="statistic">
-				<div>{this.props.data.total_transaction_count}</div>
-				<div>Product Sold: {this.props.data.total_item_sold}</div>
-				<div>Rp. {this.toRupiah(totalIncome)}</div>
+				<div className="income">
+					<div className="stat-con">
+						<span>Today Income</span>
+						<span>{this.props.data.total_transaction_count}</span>
+					</div>
+				</div>
+				<div className="orders">
+					<div className="stat-con">
+						<span>Orders</span>
+						<span>{this.props.data.total_item_sold}</span>
+					</div>
+				</div>
+				<div className="income-year">
+					<div className="stat-con">
+						<span>Income</span>
+						<span>Rp. {this.toRupiah(totalIncome)}</span>
+					</div>
+				</div>
 			</div>
 		);
 	}

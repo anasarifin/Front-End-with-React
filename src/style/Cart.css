@@ -8,7 +8,7 @@
 	height: 100%;
 	background-color: white;
 	transition: 0.5s;
-	box-shadow: -1px 0 5px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: -1px 6px 5px 2px rgba(0, 0, 0, 0.3);
 }
 #cart.show {
 	right: 0;
@@ -31,6 +31,9 @@
 }
 #cart-list::-webkit-scrollbar {
 	width: 0 !important;
+}
+#cart-logo {
+	background-color: white;
 }
 .cart_card {
 	position: relative;
@@ -81,6 +84,7 @@
 	width: 100%;
 	right: 0;
 	text-align: center;
+	padding-top: 50px;
 }
 #checkButton button {
 	margin-top: 10px;
@@ -89,26 +93,122 @@
 	color: white;
 	font-weight: 700;
 }
-#checkButton button:nth-child(2) {
+#checkButton button:nth-child(4) {
 	background-color: #57cad5;
 	border: solid 2px #57cad5;
 }
-#checkButton button:nth-child(4) {
+#checkButton button:nth-child(6) {
 	background-color: #f24f8a;
 	border: solid 2px #f24f8a;
 }
-#checkButton button:nth-child(2):hover {
+#checkButton button:nth-child(4):hover {
 	background-color: white;
 	color: #57cad5;
 }
-#checkButton button:nth-child(4):hover {
+#checkButton button:nth-child(6):hover {
 	background-color: white;
 	color: #f24f8a;
 }
 #checkButton span {
 	color: black;
 }
+#checkButton span:nth-child(1) {
+	position: absolute;
+	left: 20px;
+	top: 0px;
+	font-weight: bold;
+}
+#checkButton span:nth-child(2) {
+	position: absolute;
+	right: 20px;
+	top: 0px;
+	font-weight: bold;
+}
+#checkButton span:nth-child(3) {
+	position: absolute;
+	left: 20px;
+	top: 28px;
+}
 .order {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	margin: 0 10px;
+}
+
+#checkout-con {
+	position: fixed;
+	top: 150%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	background-color: white;
+	border-radius: 10px;
+	padding: 30px 30px 15px 30px;
+	opacity: 0;
+	transition: 0.5s;
+	z-index: 99;
+}
+#checkout-con.show {
+	top: 50%;
+	opacity: 1;
+}
+#checkout span,
+#checkout button {
+	display: block;
+}
+#checkout span:nth-child(2) {
+	position: absolute;
+	right: 30px;
+	top: 30px;
+}
+#checkout span:nth-child(3) {
+	margin-bottom: 30px;
+}
+#checkout div {
+	position: relative;
+}
+#checkout div span.co-price {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#checkout button {
+	margin: 10px auto;
+	width: 90%;
+	color: white;
+}
+#checkout button.print {
+	background-color: #57cad5;
+	border: solid 2px #57cad5;
+}
+#checkout button.cancel {
+	background-color: #f24f8a;
+	border: solid 2px #f24f8a;
+}
+#checkout button.print:hover {
+	background-color: white;
+	color: #57cad5;
+}
+#checkout button.cancel:hover {
+	background-color: white;
+	color: #f24f8a;
+}
+#payment {
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+#blackLayer2 {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	background-color: black;
+	opacity: 0;
+	transition: 0.5s opacity;
+	z-index: 80;
+}
+#blackLayer2.show {
+	opacity: 0.8;
+	width: 100%;
+	height: 100%;
 }
