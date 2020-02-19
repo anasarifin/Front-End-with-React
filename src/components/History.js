@@ -45,6 +45,7 @@ export default class History extends React.Component {
 				</div>
 				<Statistic data={this.state.data} />
 				<div id="history-list">
+					<span>Recent Order</span>
 					<div className="topTable">
 						<div className="invoices">Invoices</div>
 						<div className="cashier">Cashier</div>

@@ -25,7 +25,7 @@ export default class Statistic extends React.Component {
 			<div id="statistic">
 				<div className="income">
 					<div className="stat-con">
-						<span>Today Income</span>
+						<span>Transaction</span>
 						<span>{this.props.data.total_transaction_count}</span>
 					</div>
 				</div>

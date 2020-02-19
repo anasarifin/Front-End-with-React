@@ -5,8 +5,20 @@
 	padding: 30px 70px;
 }
 #history-list {
-	padding: 50px;
+	position: relative;
+	padding: 70px 0 0 0;
 	text-align: center;
+	box-shadow: 6px 6px 3px 0px rgba(0, 0, 0, 0.1);
+	min-height: 150px;
+	border-radius: 10px;
+}
+#history-list span {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: left;
 }
 #statistic {
 	display: grid;
@@ -70,7 +82,9 @@
 	width: 25px;
 	height: 25px;
 }
-
+.topTable div {
+	font-weight: bold;
+}
 .topTable,
 .table {
 	display: grid;
