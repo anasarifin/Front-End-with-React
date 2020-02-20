@@ -17,10 +17,14 @@ export default class Register extends React.Component {
 			fullname: document.getElementById("regFullname").value,
 			password: document.getElementById("regPassword").value,
 		}).then(resolve => {
+			console.log(resolve);
 			if (resolve.data.warning) {
 				this.setState({
 					warning: resolve.data.warning,
 				});
+			}
+			if (resolve.data.insertId) {
+				window.location.href = "/login";
 			}
 		});
 	}
