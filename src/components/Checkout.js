@@ -4,7 +4,7 @@ import Axios from "axios";
 import { reset, resetPrice } from "../redux/actions/cart";
 import PropTypes from "prop-types";
 
-const url = "http://localhost:9999/api/v1/cart";
+const url = "http://100.24.32.116:9999/api/v1/cart";
 
 class Checkout extends React.Component {
 	constructor() {

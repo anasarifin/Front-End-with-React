@@ -4,7 +4,7 @@ import Register from "./Register";
 import Axios from "axios";
 import barLogo from "../img/bar-logo.png";
 
-const url = "http://localhost:9999/api/v1/login";
+const url = "http://100.24.32.116:9999/api/v1/login";
 
 export default class Login extends React.Component {
 	constructor() {
@@ -36,6 +36,12 @@ export default class Login extends React.Component {
 		this.setState({
 			register: this.state.register ? false : true,
 		});
+	}
+
+	componentDidMount() {
+		if (localStorage.getItem("token")) {
+			window.location.href = "/";
+		}
 	}
 
 	render() {
