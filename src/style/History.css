@@ -78,7 +78,10 @@
 	text-align: center;
 }
 #header-history div img {
-	position: relative;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: 25px;
 	height: 25px;
 }
