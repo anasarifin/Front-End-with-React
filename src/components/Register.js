@@ -1,7 +1,7 @@
 import React from "react";
 import Axios from "axios";
 
-const url = "http://100.24.32.116:9999/api/v1/register";
+const url = "http://localhost:9999/api/v1/register";
 
 export default class Register extends React.Component {
 	constructor() {
