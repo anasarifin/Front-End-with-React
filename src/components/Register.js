@@ -38,7 +38,7 @@ export default class Register extends React.Component {
 	render() {
 		return (
 			<div id="login">
-				<input type="text" placeholder="Username" id="regUsername" />
+				<input type="text" placeholder="Username" id="regUsername" autoComplete="off" />
 				<input type="text" placeholder="Full Name" id="regFullname" />
 				<input type="password" placeholder="Password" id="regPassword" />
 				<input type="password" placeholder="Re-type Password" id="regRePassword" onChange={this.checkPassword} />
