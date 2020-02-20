@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Axios from "axios";
 import { reset, resetPrice } from "../redux/actions/cart";
+import PropTypes from "prop-types";
 
 const url = "http://localhost:9999/api/v1/cart";
 
@@ -101,6 +102,11 @@ class Checkout extends React.Component {
 		);
 	}
 }
+
+Checkout.propTypes = {
+	cart: PropTypes,
+	dispatch: PropTypes,
+};
 
 const mapStateToProps = state => {
 	return {

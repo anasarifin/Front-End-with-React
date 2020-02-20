@@ -1,7 +1,7 @@
 import React from "react";
-import Axios from "axios";
+import PropTypes from "prop-types";
 
-const url = "http://localhost:9999/api/v1/history";
+// const url = "http://localhost:9999/api/v1/history";
 
 export default class HistoryList extends React.Component {
 	constructor() {
@@ -42,3 +42,8 @@ export default class HistoryList extends React.Component {
 		);
 	}
 }
+
+HistoryList.propTypes = {
+	product: PropTypes,
+	paymentData: PropTypes,
+};
