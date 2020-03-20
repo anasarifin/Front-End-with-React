@@ -38,6 +38,7 @@ class Checkout extends React.Component {
 	}
 
 	checkout() {
+		console.log(this.props.cart.cartList);
 		const data = this.props.cart.cartList;
 		const final = [];
 		const order = document.getElementsByClassName("order");

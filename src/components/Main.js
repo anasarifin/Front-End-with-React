@@ -58,11 +58,16 @@ class Main extends React.Component {
 			currentPage: parseFloat(x),
 		});
 	}
+	refresh() {}
 
 	containerSize() {
+		console.log(window.innerWidth);
 		let size = 400;
 		if (document.getElementById("main-card-con").offsetHeight + 50 > window.innerHeight) {
 			size = 416;
+		}
+		if (window.innerWidth < 1000) {
+			size = 66;
 		}
 		document.getElementById("main-card-con").style.width = window.innerWidth - size + "px";
 	}
@@ -79,12 +84,19 @@ class Main extends React.Component {
 	}
 
 	filterType(event) {
-		this.setState({
-			currentPage: 1,
-			productList: this.props.product.productList.filter(x => {
-				return parseFloat(x.category_id) === parseFloat(event.target.value);
-			}),
-		});
+		if (event.target.value !== "all") {
+			this.setState({
+				currentPage: 1,
+				productList: this.props.product.productList.filter(x => {
+					return parseFloat(x.category_id) === parseFloat(event.target.value);
+				}),
+			});
+		} else {
+			this.setState({
+				currentPage: 1,
+				productList: this.props.product.productList,
+			});
+		}
 	}
 
 	filterSort(event) {
@@ -217,7 +229,7 @@ class Main extends React.Component {
 					</div>
 				</div>
 				<Cart list={this.state.cart} show={this.state.show} />
-				<Modal refresh={this.getProduct} product={this.state.modal} show={this.state.show} />
+				<Modal refresh={this.refresh} product={this.state.modal} show={this.state.show} />
 				<div id="blackLayer"></div>
 			</div>
 		);

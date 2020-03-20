@@ -32,60 +32,72 @@ class Modal extends React.Component {
 	// 	});
 	// }
 	handleChange(e) {
-		console.log(e.target.files[0]);
-		this.setState({
-			image: e.target.files[0],
-		});
+		const image = e.target.files[0];
+		if (["image/jpg", "image/jpeg", "image/png", "image/gif"].includes(image.type)) {
+			return alert("File is not image type!");
+		} else if (image.size <= 500000) {
+			return alert("Maximum file size is 500kb!");
+		} else {
+			this.setState({
+				image: image,
+			});
+		}
 	}
 	postData() {
 		const image = this.state.image;
-		const formData = new FormData();
-		formData.append("name", document.getElementById("xName").value);
-		formData.append("description", document.getElementById("xDesc").value);
-		formData.append("price", document.getElementById("xPrice").value);
-		formData.append("stock", document.getElementById("xStock").value);
-		formData.append("image", image);
-		formData.append("category_id", document.getElementById("xCategory").value);
-		const id = document.getElementById("xHidden").value;
-
-		if (image.type == "image/jpeg" || image.type == "image/png" || image.type == "image/jpg" || image.type == "image/gif") {
-			if (image.size <= 200000) {
-				if (!id) {
-					Axios.post(url, formData, {
-						headers: {
-							usertoken: localStorage.getItem("token"),
-						},
-					})
-						.then(() => {
-							this.hideCart();
-							this.props.refresh();
-						})
-						.catch(reject => {
-							console.log(reject);
-							this.hideCart();
-							this.props.refresh();
-						});
-				} else {
-					Axios.patch(url + "/" + id, formData, {
-						headers: {
-							usertoken: localStorage.getItem("token"),
-						},
-					})
-						.then(() => {
-							this.hideCart();
-							this.props.refresh();
-						})
-						.catch(reject => {
-							console.log(reject);
-							this.hideCart();
-							this.props.refresh();
-						});
-				}
-			} else {
-				return alert("Maximum file size is 200kb!");
-			}
+		if (!document.getElementById("xName").value) {
+			return alert("Name cannot be empty !");
+		} else if (!document.getElementById("xDesc").value) {
+			return alert("Description cannot be empty !");
+		} else if (!document.getElementById("xPrice").value) {
+			return alert("Price cannot be empty !");
+		} else if (!document.getElementById("xStock").value) {
+			return alert("Stock cannot be empty !");
+		} else if (!document.getElementById("xCategory").value) {
+			return alert("Category cannot be empty !");
+		} else if (!image) {
+			return alert("Image cannot be empty !");
 		} else {
-			return alert("File is not image type!");
+			const formData = new FormData();
+			formData.append("name", document.getElementById("xName").value);
+			formData.append("description", document.getElementById("xDesc").value);
+			formData.append("price", document.getElementById("xPrice").value);
+			formData.append("stock", document.getElementById("xStock").value);
+			formData.append("image", image);
+			formData.append("category_id", document.getElementById("xCategory").value);
+			const id = document.getElementById("xHidden").value;
+
+			if (!id) {
+				Axios.post(url, formData, {
+					headers: {
+						usertoken: localStorage.getItem("token"),
+					},
+				})
+					.then(() => {
+						this.hideCart();
+						this.props.refresh();
+					})
+					.catch(reject => {
+						console.log(reject);
+						this.hideCart();
+						this.props.refresh();
+					});
+			} else {
+				Axios.patch(url + "/" + id, formData, {
+					headers: {
+						usertoken: localStorage.getItem("token"),
+					},
+				})
+					.then(() => {
+						this.hideCart();
+						this.props.refresh();
+					})
+					.catch(reject => {
+						console.log(reject);
+						this.hideCart();
+						this.props.refresh();
+					});
+			}
 		}
 	}
 

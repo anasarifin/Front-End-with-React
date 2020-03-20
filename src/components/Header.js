@@ -29,8 +29,8 @@ class Header extends React.Component {
 		document.getElementById("bb1").innerHTML = event.target.value;
 	}
 
-	showMenu() {
-		document.getElementById("navbar").classList.toggle("show");
+	showSearch() {
+		document.getElementById("header-sub").classList.toggle("show");
 	}
 
 	showCart() {
@@ -56,27 +56,32 @@ class Header extends React.Component {
 		return (
 			<div id="header">
 				<div>
-					<img src={menu} alt="menu" onClick={this.showMenu} />
+					<img src={menu} alt="menu" />
 				</div>
-				<label>Filter by : </label>
-				<select onChange={this.props.eventType}>
-					<option value="all">All</option>
-					{categoryList}
-				</select>
-				<label>Sort by : </label>
-				<select onChange={this.props.eventSort}>
-					<option value="name">Name A-Z</option>
-					<option value="nameX">Name Z-A</option>
-					<option value="stockX">Stock +</option>
-					<option value="stock">Stock -</option>
-					<option value="priceX">Price +</option>
-					<option value="price">Price -</option>
-					<option value="updatedX">Updated New</option>
-					<option value="updated">Updated Old</option>
-					<option value="createdX">Created New</option>
-					<option value="created">Created Old</option>
-				</select>
-				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
+				<div id="header-small" onClick={this.showSearch}>
+					Search
+				</div>
+				<div id="header-sub">
+					<label>Filter</label>
+					<select onChange={this.props.eventType}>
+						<option value="all">All</option>
+						{categoryList}
+					</select>
+					<label>Sort</label>
+					<select onChange={this.props.eventSort}>
+						<option value="name">Name A-Z</option>
+						<option value="nameX">Name Z-A</option>
+						<option value="stockX">Stock +</option>
+						<option value="stock">Stock -</option>
+						<option value="priceX">Price +</option>
+						<option value="price">Price -</option>
+						<option value="updatedX">Updated New</option>
+						<option value="updated">Updated Old</option>
+						<option value="createdX">Created New</option>
+						<option value="created">Created Old</option>
+					</select>
+					<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
+				</div>
 				{this.props.cartIcon ? (
 					<div id="cart-logo">
 						<span onClick={this.showCart}>

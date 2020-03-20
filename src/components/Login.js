@@ -17,11 +17,13 @@ export default class Login extends React.Component {
 		this.switchPage = this.switchPage.bind(this);
 	}
 
-	postLogin() {
+	postLogin(event) {
+		event.preventDefault();
 		Axios.post(url, {
 			username: document.getElementById("loginUsername").value,
 			password: document.getElementById("loginPassword").value,
 		}).then(resolve => {
+			console.log(resolve);
 			if (resolve.data.token) {
 				localStorage.setItem("token", resolve.data.token);
 				localStorage.setItem("username", document.getElementById("loginUsername").value);
