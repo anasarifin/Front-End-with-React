@@ -5,6 +5,8 @@ import { add, addPrice } from "../redux/actions/cart";
 import edit from "../img/edit.png";
 import checklist from "../img/checklist.png";
 
+const imgUrl = "http://100.24.32.116:9999/public/img/";
+
 class MainCard extends React.Component {
 	constructor() {
 		super();
@@ -65,6 +67,7 @@ class MainCard extends React.Component {
 	}
 
 	render() {
+		console.log(imgUrl + this.props.product.image);
 		let clicked = <div>clicked</div>;
 		if (this.props.cart.cartList.some(x => x.id === this.props.product.id)) {
 			clicked = (
@@ -76,7 +79,7 @@ class MainCard extends React.Component {
 		return (
 			<div className="flex" onClick={this.addToCart}>
 				<span>
-					<img src={this.props.product.image} alt={this.props.product.name} />
+					<img src={imgUrl + this.props.product.image} alt={this.props.product.name} />
 				</span>
 				{clicked}
 				<span>{this.props.product.name}</span>

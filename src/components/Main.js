@@ -6,11 +6,13 @@ import Header from "./Header";
 import Axios from "axios";
 import Modal from "./Modal";
 import "../style/Main.css";
+import { connect } from "react-redux";
+import { product } from "../redux/actions/product";
 
 const url = "http://100.24.32.116:9999/api/v1/products?page=";
 const urlNoPage = "http://100.24.32.116:9999/api/v1/products?";
 
-export default class Main extends React.Component {
+class Main extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -32,12 +34,16 @@ export default class Main extends React.Component {
 		this.getProduct = this.getProduct.bind(this);
 	}
 
-	getProduct() {
-		Axios.get(url + this.state.currentPage).then(resolve => {
-			this.setState({
-				productList: resolve.data,
-			});
+	async getProduct() {
+		await this.props.dispatch(product());
+		this.setState({
+			productList: this.props.product.productList,
 		});
+		// Axios.get(url + this.state.currentPage).then(resolve => {
+		// 	this.setState({
+		// 		productList: resolve.data,
+		// 	});
+		// });
 	}
 
 	getPagination() {
@@ -90,35 +96,65 @@ export default class Main extends React.Component {
 	}
 
 	filterName(event) {
-		const name = "&name=" + event.target.value;
-		Axios.get(url + 1 + name + this.state.type + this.state.sort).then(resolve => {
-			this.setState({
-				productList: resolve.data,
-				name: name,
-				currentPage: 1,
-			});
+		const name = new RegExp(event.target.value, "i");
+
+		this.setState({
+			productList: this.props.product.productList.filter(x => {
+				return x.name.match(name);
+			}),
 		});
 	}
 
 	filterType(event) {
-		const type = event.target.value == "all" ? "" : "&type=" + event.target.value;
-		Axios.get(url + 1 + this.state.name + type + this.state.sort).then(resolve => {
-			this.setState({
-				productList: resolve.data,
-				type: type,
-				currentPage: 1,
-			});
+		this.setState({
+			productList: this.props.product.productList.filter(x => {
+				return parseFloat(x.category_id) === parseFloat(event.target.value);
+			}),
 		});
 	}
 
 	filterSort(event) {
-		const sort = "&sort=" + event.target.value;
-		Axios.get(url + 1 + this.state.name + this.state.type + sort).then(resolve => {
-			this.setState({
-				productList: resolve.data,
-				sort: sort,
-				currentPage: 1,
-			});
+		this.setState({
+			productList: this.props.product.productList.sort((a, b) => {
+				let sort = "";
+				switch (event.target.value) {
+					case "name":
+						sort = a.name.charCodeAt(0) - b.name.charCodeAt(0);
+						break;
+					case "nameX":
+						sort = b.name.charCodeAt(0) - a.name.charCodeAt(0);
+						break;
+					case "price":
+						sort = a.price - b.price;
+						break;
+					case "priceX":
+						sort = b.price - a.price;
+						break;
+					case "stock":
+						sort = a.stock - b.stock;
+						break;
+					case "stockX":
+						sort = b.stock - a.stock;
+						break;
+					case "updated":
+						sort = parseFloat(a.updated_at.replace(/-/g, "")) - parseFloat(b.updated_at.replace(/-/g, ""));
+						break;
+					case "updatedX":
+						sort = parseFloat(b.updated_at.replace(/-/g, "")) - parseFloat(a.updated_at.replace(/-/g, ""));
+						break;
+					case "created":
+						sort = parseFloat(a.created_at.replace(/-/g, "")) - parseFloat(b.created_at.replace(/-/g, ""));
+						break;
+					case "createdX":
+						sort = parseFloat(b.created_at.replace(/-/g, "")) - parseFloat(a.created_at.replace(/-/g, ""));
+						break;
+					default:
+						break;
+				}
+
+				console.log(sort);
+				return sort;
+			}),
 		});
 	}
 
@@ -144,16 +180,10 @@ export default class Main extends React.Component {
 		}
 
 		this.getProduct();
-		// document.addEventListener("click", event => {
-		// 	if (event.target.className != "product-con" || event.target.id != "cart" || event.target.className != "cart-icon") {
-		// 		this.hideCart();
-		// 	}
-		// });
 	}
 	componentDidUpdate() {
 		// this.getProduct();
 		this.containerSize();
-		this.getPagination();
 	}
 
 	render() {
@@ -185,3 +215,12 @@ export default class Main extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = state => {
+	return {
+		cart: state.cart,
+		product: state.product,
+	};
+};
+
+export default connect(mapStateToProps)(Main);

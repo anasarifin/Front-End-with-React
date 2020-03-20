@@ -66,15 +66,15 @@ class Header extends React.Component {
 				<label>Sort by : </label>
 				<select onChange={this.props.eventSort}>
 					<option value="name">Name A-Z</option>
-					<option value="name&dir=1">Name Z-A</option>
-					<option value="stock&dir=1">Stock +</option>
+					<option value="nameX">Name Z-A</option>
+					<option value="stockX">Stock +</option>
 					<option value="stock">Stock -</option>
-					<option value="price&dir=1">Price +</option>
+					<option value="priceX">Price +</option>
 					<option value="price">Price -</option>
-					<option value="updated_at&dir=1">Updated New</option>
-					<option value="updated_at">Updated Old</option>
-					<option value="created_at&dir=1">Created New</option>
-					<option value="created_at">Created Old</option>
+					<option value="updatedX">Updated New</option>
+					<option value="updated">Updated Old</option>
+					<option value="createdX">Created New</option>
+					<option value="created">Created Old</option>
 				</select>
 				<input type="text" id="header-search" onChange={this.props.eventSearch} placeholder="Search product here..." />
 				{this.props.cartIcon ? (
