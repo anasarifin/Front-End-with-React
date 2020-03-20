@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { add, reduce } from "../redux/actions/count";
 
-const urlGet = "http://localhost:9999/api/v1/products";
-const login = "http://localhost:9999/api/v1/login";
-
 class Profile extends React.Component {
 	constructor() {
 		super();

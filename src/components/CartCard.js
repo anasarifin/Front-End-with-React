@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { reducePrice, addPrice } from "../redux/actions/cart";
 
-// const url = "http://localhost:9999/api/v1/cart";
-
 class CartCard extends React.Component {
 	constructor() {
 		super();

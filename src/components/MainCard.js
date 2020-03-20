@@ -5,8 +5,6 @@ import { add, addPrice } from "../redux/actions/cart";
 import edit from "../img/edit.png";
 import checklist from "../img/checklist.png";
 
-// const url = "http://localhost:9999/api/v1/cart";
-
 class MainCard extends React.Component {
 	constructor() {
 		super();

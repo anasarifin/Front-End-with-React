@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import { category } from "../redux/actions/category";
 import menu from "../img/menu.png";
 
-// const urlCat = "http://localhost:9999/api/v1/category";
-
 class Header extends React.Component {
 	constructor() {
 		super();

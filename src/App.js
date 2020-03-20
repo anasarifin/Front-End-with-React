@@ -13,7 +13,7 @@ import Axios from "axios";
 // 	number: 1,
 // });
 
-const url = "http://localhost:9999/api/v1/cart";
+const url = "http://100.24.32.116:9999/api/v1/cart";
 
 class Example extends Component {
 	constructor() {
