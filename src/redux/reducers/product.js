@@ -1,5 +1,5 @@
 const initialValue = {
-	productList: [],
+	productList: false,
 	isPending: false,
 	isRejected: false,
 	isFulfilled: false,

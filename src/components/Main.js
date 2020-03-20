@@ -7,7 +7,6 @@ import Axios from "axios";
 import Modal from "./Modal";
 import "../style/Main.css";
 import { connect } from "react-redux";
-import { product } from "../redux/actions/product";
 
 const url = "http://100.24.32.116:9999/api/v1/products?page=";
 const urlNoPage = "http://100.24.32.116:9999/api/v1/products?";
@@ -22,7 +21,6 @@ class Main extends React.Component {
 			type: "",
 			sort: "",
 			show: true,
-			totalPage: 1,
 			currentPage: 1,
 		};
 		this.filterName = this.filterName.bind(this);
@@ -31,27 +29,6 @@ class Main extends React.Component {
 		this.prevPage = this.prevPage.bind(this);
 		this.nextPage = this.nextPage.bind(this);
 		this.changePage = this.changePage.bind(this);
-		this.getProduct = this.getProduct.bind(this);
-	}
-
-	async getProduct() {
-		await this.props.dispatch(product());
-		this.setState({
-			productList: this.props.product.productList,
-		});
-		// Axios.get(url + this.state.currentPage).then(resolve => {
-		// 	this.setState({
-		// 		productList: resolve.data,
-		// 	});
-		// });
-	}
-
-	getPagination() {
-		Axios.get(urlNoPage + this.state.name + this.state.type + this.state.sort).then(resolve => {
-			this.setState({
-				totalPage: Math.ceil(resolve.data.length / 8),
-			});
-		});
 	}
 
 	nextPage() {
@@ -78,12 +55,7 @@ class Main extends React.Component {
 
 	changePage(x) {
 		this.setState({
-			currentPage: parseFloat(x.target.textContent),
-		});
-		Axios.get(url + parseFloat(x.target.textContent) + this.state.name + this.state.type + this.state.sort).then(resolve => {
-			this.setState({
-				productList: resolve.data,
-			});
+			currentPage: parseFloat(x),
 		});
 	}
 
@@ -99,6 +71,7 @@ class Main extends React.Component {
 		const name = new RegExp(event.target.value, "i");
 
 		this.setState({
+			currentPage: 1,
 			productList: this.props.product.productList.filter(x => {
 				return x.name.match(name);
 			}),
@@ -107,6 +80,7 @@ class Main extends React.Component {
 
 	filterType(event) {
 		this.setState({
+			currentPage: 1,
 			productList: this.props.product.productList.filter(x => {
 				return parseFloat(x.category_id) === parseFloat(event.target.value);
 			}),
@@ -115,6 +89,7 @@ class Main extends React.Component {
 
 	filterSort(event) {
 		this.setState({
+			currentPage: 1,
 			productList: this.props.product.productList.sort((a, b) => {
 				let sort = "";
 				switch (event.target.value) {
@@ -166,7 +141,10 @@ class Main extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getPagination();
+		this.setState({
+			productList: this.props.product.productList,
+		});
+
 		window.addEventListener("resize", this.containerSize);
 		if (query.parse(window.location.search).page) {
 			this.setState({
@@ -178,8 +156,6 @@ class Main extends React.Component {
 				name: query.parse(window.location.search).name,
 			});
 		}
-
-		this.getProduct();
 	}
 	componentDidUpdate() {
 		// this.getProduct();
@@ -190,12 +166,22 @@ class Main extends React.Component {
 		const products = [];
 		if (this.state.productList.length > 0) {
 			this.state.productList.map((data, x) => {
-				products.push(<MainCard key={x} product={data} productId={data.id} />);
+				if (x >= 0 + (9 * this.state.currentPage - 9) && x < 9 * this.state.currentPage) {
+					products.push(<MainCard key={x} product={data} productId={data.id} />);
+				}
 			});
 		}
 		const page = [];
-		for (let x = 1; x <= this.state.totalPage; x++) {
-			page.push(<span onClick={this.changePage}>{x}</span>);
+		for (let x = 1; x <= Math.ceil(this.state.productList.length / 8); x++) {
+			page.push(
+				<span
+					onClick={() => {
+						this.changePage(x);
+					}}
+				>
+					{x}
+				</span>,
+			);
 		}
 		return (
 			<div id="main">
@@ -203,9 +189,31 @@ class Main extends React.Component {
 				<div className="flex-con" id="main-card-con">
 					{products}
 					<div className="pagination">
-						<span onClick={this.state.currentPage > 1 ? this.prevPage : null}> &lt; </span>
+						<span
+							onClick={() => {
+								if (this.state.currentPage > 1) {
+									this.setState({
+										currentPage: this.state.currentPage - 1,
+									});
+								}
+							}}
+						>
+							{" "}
+							&lt;{" "}
+						</span>
 						{page}
-						<span onClick={this.state.currentPage < this.state.totalPage ? this.nextPage : null}> &gt; </span>
+						<span
+							onClick={() => {
+								if (this.state.currentPage < Math.ceil(this.state.productList.length / 8)) {
+									this.setState({
+										currentPage: this.state.currentPage + 1,
+									});
+								}
+							}}
+						>
+							{" "}
+							&gt;{" "}
+						</span>
 					</div>
 				</div>
 				<Cart list={this.state.cart} show={this.state.show} />

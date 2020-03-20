@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { reducePrice, addPrice } from "../redux/actions/cart";
 
+const imgUrl = "http://100.24.32.116:9999/public/img/";
+
 class CartCard extends React.Component {
 	constructor() {
 		super();
@@ -85,7 +87,7 @@ class CartCard extends React.Component {
 		return (
 			<div className="cart_card">
 				<div>
-					<img src={this.props.product.image}></img>
+					<img src={imgUrl + this.props.product.image}></img>
 				</div>
 				<div>
 					<span className="name">

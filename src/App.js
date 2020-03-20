@@ -4,18 +4,12 @@ import Navbar from "./components/Navbar";
 import Modal from "./components/Modal";
 import History from "./components/History";
 import Axios from "axios";
-// import { Link } from "react-router-dom";
-// import logo from "./logo.svg";
-// prop-types
-// import "./App.css";
-
-// export const contextApp = React.createContext({
-// 	number: 1,
-// });
+import { connect } from "react-redux";
+import { product } from "./redux/actions/product";
 
 const url = "http://100.24.32.116:9999/api/v1/cart";
 
-class Example extends Component {
+class App extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -23,13 +17,8 @@ class Example extends Component {
 		};
 		this.changePage = this.changePage.bind(this);
 		this.changeMain = this.changeMain.bind(this);
-		// this.changeEdit = this.changeEdit.bind(this);
 		this.changeHistory = this.changeHistory.bind(this);
 	}
-	static defaultProps = {
-		batch: 1,
-		city: "Jakarta",
-	};
 
 	resetCart() {
 		Axios.delete(url, { data: { id: "all" } }).then(resolve => {});
@@ -39,6 +28,7 @@ class Example extends Component {
 		if (!localStorage.getItem("token")) {
 			window.location.href = "/login";
 		}
+		this.props.dispatch(product());
 		this.resetCart();
 	};
 
@@ -78,7 +68,7 @@ class Example extends Component {
 		return (
 			<div id="main-con">
 				<Navbar event={[this.changeMain, this.changeHistory]} />
-				{this.state.currentPage}
+				{this.props.product.productList ? this.state.currentPage : <div>Loading</div>}
 				<Modal />
 				<div id="blackLayer"></div>
 			</div>
@@ -86,33 +76,10 @@ class Example extends Component {
 	}
 }
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+const mapStateToProps = state => {
+	return {
+		product: state.product,
+	};
+};
 
-// Example.defaultProps = {
-// 	batch: 1,
-// 	city: "Jakarta",
-// };
-{
-	/* <button onClick={this.goToHome}>Profile</button> */
-}
-
-export default Example;
+export default connect(mapStateToProps)(App);
