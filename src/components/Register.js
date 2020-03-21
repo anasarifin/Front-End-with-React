@@ -11,31 +11,38 @@ export default class Register extends React.Component {
 		};
 		this.registerUser = this.registerUser.bind(this);
 	}
-	registerUser() {
-		Axios.post(url, {
-			username: document.getElementById("regUsername").value,
-			fullname: document.getElementById("regFullname").value,
-			password: document.getElementById("regPassword").value,
-		}).then(resolve => {
-			console.log(resolve);
-			if (resolve.data.warning) {
-				this.setState({
-					warning: resolve.data.warning,
-				});
-			}
-			if (resolve.data.insertId) {
-				window.location.href = "/login";
-			}
-		});
-	}
 
-	checkPassword() {
-		if (document.getElementById("regRePassword").value != document.getElementById("regPassword").value) {
-			document.getElementById("regRePassword").style.border = "solid 1.5px #ff4242";
-			document.getElementById("regSubmit").disabled = true;
+	registerUser() {
+		const username = document.getElementById("regUsername").value;
+		const password = document.getElementById("regPassword").value;
+		const rePassword = document.getElementById("regRePassword").value;
+
+		if (!username) {
+			this.setState({
+				warning: "Username cannot be empty !",
+			});
+		} else if (!password) {
+			this.setState({
+				warning: "Username cannot be empty !",
+			});
+		} else if (password !== rePassword) {
+			this.setState({
+				warning: "Re-type password is not match !",
+			});
 		} else {
-			document.getElementById("regRePassword").style.border = null;
-			document.getElementById("regSubmit").disabled = false;
+			Axios.post(url, {
+				username: username,
+				password: password,
+			}).then(resolve => {
+				if (resolve.data.warning) {
+					this.setState({
+						warning: resolve.data.warning,
+					});
+				}
+				if (resolve.data.insertId) {
+					window.location.href = "/login";
+				}
+			});
 		}
 	}
 
@@ -43,9 +50,9 @@ export default class Register extends React.Component {
 		return (
 			<div id="login">
 				<input type="text" placeholder="Username" id="regUsername" autoComplete="off" />
-				<input type="text" placeholder="Full Name" id="regFullname" />
+				{/* <input type="text" placeholder="Full Name" id="regFullname" /> */}
 				<input type="password" placeholder="Password" id="regPassword" />
-				<input type="password" placeholder="Re-type Password" id="regRePassword" onChange={this.checkPassword} />
+				<input type="password" placeholder="Re-type Password" id="regRePassword" />
 				<button type="submit" id="regSubmit" onClick={this.registerUser}>
 					Register
 				</button>

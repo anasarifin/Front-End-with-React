@@ -18,20 +18,34 @@ export default class Login extends React.Component {
 	}
 
 	postLogin(event) {
-		event.preventDefault();
-		Axios.post(url, {
-			username: document.getElementById("loginUsername").value,
-			password: document.getElementById("loginPassword").value,
-		}).then(resolve => {
-			console.log(resolve);
-			if (resolve.data.token) {
-				localStorage.setItem("token", resolve.data.token);
-				localStorage.setItem("username", document.getElementById("loginUsername").value);
-				window.location.href = "/";
-			} else {
-				alert(resolve.data.warning);
-			}
-		});
+		const username = document.getElementById("loginUsername").value;
+		const password = document.getElementById("loginPassword").value;
+
+		if (!username) {
+			this.setState({
+				warning: "Username is empty !",
+			});
+		} else if (!password) {
+			this.setState({
+				warning: "Password is empty !",
+			});
+		} else {
+			Axios.post(url, {
+				username: username,
+				password: password,
+			}).then(resolve => {
+				console.log(resolve);
+				if (resolve.data.token) {
+					localStorage.setItem("token", resolve.data.token);
+					localStorage.setItem("username", document.getElementById("loginUsername").value);
+					window.location.href = "/";
+				} else {
+					this.setState({
+						warning: resolve.data.warning,
+					});
+				}
+			});
+		}
 	}
 
 	switchPage() {
@@ -54,13 +68,14 @@ export default class Login extends React.Component {
 					<span onClick={this.switchPage}>{!this.state.register ? "Register?" : "Back to login..."}</span>
 				</div>
 				{!this.state.register ? (
-					<form id="login">
+					<div id="login">
 						<input type="text" id="loginUsername" autoComplete="off" placeholder="Username"></input>
 						<input type="password" id="loginPassword" placeholder="Password"></input>
 						<button onClick={this.postLogin} type="submit">
 							Login
 						</button>
-					</form>
+						<span className="warning">{this.state.warning}</span>
+					</div>
 				) : (
 					<Register />
 				)}

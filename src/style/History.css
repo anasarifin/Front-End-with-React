@@ -59,8 +59,8 @@
 }
 #statistic div div.stat-con span:nth-child(2) {
 	position: absolute;
-	bottom: 15px;
-	right: 20px;
+	bottom: 25px;
+	right: 30px;
 	font-size: 28px;
 }
 #statistic div.income {

@@ -69,7 +69,8 @@
 	font-weight: 600;
 	cursor: pointer;
 }
-#login span.warning {
+#login span.warning,
+#register span.warning {
 	position: fixed;
 	bottom: -40px;
 	color: red;
