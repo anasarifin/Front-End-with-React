@@ -24,17 +24,20 @@ class App extends Component {
 		Axios.delete(url, { data: { id: "all" } }).then(resolve => {});
 	}
 
-	componentDidMount = () => {
-		if (!localStorage.getItem("token")) {
+	checkLogin() {
+		if (localStorage.getItem("token")) {
+			this.setState({
+				ready: true,
+			});
+		} else {
 			window.location.href = "/login";
 		}
+	}
+
+	componentDidMount = () => {
+		this.checkLogin();
 		this.props.dispatch(product());
 		this.resetCart();
-	};
-
-	componentDidUpdate = (prevProps, prevState) => {
-		// console.log("props", prevProps);
-		// console.log("state", prevState);
 	};
 
 	goToHome() {
@@ -66,12 +69,18 @@ class App extends Component {
 
 	render() {
 		return (
-			<div id="main-con">
-				<Navbar event={[this.changeMain, this.changeHistory]} />
-				{this.props.product.productList ? this.state.currentPage : <div>Loading</div>}
-				<Modal />
-				<div id="blackLayer"></div>
-			</div>
+			<>
+				{this.state.ready && this.props.product.productList ? (
+					<div id="main-con">
+						<Navbar event={[this.changeMain, this.changeHistory]} />
+						{this.state.currentPage}
+						<Modal />
+						<div id="blackLayer"></div>
+					</div>
+				) : (
+					<></>
+				)}
+			</>
 		);
 	}
 }
