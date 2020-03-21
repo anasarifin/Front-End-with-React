@@ -26,13 +26,13 @@ export default class Statistic extends React.Component {
 				<div className="income">
 					<div className="stat-con">
 						<span>Transaction</span>
-						<span>{this.props.data.total_transaction_count}</span>
+						<span>{this.props.data.total_transaction_count} consumers</span>
 					</div>
 				</div>
 				<div className="orders">
 					<div className="stat-con">
 						<span>Orders</span>
-						<span>{this.props.data.total_item_sold}</span>
+						<span>{this.props.data.total_item_sold} items</span>
 					</div>
 				</div>
 				<div className="income-year">
