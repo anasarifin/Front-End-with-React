@@ -1,4 +1,4 @@
-# bookstore-with-redux
+# SushiBar - Point of Sales WebApp
 
 
 <p align='center'>
