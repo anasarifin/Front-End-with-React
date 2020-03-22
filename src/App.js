@@ -7,7 +7,7 @@ import Axios from "axios";
 import { connect } from "react-redux";
 import { product } from "./redux/actions/product";
 
-const url = "http://100.24.32.116:9999/api/v1/cart";
+const url = "http://100.24.32.116:8888/api/v1/cart";
 
 class App extends Component {
 	constructor() {

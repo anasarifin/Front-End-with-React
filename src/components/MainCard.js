@@ -5,7 +5,7 @@ import { add, addPrice } from "../redux/actions/cart";
 import edit from "../img/edit.png";
 import checklist from "../img/checklist.png";
 
-const imgUrl = "http://100.24.32.116:9999/public/img/";
+const imgUrl = "http://100.24.32.116:8888/public/img/";
 
 class MainCard extends React.Component {
 	constructor() {
