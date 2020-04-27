@@ -11,9 +11,6 @@
 ## Introduction
 ![Node](https://img.shields.io/node/v/express)
 
-
-<p align='justify'>Ayochat is test online to connecting teacher and their student, this app's is team project based and mabe by me and my friend's.</p>
-
 ## Requirements
 
 1. <a href="https://nodejs.org/en/download/">Node Js</a>
