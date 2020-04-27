@@ -1,7 +1,7 @@
 import React from "react";
 import Axios from "axios";
 
-const url = "http://100.24.32.116:8888/api/v1/register";
+const url = "http://3.82.66.63:2200/api/v1/register";
 
 export default class Register extends React.Component {
 	constructor() {
@@ -33,7 +33,7 @@ export default class Register extends React.Component {
 			Axios.post(url, {
 				username: username,
 				password: password,
-			}).then(resolve => {
+			}).then((resolve) => {
 				if (resolve.data.warning) {
 					this.setState({
 						warning: resolve.data.warning,

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import close from "../img/close.png";
 
-const url = "http://100.24.32.116:8888/api/v1/products";
+const url = "http://3.82.66.63:2200/api/v1/products";
 
 class Modal extends React.Component {
 	constructor() {
@@ -77,7 +77,7 @@ class Modal extends React.Component {
 						this.hideCart();
 						this.props.refresh();
 					})
-					.catch(reject => {
+					.catch((reject) => {
 						console.log(reject);
 						this.hideCart();
 						this.props.refresh();
@@ -92,7 +92,7 @@ class Modal extends React.Component {
 						this.hideCart();
 						this.props.refresh();
 					})
-					.catch(reject => {
+					.catch((reject) => {
 						console.log(reject);
 						this.hideCart();
 						this.props.refresh();
@@ -112,7 +112,7 @@ class Modal extends React.Component {
 				this.hideCart();
 				this.props.refresh();
 			})
-			.catch(reject => {
+			.catch((reject) => {
 				console.log(reject);
 				this.hideCart();
 				this.props.refresh();
@@ -202,7 +202,7 @@ class Modal extends React.Component {
 							Image
 						</Label>
 						<Col sm={10}>
-							<Input type="file" name="image" id="xImage" onChange={e => this.handleChange(e)} required />
+							<Input type="file" name="image" id="xImage" onChange={(e) => this.handleChange(e)} required />
 							<FormText color="muted"></FormText>
 						</Col>
 					</FormGroup>
@@ -226,7 +226,7 @@ Modal.propTypes = {
 	category: PropTypes,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		category: state.category,
 	};

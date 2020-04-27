@@ -5,7 +5,7 @@ import { add, addPrice } from "../redux/actions/cart";
 import edit from "../img/edit.png";
 import checklist from "../img/checklist.png";
 
-const imgUrl = "http://100.24.32.116:8888/public/img/";
+const imgUrl = "http://3.82.66.63:2200/public/img/";
 
 class MainCard extends React.Component {
 	constructor() {
@@ -37,7 +37,7 @@ class MainCard extends React.Component {
 	}
 
 	checkClicked() {
-		this.props.cart.cartList.some(x => x.id === this.props.product.id);
+		this.props.cart.cartList.some((x) => x.id === this.props.product.id);
 	}
 
 	addToCart(e) {
@@ -69,7 +69,7 @@ class MainCard extends React.Component {
 	render() {
 		console.log(imgUrl + this.props.product.image);
 		let clicked = <div>clicked</div>;
-		if (this.props.cart.cartList.some(x => x.id === this.props.product.id)) {
+		if (this.props.cart.cartList.some((x) => x.id === this.props.product.id)) {
 			clicked = (
 				<div className="show">
 					<img alt="clicked" src={checklist} className="clicked" />
@@ -97,7 +97,7 @@ MainCard.propTypes = {
 	dispatch: PropTypes,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		cart: state.cart,
 	};

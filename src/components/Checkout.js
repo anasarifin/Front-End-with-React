@@ -4,7 +4,7 @@ import Axios from "axios";
 import { reset, resetPrice } from "../redux/actions/cart";
 import PropTypes from "prop-types";
 
-const url = "http://100.24.32.116:8888/api/v1/cart";
+const url = "http://3.82.66.63:2200/api/v1/cart";
 
 class Checkout extends React.Component {
 	constructor() {
@@ -54,7 +54,7 @@ class Checkout extends React.Component {
 					usertoken: localStorage.getItem("token"),
 				},
 			},
-		).then(resolve => {
+		).then((resolve) => {
 			console.log(resolve);
 			this.resetCart();
 		});
@@ -109,7 +109,7 @@ Checkout.propTypes = {
 	dispatch: PropTypes,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		cart: state.cart,
 	};

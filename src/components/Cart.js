@@ -8,7 +8,7 @@ import { reset, resetPrice } from "../redux/actions/cart";
 import empty from "../img/empty.jpg";
 import PropTypes from "prop-types";
 
-const url = "http://100.24.32.116:8888/api/v1/cart";
+const url = "http://3.82.66.63:2200/api/v1/cart";
 
 class Cart extends React.Component {
 	constructor() {
@@ -31,7 +31,7 @@ class Cart extends React.Component {
 	// }
 
 	getCart() {
-		Axios.get(url, { headers: { usertoken: localStorage.getItem("token") } }).then(resolve => {
+		Axios.get(url, { headers: { usertoken: localStorage.getItem("token") } }).then((resolve) => {
 			this.setState({
 				cartList: resolve.data,
 				totalPrice: resolve.data.reduce((sum, product) => {
@@ -87,7 +87,7 @@ class Cart extends React.Component {
 					usertoken: localStorage.getItem("token"),
 				},
 			},
-		).then(resolve => {
+		).then((resolve) => {
 			console.log(resolve);
 			this.resetCart();
 		});
@@ -146,7 +146,7 @@ Cart.propTypes = {
 	dispatch: PropTypes,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		cart: state.cart,
 	};

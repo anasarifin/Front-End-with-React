@@ -8,8 +8,8 @@ import Modal from "./Modal";
 import "../style/Main.css";
 import { connect } from "react-redux";
 
-const url = "http://100.24.32.116:8888/api/v1/products?page=";
-const urlNoPage = "http://100.24.32.116:8888/api/v1/products?";
+const url = "http://3.82.66.63:2200/api/v1/products?page=";
+const urlNoPage = "http://3.82.66.63:2200/api/v1/products?";
 
 class Main extends React.Component {
 	constructor() {
@@ -35,7 +35,7 @@ class Main extends React.Component {
 		this.setState({
 			currentPage: this.state.currentPage + 1,
 		});
-		Axios.get(url + (this.state.currentPage + 1) + this.state.name + this.state.type + this.state.sort).then(resolve => {
+		Axios.get(url + (this.state.currentPage + 1) + this.state.name + this.state.type + this.state.sort).then((resolve) => {
 			this.setState({
 				productList: resolve.data,
 			});
@@ -46,7 +46,7 @@ class Main extends React.Component {
 		this.setState({
 			currentPage: this.state.currentPage - 1,
 		});
-		Axios.get(url + (this.state.currentPage - 1) + this.state.name + this.state.type + this.state.sort).then(resolve => {
+		Axios.get(url + (this.state.currentPage - 1) + this.state.name + this.state.type + this.state.sort).then((resolve) => {
 			this.setState({
 				productList: resolve.data,
 			});
@@ -77,7 +77,7 @@ class Main extends React.Component {
 
 		this.setState({
 			currentPage: 1,
-			productList: this.props.product.productList.filter(x => {
+			productList: this.props.product.productList.filter((x) => {
 				return x.name.match(name);
 			}),
 		});
@@ -87,7 +87,7 @@ class Main extends React.Component {
 		if (event.target.value !== "all") {
 			this.setState({
 				currentPage: 1,
-				productList: this.props.product.productList.filter(x => {
+				productList: this.props.product.productList.filter((x) => {
 					return parseFloat(x.category_id) === parseFloat(event.target.value);
 				}),
 			});
@@ -189,8 +189,7 @@ class Main extends React.Component {
 				<span
 					onClick={() => {
 						this.changePage(x);
-					}}
-				>
+					}}>
 					{x}
 				</span>,
 			);
@@ -208,8 +207,7 @@ class Main extends React.Component {
 										currentPage: this.state.currentPage - 1,
 									});
 								}
-							}}
-						>
+							}}>
 							{" "}
 							&lt;{" "}
 						</span>
@@ -221,8 +219,7 @@ class Main extends React.Component {
 										currentPage: this.state.currentPage + 1,
 									});
 								}
-							}}
-						>
+							}}>
 							{" "}
 							&gt;{" "}
 						</span>
@@ -236,7 +233,7 @@ class Main extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		cart: state.cart,
 		product: state.product,

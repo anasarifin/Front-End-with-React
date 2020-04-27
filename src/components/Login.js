@@ -4,7 +4,7 @@ import Register from "./Register";
 import Axios from "axios";
 import barLogo from "../img/bar-logo.png";
 
-const url = "http://100.24.32.116:8888/api/v1/login";
+const url = "http://3.82.66.63:2200/api/v1/login";
 
 export default class Login extends React.Component {
 	constructor() {
@@ -33,7 +33,7 @@ export default class Login extends React.Component {
 			Axios.post(url, {
 				username: username,
 				password: password,
-			}).then(resolve => {
+			}).then((resolve) => {
 				console.log(resolve);
 				if (resolve.data.token) {
 					localStorage.setItem("token", resolve.data.token);

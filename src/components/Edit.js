@@ -5,7 +5,7 @@ import Axios from "axios";
 import Modal from "./Modal";
 import "../style/Main.css";
 
-const url = "http://100.24.32.116:8888/api/v1/products?page=";
+const url = "http://3.82.66.63:2200/api/v1/products?page=";
 
 export default class Main extends React.Component {
 	constructor() {
@@ -26,7 +26,7 @@ export default class Main extends React.Component {
 		this.getProduct = this.getProduct.bind(this);
 	}
 	getProduct() {
-		Axios.get(url + 1).then(resolve => {
+		Axios.get(url + 1).then((resolve) => {
 			this.setState({
 				productList: resolve.data,
 			});
@@ -45,7 +45,7 @@ export default class Main extends React.Component {
 
 	filterName(event) {
 		const name = "&name=" + event.target.value;
-		Axios.get(url + 1 + name + this.state.type + this.state.sort).then(resolve => {
+		Axios.get(url + 1 + name + this.state.type + this.state.sort).then((resolve) => {
 			this.setState({
 				productList: resolve.data,
 				name: name,
@@ -55,7 +55,7 @@ export default class Main extends React.Component {
 
 	filterType(event) {
 		const type = event.target.value === "all" ? "" : "&type=" + event.target.value;
-		Axios.get(url + 1 + this.state.name + type + this.state.sort).then(resolve => {
+		Axios.get(url + 1 + this.state.name + type + this.state.sort).then((resolve) => {
 			console.log(resolve.data);
 			this.setState({
 				productList: resolve.data,
@@ -66,7 +66,7 @@ export default class Main extends React.Component {
 
 	filterSort(event) {
 		const sort = "&sort=" + event.target.value;
-		Axios.get(url + 1 + this.state.name + this.state.type + sort).then(resolve => {
+		Axios.get(url + 1 + this.state.name + this.state.type + sort).then((resolve) => {
 			this.setState({
 				productList: resolve.data,
 				sort: sort,

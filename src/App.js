@@ -7,7 +7,7 @@ import Axios from "axios";
 import { connect } from "react-redux";
 import { product } from "./redux/actions/product";
 
-const url = "http://100.24.32.116:8888/api/v1/cart";
+const url = "http://3.82.66.63:2200/api/v1/cart";
 
 class App extends Component {
 	constructor() {
@@ -21,7 +21,7 @@ class App extends Component {
 	}
 
 	resetCart() {
-		Axios.delete(url, { data: { id: "all" } }).then(resolve => {});
+		Axios.delete(url, { data: { id: "all" } }).then((resolve) => {});
 	}
 
 	checkLogin() {
@@ -85,7 +85,7 @@ class App extends Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		product: state.product,
 	};

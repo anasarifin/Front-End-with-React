@@ -5,7 +5,7 @@ import Axios from "axios";
 import "../style/History.css";
 import menu from "../img/menu.png";
 
-const url = "http://100.24.32.116:8888/api/v1/history";
+const url = "http://3.82.66.63:2200/api/v1/history";
 
 export default class History extends React.Component {
 	constructor() {
@@ -16,7 +16,7 @@ export default class History extends React.Component {
 	}
 
 	getData() {
-		Axios.get(url).then(resolve => {
+		Axios.get(url).then((resolve) => {
 			this.setState({
 				data: resolve.data,
 			});

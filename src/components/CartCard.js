@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { reducePrice, addPrice } from "../redux/actions/cart";
 
-const imgUrl = "http://100.24.32.116:8888/public/img/";
+const imgUrl = "http://3.82.66.63:2200/public/img/";
 
 class CartCard extends React.Component {
 	constructor() {
@@ -111,7 +111,7 @@ CartCard.propTypes = {
 	dispatch: PropTypes,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		cart: state.cart,
 	};
