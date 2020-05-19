@@ -87,7 +87,7 @@ class CartCard extends React.Component {
 		return (
 			<div className="cart_card">
 				<div>
-					<img src={imgUrl + this.props.product.image}></img>
+					<img src={this.props.product.image.replace("localhost:9999", "18.212.147.11:2200")}></img>
 				</div>
 				<div>
 					<span className="name">
