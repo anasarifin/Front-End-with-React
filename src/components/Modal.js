@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import close from "../img/close.png";
 
-const url = "http://3.82.66.63:2200/api/v1/products";
+const url = "http://18.212.147.11:2200/api/v1/products";
 
 class Modal extends React.Component {
 	constructor() {

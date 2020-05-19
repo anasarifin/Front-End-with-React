@@ -5,7 +5,7 @@ import Axios from "axios";
 import Modal from "./Modal";
 import "../style/Main.css";
 
-const url = "http://3.82.66.63:2200/api/v1/products?page=";
+const url = "http://18.212.147.11:2200/api/v1/products?page=";
 
 export default class Main extends React.Component {
 	constructor() {

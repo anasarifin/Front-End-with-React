@@ -5,7 +5,7 @@ import Axios from "axios";
 import "../style/History.css";
 import menu from "../img/menu.png";
 
-const url = "http://3.82.66.63:2200/api/v1/history";
+const url = "http://18.212.147.11:2200/api/v1/history";
 
 export default class History extends React.Component {
 	constructor() {

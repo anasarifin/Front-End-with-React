@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { reducePrice, addPrice } from "../redux/actions/cart";
 
-const imgUrl = "http://3.82.66.63:2200/public/img/";
+const imgUrl = "http://18.212.147.11:2200/public/img/";
 
 class CartCard extends React.Component {
 	constructor() {

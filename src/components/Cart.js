@@ -8,7 +8,7 @@ import { reset, resetPrice } from "../redux/actions/cart";
 import empty from "../img/empty.jpg";
 import PropTypes from "prop-types";
 
-const url = "http://3.82.66.63:2200/api/v1/cart";
+const url = "http://18.212.147.11:2200/api/v1/cart";
 
 class Cart extends React.Component {
 	constructor() {

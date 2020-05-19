@@ -4,7 +4,7 @@ import Register from "./Register";
 import Axios from "axios";
 import barLogo from "../img/bar-logo.png";
 
-const url = "http://3.82.66.63:2200/api/v1/login";
+const url = "http://18.212.147.11:2200/api/v1/login";
 
 export default class Login extends React.Component {
 	constructor() {
