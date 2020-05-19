@@ -22,7 +22,7 @@ export default class Navbar extends React.Component {
 		return (
 			<div id="navbar">
 				<img alt="Home" src={home} onClick={this.props.event[0]} />
-				{/* <img alt="Edit" src="http://localhost:8888/public/img/edit.png" onClick={this.props.event[1]} /> */}
+				{/* <img alt="Edit" src="http://18.212.147.11:8888/public/img/edit.png" onClick={this.props.event[1]} /> */}
 				<img alt="History" src={history} onClick={this.props.event[1]} />
 				<img alt="Add" src={add} onClick={this.showModal} />
 				<img alt="Logout" src={logout} onClick={this.logout} />
